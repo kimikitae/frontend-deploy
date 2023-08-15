@@ -1,9 +1,11 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import router from '../router';
+
+router.push('/SignInView')
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    home,,
   </main>
 </template>
