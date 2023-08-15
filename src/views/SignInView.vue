@@ -26,7 +26,6 @@ const loginPassword = ""
 </template>
 
 <script>
-
 export default {
   name: "SignInView",
   data() {
