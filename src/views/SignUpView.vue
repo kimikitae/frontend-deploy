@@ -28,9 +28,9 @@ export default {
       CheckId: false,
       ChecksignUp: false,
       // mock server
-      server: "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
+      // server: "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
       // local server
-      // server: "http://localhost:8080"
+      server: "http://localhost:8080"
     };
   },
   computed: {
