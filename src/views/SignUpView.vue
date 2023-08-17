@@ -53,7 +53,7 @@ export default {
       }
 
       const data = await response.json()
-      this.CheckId = data.CheckId
+      this.CheckId = data.success
     },
     async signUp(){
       if(!this.checkPw()){
@@ -80,7 +80,7 @@ export default {
 
         const data = await response.json()
         console.log(data)
-        this.ChecksignUp = data.ChecksignUp
+        this.ChecksignUp = data.success
     },
     checkPw(){
       if(this.userPw == this.userPwChk){
