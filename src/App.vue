@@ -1,6 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
@@ -16,10 +15,13 @@ import HelloWorld from './components/HelloWorld.vue'
       </nav>
     </div>
   </header> -->
-  <RouterView/>
+  <RouterView id="all"/>
 </template>
 
 <style scoped>
+#all{
+  font-family: Arial, sans-serif;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;

@@ -2,9 +2,15 @@
 </script>
 
 <template>
-  
-  <h1>SignUpPage</h1>
   <main>
+    <img class="logo" src="../../assets/appLogo.png">
+
+    <div>
+      <div class="tap1" :class="{click: userType == 1}" @click="userType = 1">일반회원</div>
+      <div class="tap2" :class="{click: userType == 2}" @click="userType = 2">업주</div>
+      <div class="tap3" :class="{click: userType == 3}" @click="userType = 3">라이더</div>
+    </div>
+
     <input type="text" placeholder="User name" v-model="userName">
     <input type="text" placeholder="Id" v-model="userId">
     <button @click="checkId">Check Id</button>
@@ -30,7 +36,8 @@ export default {
       // mock server
       // server: "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
       // local server
-      server: "http://localhost:8080"
+      server: "http://localhost:8080",
+      userType: 0,
     };
   },
   computed: {
@@ -95,8 +102,26 @@ export default {
 
 
 <style scoped>
-h1{
-  text-align: center;
+.logo{
+  width: 8%;
+  margin: 0 auto;
+  margin-top: 7%;
+  display: block;
+}
+.tap1{
+  display: inline-block;
+  background-color: red;
+}
+.tap2{
+  display: inline-block;
+  background-color: blue;
+}
+.tap3{
+  display: inline-block;
+  background-color: green;
+}
+.click{
+  background-color: white;
 }
 div{
   text-align: center;
