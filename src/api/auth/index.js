@@ -1,4 +1,7 @@
-const server = "http://localhost:8080"
+//mock server
+const server = "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
+//local server
+// const server = "http://localhost:8080"
 
 export default {
   async login(info) {
@@ -15,7 +18,6 @@ export default {
     }
 
     const data = response.json()
-    alert("로그인 응답: ", data)
     return data
   },
   async signup(info) {
@@ -32,7 +34,6 @@ export default {
     }
 
     const data = await response.json()
-    alert(data)
     return data
   }
 }

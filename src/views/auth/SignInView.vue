@@ -55,8 +55,8 @@ export default {
       else { this.no_pwd = false }
 
       const param = {
-        user_email: this.loginId,
-        user_password: this.loginPassword,
+        userId: this.loginId,
+        password: this.loginPassword,
       }
       await this.tryLogin(param)
 
