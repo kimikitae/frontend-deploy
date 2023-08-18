@@ -23,7 +23,15 @@ export default {
         console.log('login fail')
         return false
       }
+    },
+    async trySignUp(info) {
+      const data = await api.signup(info)
+
+      if(data.success){
+        return true
+      }
+      alert(data.error.status, data.error.message)
+      return false
     }
   },
-  modules: {}
 }
