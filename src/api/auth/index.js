@@ -1,7 +1,7 @@
 //mock server
-const server = "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
+// const server = "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
 //local server
-// const server = "http://localhost:8080"
+const server = "http://localhost:8080"
 
 export default {
   async login(info) {
