@@ -7,7 +7,7 @@
       <span class="menu">동네이야기</span>
       <span class="menu">더보기</span>
       <div class="right">
-        <div class="button">{{ name }}님
+        <div class="button" >{{ name }}님
             <img class="direct" src="../../assets/Downarrow.png" />
         </div>
       </div>
@@ -30,10 +30,12 @@ export default {
 
 <style scoped>
 .frame {
-  width: 99%;
+  z-index: 100;
   position: fixed;
   top: 0.5rem;
-  left: 0.5rem;
+  width: calc(100% - 1rem);
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   background-color: white;
 }
 

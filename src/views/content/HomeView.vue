@@ -3,6 +3,7 @@
     <NavBar />
     <div class="float">
       <MainScreen />
+      <MainContent />
     </div>
   </main>
 </template>
@@ -10,6 +11,7 @@
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import MainScreen from "../../components/home/MainScreen.vue";
+import MainContent from "../../components/home/MainContent.vue";
 import { mapActions } from "vuex";
 
 export default {
@@ -24,6 +26,7 @@ export default {
   components: {
     NavBar,
     MainScreen,
+    MainContent
   },
 };
 </script>
@@ -33,7 +36,7 @@ export default {
   background-color: #d9d9d9;
 }
 .float{
-    position: relative;
+  position: relative;
   top: 5rem;
 }
 </style>
