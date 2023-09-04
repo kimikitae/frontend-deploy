@@ -20,8 +20,8 @@ export default {
 
 <style scoped>
 .frame {
-  height: 15rem;
-  font-size: 2.5rem;
+  height: 45rem;
+  font-size: 4rem;
   text-align: center;
   display: flex;
   justify-content: center;
