@@ -7,7 +7,7 @@
       <span class="menu">동네이야기</span>
       <span class="menu">더보기</span>
       <div class="right">
-        <div class="button">dsadsa
+        <div class="button">{{ name }}님
             <img class="direct" src="../../assets/Downarrow.png" />
         </div>
       </div>
@@ -19,7 +19,9 @@
 export default {
   name: "NavBar",
   data() {
-    return {};
+    return {
+        name: "고민석"
+    };
   },
   computed: {},
   methods: {},
