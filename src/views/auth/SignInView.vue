@@ -85,9 +85,9 @@ export default {
   width: 10%;
 }
 
-.input>input {
-  /* height: %; */
-}
+/* .input>input {
+  height: %;
+}  */
 
 button {
   font-size: 1.5rem;
