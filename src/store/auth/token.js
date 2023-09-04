@@ -1,26 +1,28 @@
 import api from '../../api/auth/index.js'
+import router from '../../router/index.js'
 
 export default {
   namespaced: true,
 
   state: {
     token: {
-      accessToken: String
+      accessToken: ""
     },
-    isAuthenticated: Boolean
+    // isAuthenticated: 
   },
   getters: {},
   mutations: {
-    setToken() {}
+    setToken(state, accessToken) {
+      state.accessToken = accessToken
+    }
   },
   actions: {
     async tryLogin(context, info) {
       const data = await api.login(info)
       if (data.success) {
-        // context.commit('setToken', data)
-        alert('로긴 せいこう(성공의 히라가나)')
+        await context.commit('setToken', data.token)
+        router.push('/')
         return true
-        // return data
       } else {
         alert(data.error.status, data.error.message)
         return false
@@ -31,7 +33,7 @@ export default {
       console.log(data)
 
       if(data.success){
-        alert('횐갑 せいこう(성공의 히라가나)')
+        router.push('/SignInView')
         return true
       }
       alert(data.error.status, data.error.message)
