@@ -1,30 +1,54 @@
 <template>
   <main>
     <div class="frame">
-      <img class="logo" src="../../assets/appLogo.png" />
-      <span class="title">용기나눔</span>
+      <img class="logo" src="../../assets/appLogo.png" @click="toMain" />
+      <span class="title" @click="toMain">용기나눔</span>
       <span class="menu">공유</span>
       <span class="menu">동네이야기</span>
       <span class="menu">더보기</span>
       <div class="right">
-        <div class="button" >{{ name }}님
+        <template v-if="token">
+          <div class="button" @click="$emit('openUserModal')">
+            {{ name }}님
             <img class="direct" src="../../assets/Downarrow.png" />
-        </div>
+          </div>
+        </template>
+        <template v-else>
+          <div class="button" @click="toSignUpView">회원가입</div>
+          <div class="button" @click="toSignInView">로그인</div>
+        </template>
       </div>
     </div>
   </main>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import router from "../../router";
+
 export default {
   name: "NavBar",
   data() {
     return {
-        name: "고민석"
+      name: "고민석",
     };
   },
-  computed: {},
-  methods: {},
+  computed: {
+    ...mapState("token", {
+      token: (state) => state.accessToken,
+    }),
+  },
+  methods: {
+    toSignInView(){
+      router.push('/SignInView')
+    },
+    toSignUpView(){
+      router.push('/SignUpView')
+    },
+    toMain() {
+      router.push("/");
+    },
+  },
 };
 </script>
 
@@ -43,9 +67,11 @@ export default {
   position: relative;
   left: 0.5rem;
   width: 3rem;
+  cursor: pointer;
 }
 
 .title {
+  cursor: pointer;
   position: relative;
   left: 0.5rem;
   font-size: 2rem;
@@ -59,6 +85,7 @@ export default {
   float: right;
 }
 .button {
+  float: right;
   background-color: white;
   border-radius: 1.5rem;
   border: none;
@@ -69,7 +96,7 @@ export default {
   margin-right: 1rem;
   margin-top: 1rem;
 }
-.direct{
+.direct {
   width: 1rem;
 }
 </style>

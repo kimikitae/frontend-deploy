@@ -1,4 +1,4 @@
-import api from '../../api/auth/index.js'
+import api from '../../api/user/index.js'
 import router from '../../router/index.js'
 
 export default {

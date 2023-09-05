@@ -1,18 +1,15 @@
 <template>
   <main class="color">
-    <NavBar @openUserModal="openUserModal = true"/>
+    <NavBar @openUserModal="openUserModal = true" />
     <div class="float">
-      <MainScreen />
-      <MainContent />
+      dasasd
     </div>
-    <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false"/>
+    <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
   </main>
 </template>
 
 <script>
 import NavBar from "../../components/common/navBar.vue";
-import MainScreen from "../../components/home/MainScreen.vue";
-import MainContent from "../../components/home/MainContent.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import { mapActions } from "vuex";
 
@@ -20,7 +17,7 @@ export default {
   name: "HomeView",
   data() {
     return {
-        openUserModal: false,
+      openUserModal: false,
     };
   },
   computed: {},
@@ -29,9 +26,7 @@ export default {
   },
   components: {
     NavBar,
-    MainScreen,
-    MainContent,
-    UserModal
+    UserModal,
   },
 };
 </script>
@@ -40,8 +35,12 @@ export default {
 .color {
   background-color: #d9d9d9;
 }
-.float{
+.float {
+  background-color: white;
   position: relative;
-  top: 5rem;
+  top: 3.5rem;
+  width: calc(100% - 1rem);
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 </style>
