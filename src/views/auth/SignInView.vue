@@ -39,6 +39,7 @@ export default {
   },
   methods: {
     ...mapActions('token', ['tryLogin']),
+    ...mapActions('user', ['getInfo']),
     chk_null(cmp) { // 비어있는지 체크하는 함수
       if (cmp.trim().length == 0) { return true }
       return false
@@ -59,6 +60,7 @@ export default {
         password: this.loginPassword,
       }
       await this.tryLogin(param)
+      await this.getInfo()
 
       this.loginId = null
       this.loginPassword = null

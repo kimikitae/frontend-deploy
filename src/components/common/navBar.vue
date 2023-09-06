@@ -9,7 +9,7 @@
       <div class="right">
         <template v-if="token">
           <div class="button" @click="$emit('openUserModal')">
-            {{ name }}님
+            {{ userName }}님
             <img class="direct" src="../../assets/Downarrow.png" />
           </div>
         </template>
@@ -37,6 +37,9 @@ export default {
     ...mapState("token", {
       token: (state) => state.accessToken,
     }),
+    ...mapState("user",{
+      userName: (state) => state.userInfo.userName
+    })
   },
   methods: {
     toSignInView(){

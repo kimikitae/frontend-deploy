@@ -77,6 +77,7 @@ export default {
       throw new Error('내정보 수정하기에 실패했습니다.')
     }
     const data = await response.json()
+    console.log(data)
     return data
   },
 }

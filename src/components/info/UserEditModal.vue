@@ -53,6 +53,11 @@ export default {
           oldPassword: this.editInfo.oldPassword,
           newPassword: this.editInfo.newPassword,
         };
+        if(data.newNickname == "" || data.newNickname == null) data.newNickname = null
+        if(data.oldPassword == "" || data.oldPassword == null || data.newPassword == "" || data.newPassword == null){
+            data.oldPassword = null
+            data.newPassword = null
+        }
         this.putInfo(data);
         router.push("/InfoView");
       } else {

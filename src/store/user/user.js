@@ -28,6 +28,9 @@ export default {
   },
   getters: {},
   mutations: {
+    setUserNickname(state, userName){
+      state.userInfo.userName = userName
+    },
     setUserInfo(state, userInfo) {
       state.userInfo = userInfo
     },
@@ -46,8 +49,7 @@ export default {
     async putInfo(context, info) {
       const data = await api.putInfo(info)
       if (data.success) {
-        // console.log(data)
-        //   await context.commit('setUserInfo', data.response)
+        await context.commit('setUserNickname', info.newNickname)
         return true
       } else {
         alert(data.error.status, data.error.message)
