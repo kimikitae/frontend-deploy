@@ -20,10 +20,10 @@ import router from "@/router";
 export default {
   name: "UserModal",
   methods: {
-    toLogOut() {
+    async toLogOut() {
       localStorage.removeItem("vuex");
       this.$emit("closeUserModal");
-      router.replace('/')
+      await router.replace('/')
       router.go(0)
     },
     toInfo() {
