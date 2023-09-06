@@ -2,6 +2,7 @@
 // const server = "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
 //local server
 const server = 'http://localhost:8080'
+import store from '../../store/index'
 
 export default {
   async login(info) {
@@ -44,5 +45,38 @@ export default {
 
     const data = await response.json()
     return data
-  }
+  },
+  async getInfo() {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/users`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error('내정보 가져오기에 실패했습니다.')
+    }
+    const data = await response.json()
+    return data
+  },
+  async putInfo(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/users/update`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      },
+      body: JSON.stringify(info)
+    })
+
+    if (!response.ok) {
+      throw new Error('내정보 수정하기에 실패했습니다.')
+    }
+    const data = await response.json()
+    return data
+  },
 }

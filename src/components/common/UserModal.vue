@@ -14,25 +14,24 @@
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions } from "vuex";
 import router from "@/router";
 
 export default {
-  name: "ModalLogOut",
-  props: {
-    openModalLogOut: Boolean,
-  },
+  name: "UserModal",
   methods: {
-    async toLogOut() {
+    toLogOut() {
       localStorage.removeItem("vuex");
       this.$emit("closeUserModal");
       router.go(0)
     },
     toInfo() {
       this.$emit("closeUserModal");
+      this.getInfo()
       router.push("/InfoView");
     },
     ...mapMutations("token", ["setToken"]),
+    ...mapActions("user", ["getInfo"])
   },
 };
 </script>
@@ -56,7 +55,7 @@ export default {
   background-color: white;
   border-radius: 0.5rem;
   border: none;
-  box-shadow: 0.2px 0.2px 4px 4px #0000002f;
+  box-shadow: 0px 5px 8px 4px #b4b4b476;
   animation: fadeInUp 0.5s ease backwards;
 }
 .modalframe {
