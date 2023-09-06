@@ -23,6 +23,7 @@ export default {
     toLogOut() {
       localStorage.removeItem("vuex");
       this.$emit("closeUserModal");
+      router.replace('/')
       router.go(0)
     },
     toInfo() {
