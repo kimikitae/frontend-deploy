@@ -6,7 +6,7 @@
           <span class="content2">로그아웃</span>
         </div>
         <div class="content" @click="toInfo">내 정보</div>
-        <div class="content" @click="toLogOut">장바구니</div>
+        <div class="content" @click="toCart">장바구니</div>
         <div class="content" @click="toLogOut">기타항목</div>
       </div>
     </main>
@@ -23,16 +23,22 @@ export default {
     async toLogOut() {
       localStorage.removeItem("vuex");
       this.$emit("closeUserModal");
-      await router.replace('/')
-      router.go(0)
+      await router.replace("/");
+      router.go(0);
     },
     toInfo() {
       this.$emit("closeUserModal");
-      this.getInfo()
+      this.getInfo();
       router.push("/InfoView");
     },
+    toCart() {
+      this.$emit("closeUserModal");
+      this.getCartInfo();
+      router.push("/CartView");
+    },
     ...mapMutations("token", ["setToken"]),
-    ...mapActions("user", ["getInfo"])
+    ...mapActions("user", ["getInfo"]),
+    ...mapActions("cart", ["getCartInfo"]),
   },
 };
 </script>
@@ -62,12 +68,12 @@ export default {
 .modalframe {
   position: relative;
 }
-.content1{
+.content1 {
   padding-top: 0.8rem;
   height: 1rem;
 }
-.content2{
-  color: #D0D0D0;
+.content2 {
+  color: #d0d0d0;
   margin-right: 1rem;
   float: right;
   font-size: 0.6rem;
