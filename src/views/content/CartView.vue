@@ -19,7 +19,7 @@
                   <div class="content pleft btn">+</div>
                   <div class="content">1</div>
                   <div class="content btn">-</div>
-                  <span class="content">19000원</span>
+                  <span class="price">19000원</span>
                 </div>
               </div>
 
@@ -144,9 +144,10 @@ export default {
   text-align: center;
   line-height: 170%;
 }
-.line2 > span {
+.price {
+    float: right;
   font-weight: bold;
-  margin-left: 62%;
+  margin-right: 1rem;
 }
 .btn {
   cursor: pointer;
@@ -174,8 +175,8 @@ hr {
   font-weight: bold;
   font-size: 1.2rem;
   line-height: 240%;
-  float: left;
-  margin-left: 55%;
+  float: right;
+  margin-right: 1rem;
   color: #113ee0;
 }
 .box3{
