@@ -11,16 +11,14 @@ export default {
   getters: {},
   mutations: {
     setCartInfo(state, cartInfo) {
-      state.userInfo = cartInfo
+      state.cartInfo = cartInfo
     },
   },
   actions: {
     async getCartInfo(context) {
       const data = await api.getCartInfo()
-      console.log(data)
       if (data.success) {
-        console.log(data.response)
-        await context.commit('setCartInfo', data.response)
+        context.commit('setCartInfo', data.response)
         return true
       } else {
         alert(data.error.status, data.error.message)

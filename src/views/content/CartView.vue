@@ -8,32 +8,28 @@
           <div class="box1">
             <div class="topi">장바구니 정보</div>
             <hr />
-            <!-- <div class="cartlist" v-for="(it, index) in cartInfo.menus" :key="index"> -->
-            <div class="cartlist">
-              <div class="cartname">고추 바사삭</div>
-              <div class="menulist">
-                <div class="line1">
-                  <div class="mname">1. 뼈치킨</div>
+            <div class="cartlist" v-for="(menu, cindex) in cartInfo.menus" :key="cindex">
+              <div class="cartname">{{ menu.menuName }}</div>
+              <template v-for="(cart, cindex) in menu.carts" :key="cindex">
+                <div class="menulist">
+                  <div class="line1">
+                    <div class="mname">{{ cart.option.optionName }}</div>
+                  </div>
+                  <div class="line2">
+                    <div class="content pleft btn">+</div>
+                    <div class="content">{{ cart.quantity }}</div>
+                    <div class="content btn">-</div>
+                    <span class="price">{{ cart.price }}</span>
+                  </div>
                 </div>
-                <div class="line2">
-                  <div class="content pleft btn">+</div>
-                  <div class="content">1</div>
-                  <div class="content btn">-</div>
-                  <span class="price">19000원</span>
-                </div>
-              </div>
-
-              <!-- <div class="content">{{ it.menuName }}</div>
-              <div class="content">{{ it.carts.option.optionName }}</div>
-              <div class="content">{{ it.carts.price }}</div>
-              <div class="content">{{ it.carts.quantity }}</div> -->
+              </template>
             </div>
           </div>
 
           <div class="shad">
             <div class="box2">
               <div class="ptext">주문 예상 금액</div>
-              <div class="tprice">44000원</div>
+              <div class="tprice">{{ cartInfo.totalPrice }}</div>
             </div>
 
             <div class="box3">결제하기</div>
@@ -95,8 +91,8 @@ export default {
 }
 .box1 {
   width: 100%;
-  border: none;
-  box-shadow: 0px 5px 8px 4px #b4b4b476;
+  border: solid 1px rgba(128, 128, 128, 0.168);
+  /* box-shadow: 0px 5px 8px 4px #b4b4b476; */
   padding-bottom: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -183,7 +179,7 @@ hr {
   cursor: pointer;
 }
 .shad {
-  border: none;
-  box-shadow: 0px 5px 8px 4px #b4b4b476;
+  border: solid 1px rgba(128, 128, 128, 0.168);
+  /* box-shadow: 0px 5px 8px 4px #b4b4b476; */
 }
 </style>
