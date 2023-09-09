@@ -19,7 +19,7 @@
                     <div class="content pleft btn">+</div>
                     <div class="content">{{ cart.quantity }}</div>
                     <div class="content btn">-</div>
-                    <span class="price">{{ cart.price }}</span>
+                    <span class="price">{{ cart.price + "원" }}</span>
                   </div>
                 </div>
               </template>
@@ -29,7 +29,7 @@
           <div class="shad">
             <div class="box2">
               <div class="ptext">주문 예상 금액</div>
-              <div class="tprice">{{ cartInfo.totalPrice }}</div>
+              <div class="tprice">{{ cartInfo.totalPrice + "원"}}</div>
             </div>
 
             <div class="box3">결제하기</div>
