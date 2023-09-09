@@ -30,12 +30,14 @@
             </div>
           </div>
 
-          <div class="box2">
-            <div class="ptext">주문 예상 금액</div>
-            <div class="tprice">44000원</div>
-          </div>
+          <div class="shad">
+            <div class="box2">
+              <div class="ptext">주문 예상 금액</div>
+              <div class="tprice">44000원</div>
+            </div>
 
-          <div class="box3">결제하기</div>
+            <div class="box3">결제하기</div>
+          </div>
         </div>
       </div>
     </div>
@@ -69,18 +71,11 @@ export default {
 </script>
 
 <style scoped>
-.color {
-  background-color: #d9d9d9;
-}
-
 .float {
   background-color: white;
   position: relative;
-  top: 1rem;
-  width: calc(100% - 1rem);
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  padding-top: 4rem;
+  width: 100%;
+  padding-top: 8rem;
 }
 .flex {
   display: flex;
@@ -145,7 +140,7 @@ export default {
   line-height: 170%;
 }
 .price {
-    float: right;
+  float: right;
   font-weight: bold;
   margin-right: 1rem;
 }
@@ -179,12 +174,16 @@ hr {
   margin-right: 1rem;
   color: #113ee0;
 }
-.box3{
+.box3 {
   text-align: center;
   font-size: 1.1rem;
   font-weight: bold;
   padding: 0.4rem 0;
-  background-color: #FFF5D1;
+  background-color: #fff5d1;
   cursor: pointer;
+}
+.shad {
+  border: none;
+  box-shadow: 0px 5px 8px 4px #b4b4b476;
 }
 </style>

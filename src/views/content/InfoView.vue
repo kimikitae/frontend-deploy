@@ -80,18 +80,11 @@ export default {
 </script>
 
 <style scoped>
-.color {
-  background-color: #d9d9d9;
-}
-
 .float {
   background-color: white;
   position: relative;
-  top: 1rem;
-  width: calc(100% - 1rem);
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
-  padding-top: 4rem;
+  width: calc(100%);
+  padding-top: 8rem;
 }
 
 .flex {

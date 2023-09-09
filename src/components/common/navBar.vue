@@ -59,10 +59,10 @@ export default {
 .frame {
   z-index: 100;
   position: fixed;
-  top: 0.5rem;
-  width: calc(100% - 1rem);
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  /* top: 0.5rem; */
+  width: calc(100%);
+  /* margin-left: 0.5rem;
+  margin-right: 0.5rem; */
   background-color: white;
 }
 
@@ -77,25 +77,26 @@ export default {
   cursor: pointer;
   position: relative;
   left: 0.5rem;
-  font-size: 2rem;
-  vertical-align: 30%;
+  font-size: 2.4rem;
+  vertical-align: 15%;
 }
 .menu {
+  font-size: 1.2rem;
   margin-left: 2rem;
-  vertical-align: 70%;
+  vertical-align: 50%;
 }
 .right {
   float: right;
 }
 .button {
+  font-size: 1.2rem;
   float: right;
   background-color: white;
   border-radius: 1.5rem;
   border: none;
   box-shadow: 0.5px 0.5px 2px 1px #d6d6d624;
   cursor: pointer;
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding: 0.1rem 2.4rem;
   margin-right: 1rem;
   margin-top: 1rem;
 }
