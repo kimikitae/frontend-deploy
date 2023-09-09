@@ -126,8 +126,8 @@ export default {
 .menulist {
   background-color: white;
   border-radius: 1.5rem;
-  border: none;
-  box-shadow: 0px 5px 8px 4px #b4b4b476;
+  border: solid 1px rgba(128, 128, 128, 0.168);
+  /* box-shadow: 0px 5px 8px 4px #b4b4b476; */
   cursor: pointer;
   margin-top: 5rem;
   width: 35rem;
@@ -136,8 +136,8 @@ export default {
 .postlist {
   background-color: white;
   border-radius: 1.5rem;
-  border: none;
-  box-shadow: 0px 5px 8px 4px #b4b4b476;
+  border: solid 1px rgba(128, 128, 128, 0.168);
+  /* box-shadow: 0px 5px 8px 4px #b4b4b476; */
   cursor: pointer;
   margin: 0 auto;
   margin-top: 1.5rem;
