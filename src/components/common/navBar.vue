@@ -84,6 +84,7 @@ export default {
   font-size: 1.2rem;
   margin-left: 2rem;
   vertical-align: 50%;
+  cursor: pointer;
 }
 .right {
   float: right;

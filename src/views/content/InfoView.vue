@@ -22,7 +22,7 @@
           <div class="menulist">
             <div class="content">내 주문 내역</div>
             <hr />
-            <div class="content">리뷰 관리</div>
+            <div class="content" @click="toReviewView">리뷰 관리</div>
             <hr />
             <div class="content" @click="openUserEditModal = true">정보 수정하기</div>
             <hr />
@@ -54,6 +54,7 @@ import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import UserEditModal from "../../components/info/UserEditModal.vue";
 import { mapActions, mapState } from "vuex";
+import router from "../../router";
 
 export default {
   name: "HomeView",
@@ -69,6 +70,9 @@ export default {
     }),
   },
   methods: {
+    toReviewView(){
+      router.push('/ReviewView')
+    },
     ...mapActions("token", ["tryLogin"]),
   },
   components: {

@@ -3,6 +3,7 @@ import createPersistedState from 'vuex-persistedstate'
 import token from './auth/token.js'
 import user from './user/user.js'
 import cart from './cart/cart.js'
+import review from './review/review.js'
 
 export default createStore({
   state: {},
@@ -12,11 +13,12 @@ export default createStore({
   modules: {
     token,
     user,
-    cart
+    cart,
+    review
   },
   plugins: [
     createPersistedState({
-      paths: ['token','user','cart']
+      paths: ['token','user','cart', 'review']
     })
   ]
 })

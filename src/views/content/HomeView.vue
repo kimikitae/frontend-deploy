@@ -38,7 +38,7 @@ export default {
 
 <style scoped>
 .color {
-  background-color: #d9d9d9;
+  background-color: white;
 }
 .float{
   position: relative;

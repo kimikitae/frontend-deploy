@@ -4,6 +4,7 @@ import SignInView from '../views/auth/SignInView.vue'
 import SignUpView from '../views/auth/SignUpView.vue'
 import InfoView from '../views/content/InfoView.vue'
 import CartView from '../views/content/CartView.vue'
+import ReviewView from '../views/content/ReviewView.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -47,6 +48,12 @@ const router = createRouter({
       name: 'CartView',
       component: CartView
     },
+    {
+      path: '/ReviewView',
+      name: 'ReviewView',
+      component: ReviewView
+    },
+    
   ]
 })
 
