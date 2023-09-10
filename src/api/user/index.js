@@ -13,10 +13,6 @@ export default {
       },
       body: JSON.stringify(info)
     })
-
-    if (!response.ok) {
-      throw new Error('로그인에 실패했습니다.')
-    }
     let head = response.headers.get('Authorization')
     let data = await response.json()
 
@@ -38,11 +34,6 @@ export default {
       },
       body: JSON.stringify(info)
     })
-
-    if (!response.ok) {
-      throw new Error('회원가입에 실패했습니다.')
-    }
-
     const data = await response.json()
     return data
   },
@@ -55,10 +46,6 @@ export default {
         'Authorization': tok
       }
     })
-
-    if (!response.ok) {
-      throw new Error('내정보 가져오기에 실패했습니다.')
-    }
     const data = await response.json()
     return data
   },
@@ -72,10 +59,6 @@ export default {
       },
       body: JSON.stringify(info)
     })
-
-    if (!response.ok) {
-      throw new Error('내정보 수정하기에 실패했습니다.')
-    }
     const data = await response.json()
     console.log(data)
     return data

@@ -14,10 +14,21 @@ export default {
         Authorization: tok,
       },
     })
-
-    if (!response.ok) {
-      throw new Error('카트 정보 가져오기에 실패했습니다.')
-    }
+    console.log(response)
+    const data = await response.json()
+    return data
+  },
+  async putCartInfo(info) {
+    const tok = store.state.token.accessToken
+    console.log(info)
+    const response = await fetch(`${server}/carts/update`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok
+      },
+      body: JSON.stringify(info)
+    })
     console.log(response)
     const data = await response.json()
     return data

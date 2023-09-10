@@ -8,17 +8,29 @@
           <div class="box1">
             <div class="topi">장바구니 정보</div>
             <hr />
-            <div class="cartlist" v-for="(menu, cindex) in cartInfo.menus" :key="cindex">
+            <div class="cartlist" v-for="(menu, mindex) in cartInfo.menus" :key="mindex">
               <div class="cartname">{{ menu.menuName }}</div>
               <template v-for="(cart, cindex) in menu.carts" :key="cindex">
                 <div class="menulist">
                   <div class="line1">
-                    <div class="mname">{{ cart.option.optionName }}</div>
+                    <div class="mname">
+                      {{ cindex + 1 + ". " + cart.option.optionName }}
+                    </div>
                   </div>
                   <div class="line2">
-                    <div class="content pleft btn">+</div>
+                    <div
+                      class="content pleft btn"
+                      @click="qModify(1, cart.idx, cart.quantity)"
+                    >
+                      +
+                    </div>
                     <div class="content">{{ cart.quantity }}</div>
-                    <div class="content btn">-</div>
+                    <div
+                      class="content btn"
+                      @click="qModify(-1, cart.idx, cart.quantity)"
+                    >
+                      -
+                    </div>
                     <span class="price">{{ cart.price + "원" }}</span>
                   </div>
                 </div>
@@ -29,7 +41,7 @@
           <div class="shad">
             <div class="box2">
               <div class="ptext">주문 예상 금액</div>
-              <div class="tprice">{{ cartInfo.totalPrice + "원"}}</div>
+              <div class="tprice">{{ cartInfo.totalPrice + "원" }}</div>
             </div>
 
             <div class="box3">결제하기</div>
@@ -44,7 +56,7 @@
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
-import { mapState } from "vuex";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "HomeView",
@@ -58,7 +70,20 @@ export default {
       cartInfo: (state) => state.cartInfo,
     }),
   },
-  methods: {},
+  methods: {
+    ...mapMutations("cart", ["setQuantity"]),
+    ...mapActions("cart", ["putCartInfo"]),
+    async qModify(m, i, q) {
+      const data = [{
+        idx: i,
+        quantity: parseInt(q + m),
+      }];
+      if(data[0].quantity <= 0){
+        return
+      }
+      await this.putCartInfo(data);
+    },
+  },
   components: {
     NavBar,
     UserModal,
