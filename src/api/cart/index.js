@@ -14,13 +14,11 @@ export default {
         Authorization: tok,
       },
     })
-    console.log(response)
     const data = await response.json()
     return data
   },
   async putCartInfo(info) {
     const tok = store.state.token.accessToken
-    console.log(info)
     const response = await fetch(`${server}/carts/update`, {
       method: 'PUT',
       headers: {
@@ -29,7 +27,6 @@ export default {
       },
       body: JSON.stringify(info)
     })
-    console.log(response)
     const data = await response.json()
     return data
   },

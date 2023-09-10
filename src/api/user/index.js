@@ -22,8 +22,6 @@ export default {
       error: data.error,
       token: head
     }
-    console.log(d)
-
     return d
   },
   async signup(info) {
@@ -60,7 +58,6 @@ export default {
       body: JSON.stringify(info)
     })
     const data = await response.json()
-    console.log(data)
     return data
   },
 }
