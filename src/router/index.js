@@ -5,6 +5,7 @@ import SignUpView from '../views/auth/SignUpView.vue'
 import InfoView from '../views/content/InfoView.vue'
 import CartView from '../views/content/CartView.vue'
 import ReviewView from '../views/content/ReviewView.vue'
+import OrderView from '../views/content/OrderView.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -53,7 +54,11 @@ const router = createRouter({
       name: 'ReviewView',
       component: ReviewView
     },
-    
+    {
+      path: '/OrderView',
+      name: 'OrderView',
+      component: OrderView
+    },
   ]
 })
 

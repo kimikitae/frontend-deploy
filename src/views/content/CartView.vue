@@ -4,7 +4,10 @@
     <div class="float">
       <div class="flex">
         <div class="item">
-          <div class="line">장바구니</div>
+          <div class="line">
+            <span>장바구니</span>
+            <span class="right" @click="deleteCart">장바구니 비우기</span>
+          </div>
           <div class="box1">
             <div class="topi">장바구니 정보</div>
             <hr />
@@ -72,14 +75,16 @@ export default {
   },
   methods: {
     ...mapMutations("cart", ["setQuantity"]),
-    ...mapActions("cart", ["putCartInfo"]),
+    ...mapActions("cart", ["putCartInfo", "deleteCart"]),
     async qModify(m, i, q) {
-      const data = [{
-        idx: i,
-        quantity: parseInt(q + m),
-      }];
-      if(data[0].quantity <= 0){
-        return
+      const data = [
+        {
+          idx: i,
+          quantity: parseInt(q + m),
+        },
+      ];
+      if (data[0].quantity <= 0) {
+        return;
       }
       await this.putCartInfo(data);
     },
@@ -113,6 +118,15 @@ export default {
   font-weight: bold;
   margin-left: 1rem;
   margin-bottom: 1.5rem;
+}
+.line > .right{
+  margin-left: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #FFF5D1;
+  padding: 0.3rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
 .box1 {
   width: 100%;

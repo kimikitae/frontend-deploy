@@ -30,4 +30,16 @@ export default {
     const data = await response.json()
     return data
   },
+  async deleteCart() {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/carts/clear`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
 }

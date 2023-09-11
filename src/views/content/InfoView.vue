@@ -20,7 +20,7 @@
             </div>
           </div>
           <div class="menulist">
-            <div class="content">내 주문 내역</div>
+            <div class="content" @click="toOrderList">내 주문 내역</div>
             <hr />
             <div class="content" @click="toReviewView">리뷰 관리</div>
             <hr />
@@ -70,6 +70,9 @@ export default {
     }),
   },
   methods: {
+    toOrderList(){
+      router.push('/OrderView')
+    },
     toReviewView(){
       router.push('/ReviewView')
     },

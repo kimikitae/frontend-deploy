@@ -40,5 +40,15 @@ export default {
         return false
       }
     },
+    async deleteCart(context) {
+      const data = await api.deleteCart()
+      if (data.success) {
+        await context.dispatch('getCartInfo')
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
   },
 }
