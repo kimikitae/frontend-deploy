@@ -20,13 +20,13 @@
             </div>
           </div>
           <div class="menulist">
-            <div class="content" @click="toOrderList">내 주문 내역</div>
+            <div class="content" @click="toOrderList('ing')">내 주문 내역</div>
             <hr />
             <div class="content" @click="toReviewView">리뷰 관리</div>
             <hr />
             <div class="content" @click="openUserEditModal = true">정보 수정하기</div>
             <hr />
-            <div class="content">주문 취소 목록</div>
+            <div class="content" @click="toOrderList('cancel')">주문 취소 목록</div>
             <hr />
             <div class="content">내 주소 관리</div>
           </div>
@@ -70,7 +70,8 @@ export default {
     }),
   },
   methods: {
-    toOrderList(){
+    toOrderList(s){
+      this.$emit('orderInfo', s)
       router.push('/OrderView')
     },
     toReviewView(){

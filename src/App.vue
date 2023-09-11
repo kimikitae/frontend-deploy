@@ -3,7 +3,7 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <RouterView id="all" />
+  <RouterView id="all" @orderInfo="orderInfo" :stats="stats"/>
   <!-- <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
@@ -22,9 +22,15 @@ import { RouterView } from "vue-router";
 export default {
   data() {
     return {
+      stats: "",
       isBackgroundBlue: true,
     };
   },
+  methods:{
+    orderInfo(stats){
+      this.stats = stats
+    }
+  }
 };
 </script>
 

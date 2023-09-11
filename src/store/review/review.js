@@ -13,7 +13,7 @@ export default {
     },
   },
   mutations: {
-    setreviewInfo(state, reviewInfo) {
+    setReviewInfo(state, reviewInfo) {
       state.reviewInfo = reviewInfo
     },
   },
@@ -21,7 +21,7 @@ export default {
     async getReviewInfo(context) {
       const data = await api.getReviewInfo()
       if (data.success) {
-        context.commit('setreviewInfo', data.response.reviews)
+        context.commit('setReviewInfo', data.response.reviews)
         return true
       } else {
         alert(data.error.status + data.error.message)
