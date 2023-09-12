@@ -37,7 +37,7 @@
                   <template v-else>
                     <template v-for="(item, index) in menu.items" :key="index">
                       <span>{{ item.optionName }}</span>
-                      <span v-if="index != menu.items.length">, </span>
+                      <span v-if="index < menu.items.length - 1">,&nbsp;</span>
                     </template>
                   </template>
                 </div>
