@@ -71,7 +71,7 @@ export default {
 
 <style scoped>
 .logo {
-  width: 14%;
+  width: 15rem;
   margin: 0 auto;
   margin-top: 7%;
   display: block;
@@ -84,7 +84,7 @@ export default {
 }
 
 .input>img {
-  width: 10%;
+  width: 1rem;
 }
 
 /* .input>input {
@@ -105,7 +105,6 @@ button {
 
 .usersupport {
   text-align: center;
-  width: 20%;
   display: block;
   margin: 0 auto;
   margin-top: 2%;
