@@ -17,4 +17,17 @@ export default {
     const data = await response.json()
     return data
   },
+  async postReview(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/reviews/write`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
 }

@@ -29,7 +29,7 @@ export default {
       }
     },
     async postReview(context, info) {
-      const data = await api.getReviewInfo(info)
+      const data = await api.postReview(info)
       if (data.success) {
         return true
       } else {
