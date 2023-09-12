@@ -119,8 +119,8 @@ export default {
   margin-left: 1rem;
   margin-bottom: 1.5rem;
 }
-.line > .right{
-  margin-left: 50%;
+.right{
+  float: right;
   font-size: 1rem;
   font-weight: bold;
   background-color: #FFF5D1;
