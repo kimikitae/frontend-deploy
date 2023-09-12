@@ -11,7 +11,8 @@
               ". " +
               extrMonth(order.createAt) +
               ". " +
-              extrDate(order.createAt)
+              extrDate(order.createAt) +
+              " 주문"
             }}
           </div>
           <div class="box1">
@@ -124,6 +125,10 @@ export default {
 </script>
 
 <style scoped>
+.date{
+  font-size: 1.4rem;
+  padding-bottom: 0.5rem;
+}
 .float {
   background-color: white;
   position: relative;
