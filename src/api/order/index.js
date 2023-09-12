@@ -43,7 +43,7 @@ export default {
   },
   async getOrder(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/orders/${info.idx}`, {
+    const response = await fetch(`${server}/orders/${info}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

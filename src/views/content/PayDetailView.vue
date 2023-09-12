@@ -4,46 +4,63 @@
     <div class="float">
       <div class="flex">
         <div class="item">
-          <div class="line">
-            결제 상세
+          <div class="line">결제 상세</div>
+          <div class="date">
+            {{
+              extrYear(order.createAt) +
+              ". " +
+              extrMonth(order.createAt) +
+              ". " +
+              extrDate(order.createAt)
+            }}
           </div>
           <div class="box1">
             <div class="topi">주문상품 정보</div>
             <hr />
-            <div class="cartlist" v-for="(menu, mindex) in cartInfo.menus" :key="mindex">
-              <div class="cartname">{{ menu.menuName }}</div>
-              <template v-for="(cart, cindex) in menu.carts" :key="cindex">
-                <div class="menulist">
-                  <div class="line1">
-                    <div class="mname">
-                      {{ cindex + 1 + ". " + cart.option.optionName }}
-                    </div>
-                  </div>
-                  <div class="line2">
-                    <div
-                      class="content pleft btn"
-                      @click="qModify(1, cart.idx, cart.quantity)"
-                    >
-                      +
-                    </div>
-                    <div class="content">{{ cart.quantity }}</div>
-                    <div
-                      class="content btn"
-                      @click="qModify(-1, cart.idx, cart.quantity)"
-                    >
-                      -
-                    </div>
-                    <span class="price">{{ cart.price + "원" }}</span>
-                  </div>
+            <div class="boxflex">
+              <div class="flexch">
+                <span>주문번호 </span>
+                <span>{{ order.idx }}</span>
+              </div>
+
+              <div class="list" v-for="(menu, oindex) in order.menus" :key="oindex">
+                <div class="flexch">
+                  <span>상품명 </span>
+                  <span>{{ menu.menuName }}</span>
                 </div>
-              </template>
+                <div class="flexch">
+                  <span>옵션 </span>
+                  <template v-if="menu.items.length == 1">
+                    <span>{{ menu.items[0].optionName }}</span>
+                  </template>
+                  <template v-else>
+                    <template v-for="(item, index) in menu.items" :key="index">
+                      <span>{{ item.optionName }}</span>
+                      <span v-if="index != menu.items.length">, </span>
+                    </template>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="box1">
+            <div class="topi">배달 정보</div>
+            <hr />
+            <div class="boxflex">
+              <div class="flexch">
+                {{ userName }}
+              </div>
+              <div class="flexch">
+                {{ order.address }}
+              </div>
             </div>
           </div>
 
           <div class="shad">
             <div class="box2">
               <div class="ptext">결제 금액</div>
-              <div class="tprice">{{ cartInfo.totalPrice + "원" }}</div>
+              <div class="tprice">{{ order.totalPrice + "원" }}</div>
             </div>
 
             <div class="box3">메인으로 돌아가기</div>
@@ -58,43 +75,51 @@
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
-import { mapState, mapMutations, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   name: "PayDetailView",
   data() {
     return {
       openUserModal: false,
+      sum: 0,
     };
   },
   computed: {
     ...mapState("order", {
-      selectedIdx: (state) => state.selectedIdx,
+      order: (state) => state.order,
+    }),
+    ...mapState("user", {
+      userName: (state) => state.userInfo.userName,
     }),
   },
   methods: {
-    ...mapMutations("cart", ["setQuantity"]),
-    ...mapActions("order", ["putCartInfo", "deleteCart"]),
-    async qModify(m, i, q) {
-      const data = [
-        {
-          idx: i,
-          quantity: parseInt(q + m),
-        },
-      ];
-      if (data[0].quantity <= 0) {
-        return;
-      }
-      await this.putCartInfo(data);
+    ...mapActions("order", ["getOrder"]),
+    getSum(items) {
+      console.log(items);
+      let sum = 0;
+      items.forEach((item) => {
+        sum += item.price;
+      });
+      return sum;
+    },
+    extrYear(d) {
+      return new Date(d).getFullYear();
+    },
+    extrMonth(d) {
+      return new Date(d).getUTCMonth() + 1;
+    },
+    extrDate(d) {
+      return new Date(d).getDate();
     },
   },
   components: {
     NavBar,
     UserModal,
   },
-  mounted(){
-
-  }
+  mounted() {
+    this.getOrder();
+  },
 };
 </script>
 
@@ -116,7 +141,7 @@ export default {
   margin-bottom: 1rem;
 }
 .line {
-    text-align: center;
+  text-align: center;
   font-size: 2rem;
   font-weight: bold;
   margin-left: 1rem;
@@ -125,61 +150,18 @@ export default {
 .box1 {
   width: 100%;
   border: solid 1px rgba(128, 128, 128, 0.168);
-  /* box-shadow: 0px 5px 8px 4px #b4b4b476; */
-  padding-bottom: 1.5rem;
   margin-bottom: 2rem;
 }
 .topi {
   padding: 1rem 0;
   text-align: center;
 }
-.cartlist {
-  margin: 0 auto;
-  width: 88%;
-  margin-bottom: 2rem;
+.boxflex {
+  display: felx;
+  flex-direction: column;
+  justify-content: space-around;
 }
-.cartname {
-  font-weight: bold;
-  margin-top: 2rem;
-  margin-bottom: 0.7rem;
-}
-.menulist {
-  height: 5rem;
-  border: solid 0.5px #d0d0d079;
-}
-.line1 {
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-}
-.mname {
-  padding-left: 1rem;
-}
-.line2 {
-  height: 2.5rem;
-}
-.pleft {
-  margin-left: 1rem;
-}
-.line2 > div {
-  width: 1.7rem;
-  height: 1.7rem;
-  border: solid 0.5px #d0d0d09f;
-  text-align: center;
-  line-height: 170%;
-}
-.price {
-  float: right;
-  font-weight: bold;
-  margin-right: 1rem;
-}
-.btn {
-  cursor: pointer;
-}
-.content {
-  float: left;
-}
-hr {
+.box1 > hr {
   margin: 0 auto;
   width: 100%;
 }
@@ -214,5 +196,13 @@ hr {
 .shad {
   border: solid 1px rgba(128, 128, 128, 0.168);
   /* box-shadow: 0px 5px 8px 4px #b4b4b476; */
+}
+.flexch {
+  display: flex;
+  margin: 1.5rem 0;
+  margin-left: 2rem;
+}
+.flexch > span:first-child {
+  width: 5rem;
 }
 </style>

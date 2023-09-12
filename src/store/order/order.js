@@ -6,7 +6,7 @@ export default {
 
   state: {
     orderInfo: [],
-    selectedIdx: "",
+    selectedIdx: 0,
     order:{ }
   },
   getters: {},
@@ -51,8 +51,8 @@ export default {
         return false
       }
     },
-    async getOrder(context, info) {
-      const data = await api.getOrder(info)
+    async getOrder(context) {
+      const data = await api.getOrder(context.state.selectedIdx)
       if (data.success) {
         await context.commit('setOrder', data.response)
         return true
