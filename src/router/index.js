@@ -6,6 +6,7 @@ import InfoView from '../views/content/InfoView.vue'
 import CartView from '../views/content/CartView.vue'
 import ReviewView from '../views/content/ReviewView.vue'
 import OrderView from '../views/content/OrderView.vue'
+import PayDetailView from '../views/content/PayDetailView.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -58,6 +59,11 @@ const router = createRouter({
       path: '/OrderView',
       name: 'OrderView',
       component: OrderView
+    },
+    {
+      path: '/PayDetailView',
+      name: 'PayDetailView',
+      component: PayDetailView
     },
   ]
 })

@@ -48,7 +48,7 @@
               <template v-else-if="'status' in it && it.status == '배달 중'">
                 <div @click="openCancelOrderModalf(it.idx)">취소하기</div>
               </template>
-              <div>결제 정보</div>
+              <div @click="toPayDetail(it.idx)">결제 정보</div>
             </div>
           </div>
         </template>
@@ -65,7 +65,8 @@ import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import ReviewModal from "../../components/review/ReviewModal.vue";
 import CancelOrderModal from "../../components/order/CancelOrderModal.vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
+import router from "../../router";
 
 export default {
   name: "OrderView",
@@ -94,6 +95,11 @@ export default {
       this.idx = idx
       this.openCancelOrderModal = true
     },
+    toPayDetail(idx){
+      this.setIdx(idx)
+      router.push('/PayDetailView')
+    },
+    ...mapMutations("order", ["setIdx"]),
     ...mapActions("order", ["getOrderInfo", "getCancelOderInfo"]),
     extrMonth(d) {
       return new Date(d).getUTCMonth();

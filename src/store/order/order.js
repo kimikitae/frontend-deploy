@@ -6,11 +6,19 @@ export default {
 
   state: {
     orderInfo: [],
+    selectedIdx: "",
+    order:{ }
   },
   getters: {},
   mutations: {
     setOrderInfo(state, orderInfo) {
       state.orderInfo = orderInfo
+    },
+    setOrder(state, order) {
+      state.order = order
+    },
+    setIdx(state, selectedIdx){
+      state.selectedIdx = selectedIdx
     },
   },
   actions: {
@@ -37,6 +45,16 @@ export default {
           stats: 'ing'
         }
         await context.dispatch('getOrderInfo', info)
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+    async getOrder(context, info) {
+      const data = await api.getOrder(info)
+      if (data.success) {
+        await context.commit('setOrder', data.response)
         return true
       } else {
         alert(data.error.status + data.error.message)

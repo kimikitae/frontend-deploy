@@ -5,11 +5,10 @@
       <div class="flex">
         <div class="item">
           <div class="line">
-            <span>장바구니</span>
-            <span class="right" @click="deleteCart">장바구니 비우기</span>
+            결제 상세
           </div>
           <div class="box1">
-            <div class="topi">장바구니 정보</div>
+            <div class="topi">주문상품 정보</div>
             <hr />
             <div class="cartlist" v-for="(menu, mindex) in cartInfo.menus" :key="mindex">
               <div class="cartname">{{ menu.menuName }}</div>
@@ -43,11 +42,11 @@
 
           <div class="shad">
             <div class="box2">
-              <div class="ptext">주문 예상 금액</div>
+              <div class="ptext">결제 금액</div>
               <div class="tprice">{{ cartInfo.totalPrice + "원" }}</div>
             </div>
 
-            <div class="box3">결제하기</div>
+            <div class="box3">메인으로 돌아가기</div>
           </div>
         </div>
       </div>
@@ -62,20 +61,20 @@ import UserModal from "../../components/common/UserModal.vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
-  name: "CartView",
+  name: "PayDetailView",
   data() {
     return {
       openUserModal: false,
     };
   },
   computed: {
-    ...mapState("cart", {
-      cartInfo: (state) => state.cartInfo,
+    ...mapState("order", {
+      selectedIdx: (state) => state.selectedIdx,
     }),
   },
   methods: {
     ...mapMutations("cart", ["setQuantity"]),
-    ...mapActions("cart", ["putCartInfo", "deleteCart"]),
+    ...mapActions("order", ["putCartInfo", "deleteCart"]),
     async qModify(m, i, q) {
       const data = [
         {
@@ -93,6 +92,9 @@ export default {
     NavBar,
     UserModal,
   },
+  mounted(){
+
+  }
 };
 </script>
 
@@ -114,19 +116,11 @@ export default {
   margin-bottom: 1rem;
 }
 .line {
+    text-align: center;
   font-size: 2rem;
   font-weight: bold;
   margin-left: 1rem;
   margin-bottom: 1.5rem;
-}
-.right{
-  float: right;
-  font-size: 1rem;
-  font-weight: bold;
-  background-color: #FFF5D1;
-  padding: 0.3rem 1rem;
-  border-radius: 6px;
-  cursor: pointer;
 }
 .box1 {
   width: 100%;
