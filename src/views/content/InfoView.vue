@@ -52,7 +52,7 @@
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
-import UserEditModal from "../../components/info/UserEditModal.vue";
+import UserEditModal from "../../components/user/UserEditModal.vue";
 import { mapActions, mapState } from "vuex";
 import router from "../../router";
 

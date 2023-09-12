@@ -11,8 +11,8 @@
 
 <script>
 import NavBar from "../../components/common/navBar.vue";
-import MainScreen from "../../components/home/MainScreen.vue";
-import MainContent from "../../components/home/MainContent.vue";
+import MainScreen from "../../components/common/MainScreen.vue";
+import MainContent from "../../components/common/MainContent.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import { mapActions } from "vuex";
 

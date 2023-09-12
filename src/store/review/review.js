@@ -28,5 +28,14 @@ export default {
         return false
       }
     },
+    async postReview(context, info) {
+      const data = await api.getReviewInfo(info)
+      if (data.success) {
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
   },
 }

@@ -43,10 +43,10 @@
             </div>
             <div class="line3">
               <template v-if="'status' in it && it.status == '배달 완료'">
-                <div>리뷰 작성</div>
+                <div @click="openReviewModalf(it.idx)">리뷰 작성</div>
               </template>
               <template v-else-if="'status' in it && it.status == '배달 중'">
-                <div>취소하기</div>
+                <div @click="openCancelOrderModalf(it.idx)">취소하기</div>
               </template>
               <div>결제 정보</div>
             </div>
@@ -55,12 +55,16 @@
       </div>
     </div>
     <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
+    <ReviewModal :idx="idx" v-if="openReviewModal" @closeReviewModal="openReviewModal = false" />
+    <CancelOrderModal :idx="idx" v-if="openCancelOrderModal" @closeCancelOrderModal="openCancelOrderModal = false" />
   </main>
 </template>
 
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
+import ReviewModal from "../../components/review/ReviewModal.vue";
+import CancelOrderModal from "../../components/order/CancelOrderModal.vue";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -71,6 +75,9 @@ export default {
   data() {
     return {
       openUserModal: false,
+      openReviewModal: false,
+      openCancelOrderModal: false,
+      idx: 0,
     };
   },
   computed: {
@@ -79,6 +86,14 @@ export default {
     }),
   },
   methods: {
+    openReviewModalf(idx){
+      this.idx = idx
+      this.openReviewModal = true
+    },
+    openCancelOrderModalf(idx){
+      this.idx = idx
+      this.openCancelOrderModal = true
+    },
     ...mapActions("order", ["getOrderInfo", "getCancelOderInfo"]),
     extrMonth(d) {
       return new Date(d).getUTCMonth();
@@ -107,6 +122,8 @@ export default {
   components: {
     NavBar,
     UserModal,
+    ReviewModal,
+    CancelOrderModal
   },
   mounted() {
     const data = {
