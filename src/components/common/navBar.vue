@@ -3,7 +3,7 @@
     <div class="frame">
       <img class="logo" src="../../assets/appLogo.png" @click="toMain" />
       <span class="title" @click="toMain">용기나눔</span>
-      <span class="menu">공유</span>
+      <span class="menu" @click="this.$router.push('/ShareView')">공유</span>
       <span class="menu">동네이야기</span>
       <span class="menu">더보기</span>
       <div class="right">

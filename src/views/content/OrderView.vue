@@ -55,7 +55,7 @@
       </div>
     </div>
     <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
-    <ReviewModal :idx="idx" v-if="openReviewModal" @closeReviewModal="openReviewModal = false" />
+    <ReviewModal :mode="mode" :idx="idx" v-if="openReviewModal" @closeReviewModal="openReviewModal = false" />
     <CancelOrderModal :idx="idx" v-if="openCancelOrderModal" @closeCancelOrderModal="openCancelOrderModal = false" />
   </main>
 </template>
@@ -79,6 +79,7 @@ export default {
       openReviewModal: false,
       openCancelOrderModal: false,
       idx: 0,
+      mode: 0,
     };
   },
   computed: {

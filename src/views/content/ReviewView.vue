@@ -22,9 +22,9 @@
                 {{ it.shopName }}
               </div>
               <div class="right">&nbsp;&nbsp;&nbsp;&nbsp;</div>
-              <div class="right ul">삭제</div>
+              <div class="right ul" @click="delReview(it.idx)">삭제</div>
               <div class="right">&nbsp;</div>
-              <div class="right ul">수정</div>
+              <div class="right ul" @click="mdfReview(it.idx, it.content, it.starPoint)">수정</div>
             </div>
             <div class="line2">{{ it.orderName }}</div>
             <star-rating
@@ -42,6 +42,7 @@
       </div>
     </div>
     <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
+    <ReviewModal :mode="mode" :oldReview="oldReview" v-if="openReviewModal" @closeReviewModal="openReviewModal = false" />
   </main>
 </template>
 
@@ -49,6 +50,7 @@
 import StarRating from "vue-star-rating";
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
+import ReviewModal from "../../components/review/ReviewModal.vue";
 import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
@@ -56,6 +58,11 @@ export default {
   data() {
     return {
       openUserModal: false,
+      openReviewModal: false,
+      oldReview: {
+
+      },
+      mode: 1
     };
   },
   computed: {
@@ -65,7 +72,21 @@ export default {
     ...mapGetters("review", ["sortedReview"]),
   },
   methods: {
-    ...mapActions("review", ["getReviewInfo"]),
+    delReview(idx){
+      const data = {
+        idx: idx
+      }
+      this.deleteReview(data)
+    },
+    mdfReview(idx, content, starPoint) {
+      this.oldReview = {
+        idx: idx,
+        content: content,
+        starPoint: starPoint
+      }
+      this.openReviewModal = true
+    },
+    ...mapActions("review", ["getReviewInfo", "deleteReview"]),
     extrMonth(d) {
       return new Date(d).getUTCMonth();
     },
@@ -94,6 +115,7 @@ export default {
     NavBar,
     UserModal,
     StarRating,
+    ReviewModal
   },
   mounted() {
     this.getReviewInfo();
@@ -152,6 +174,7 @@ export default {
   color: #d0d0d0;
 }
 .ul {
+  cursor: pointer;
   text-decoration: underline;
 }
 .line2 {

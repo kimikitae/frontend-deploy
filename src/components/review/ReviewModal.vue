@@ -1,7 +1,7 @@
 <template>
   <div class="zidx">
     <main>
-      <div class="modalframe">
+      <div class="modalframe" v-if="mode == 0">
         <div @click="this.$emit('closeReviewModal')" class="close">X</div>
         <div class="content-box">
           <h1>리뷰 작성</h1>
@@ -11,7 +11,7 @@
           <star-rating
             class="setstar"
             :star-size="25"
-            @update:rating ="setRating"
+            @update:rating="setRating"
             :show-rating="false"
             inactive-color="#9A9A9A"
             active-color="#FEE503"
@@ -20,10 +20,36 @@
           <div class="editInfo1">
             <textarea v-model="reviewInfo.content" />
           </div>
-          
         </div>
         <div class="button" @click="writeReview">
           <span> 리뷰 등록하기 </span>
+        </div>
+      </div>
+
+      <div class="modalframe" v-if="mode == 1">
+        <div @click="this.$emit('closeReviewModal')" class="close">X</div>
+        <div class="content-box">
+          <h1>리뷰 수정</h1>
+          <div class="desc">
+            가게 사장님을 위해<br />솔직하고 담백한 리뷰를 작성해주세요.
+          </div>
+          <star-rating
+            class="setstar"
+            :star-size="25"
+            :rating="oldReview.starPoint"
+            :read-only="true"
+            :show-rating="false"
+            inactive-color="#9A9A9A"
+            active-color="#FEE503"
+          ></star-rating>
+
+          <div class="editInfo1">
+            <textarea v-model="reviewInfo.content" :placeholder="oldReview.content"
+            onfocus="this.placeholder = ''"/>
+          </div>
+        </div>
+        <div class="button" @click="writeReview">
+          <span> 리뷰 수정하기 </span>
         </div>
       </div>
     </main>
@@ -37,7 +63,9 @@ import { mapActions } from "vuex";
 export default {
   name: "ReviewModal",
   props: {
+    mode: Number,
     idx: String,
+    oldReview: Object,
   },
   data() {
     return {
@@ -48,23 +76,34 @@ export default {
     };
   },
   methods: {
-    setRating(rating){
-      this.reviewInfo.starPoint= rating;
+    setRating(rating) {
+      this.reviewInfo.starPoint = rating;
     },
     async writeReview() {
-      const data = {
-        idx: this.idx,
-        content: this.reviewInfo.content,
-        starPoint: this.reviewInfo.starPoint
+      let data, a;
+      if (this.mode == 0) {
+        data = {
+          idx: this.idx,
+          content: this.reviewInfo.content,
+          starPoint: this.reviewInfo.starPoint,
+        };
+        a = await this.postReview(data);
+      } else if (this.mode == 1) {
+        data = {
+          idx: this.oldReview.idx,
+          content: this.reviewInfo.content,
+          starPoint: this.oldReview.starPoint,
+        };
+        a = await this.putReview(data);
       }
-      const a = await this.postReview(data)
-      if(a){
+
+      if (a) {
         this.$emit("closeReviewModal");
-      } else{
-        return
+      } else {
+        return;
       }
     },
-    ...mapActions("review", ["postReview"]),
+    ...mapActions("review", ["postReview", "putReview"]),
   },
   components: {
     StarRating,

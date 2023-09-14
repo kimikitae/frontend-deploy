@@ -7,6 +7,7 @@ import CartView from '../views/content/CartView.vue'
 import ReviewView from '../views/content/ReviewView.vue'
 import OrderView from '../views/content/OrderView.vue'
 import PayDetailView from '../views/content/PayDetailView.vue'
+import ShareView from '../views/content/ShareView.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -64,6 +65,11 @@ const router = createRouter({
       path: '/PayDetailView',
       name: 'PayDetailView',
       component: PayDetailView
+    },
+    {
+      path: '/ShareView',
+      name: 'ShareView',
+      component: ShareView
     },
   ]
 })
