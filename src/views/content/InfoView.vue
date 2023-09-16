@@ -35,7 +35,7 @@
           <div class="line2">작성한 게시물</div>
           <div class="postlist">
             <template v-for="(it, index) in userInfo.posts" :key="index">
-              <div class="content">{{ it.title }}</div>
+              <div class="content" @click="toPost(it.idx)">{{ it.title }}</div>
               <hr />
             </template>
           </div>
@@ -54,7 +54,7 @@
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import UserEditModal from "../../components/user/UserEditModal.vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import router from "../../router";
 
 export default {
@@ -78,7 +78,12 @@ export default {
     toReviewView() {
       router.push("/ReviewView");
     },
+    async toPost(idx){
+      await this.setSelectedIdx(idx); 
+      this.$router.push('/PostView')
+    },
     ...mapActions("token", ["tryLogin"]),
+    ...mapMutations("post", ["setSelectedIdx"]),
   },
   components: {
     NavBar,
