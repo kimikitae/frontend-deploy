@@ -14,7 +14,7 @@
         <div>
           <div class="line">
             <span>공유</span>
-            <span class="right" @click="deleteCart">게시글 작성</span>
+            <span class="right" @click="this.$router.push('/WriteView')">게시글 작성</span>
             <div class="subt">음식을 나누고, 용기도 나눠요.</div>
             <input
               type="text"
