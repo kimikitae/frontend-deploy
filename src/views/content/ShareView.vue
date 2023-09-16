@@ -5,7 +5,7 @@
       <div class="flex">
         <div>
           <div class="box" v-for="(menu, mindex) in menuList" :key="mindex">
-            <div class="boxitem">
+            <div class="boxitem" @click="search(menu)">
               {{ menu }}
             </div>
           </div>
@@ -14,10 +14,14 @@
         <div>
           <div class="line">
             <span>공유</span>
-            <span class="right" @click="this.$router.push('/WriteView')">게시글 작성</span>
+            <span class="right" @click="this.$router.push('/WriteView')"
+              >게시글 작성</span
+            >
             <div class="subt">음식을 나누고, 용기도 나눠요.</div>
             <input
+              @keyup.enter="search(searchtext)"
               type="text"
+              v-model="searchtext"
               placeholder="검색어를 입력하여 검색할 수 있어요."
               onfocus="this.placeholder = ''"
               onblur="this.placeholder = '검색어를 입력하여 검색할 수 있어요.'"
@@ -57,8 +61,27 @@
           </div>
           <div class="serve">아래로 내리면 더 많은 게시물을 볼 수 있어요.</div>
         </div>
+
         <div>
           <span class="news">우리 동네 소식</span>
+          <div class="newslistbox">
+            <template v-for="(notice, nindex) in notices.slice().reverse()" :key="nindex">
+              <div class="newsitem">
+                <div>
+                  {{ notice.content }}
+                </div>
+                <div>
+                  {{ elapsedTime(notice.createAt) }}
+                </div>
+              </div>
+            </template>
+
+            <div class="writebox">
+              <div>동네 소식 작성하기</div>
+              <input v-model="writeNews" type="text" />
+              <img src="../../assets/send.png" @click="sendNews" />
+            </div>
+          </div>
         </div>
 
         <div class="chat">채팅</div>
@@ -79,16 +102,56 @@ export default {
     return {
       openUserModal: false,
       menuList: ["치킨", "피자", "일식", "중식", "분식", "족발/보쌈"],
+      searchtext: "",
+      writeNews: "",
     };
   },
   computed: {
     ...mapState("post", {
       posts: (state) => state.posts,
+      notices: (state) => state.notices,
     }),
   },
   methods: {
     ...mapMutations("post", ["setSelectedIdx"]),
-    ...mapActions("post", ["getPosts"]),
+    ...mapActions("post", ["getPosts", "getSearchPosts", "getNotices", "postNotice"]),
+    async search(title){
+        const data = { 
+            title: title
+        }
+        await this.getSearchPosts(data)
+    },
+    async sendNews() {
+      const data = {
+        content: this.writeNews,
+      };
+      if (await this.postNotice(data)) {
+        this.writeNews = "";
+      }
+    },
+    elapsedTime(date) {
+      const start = new Date(date)
+      const end = new Date()
+
+      const diff = (end - start) / 1000;
+
+      const times = [
+        { name: "년", milliSeconds: 60 * 60 * 24 * 365 },
+        { name: "개월", milliSeconds: 60 * 60 * 24 * 30 },
+        { name: "일", milliSeconds: 60 * 60 * 24 },
+        { name: "시간", milliSeconds: 60 * 60 },
+        { name: "분", milliSeconds: 60 },
+      ];
+
+      for (const value of times) {
+        const betweenTime = Math.floor(diff / value.milliSeconds);
+
+        if (betweenTime > 0) {
+          return `${betweenTime}${value.name} 전`;
+        }
+      }
+      return "방금 전";
+    },
   },
   components: {
     NavBar,
@@ -96,6 +159,7 @@ export default {
   },
   mounted() {
     this.getPosts();
+    this.getNotices();
   },
 };
 </script>
@@ -160,7 +224,7 @@ export default {
   flex: 4;
 }
 .flex > div:nth-child(3) {
-  padding-top: 10.5rem;
+  padding-top: 11rem;
   flex: 2;
 }
 .box {
@@ -183,7 +247,7 @@ export default {
   margin-left: 2rem;
 }
 .news {
-  font-size: 1.4rem;
+  font-size: 1.8rem;
 }
 
 .listbox {
@@ -244,13 +308,61 @@ export default {
   text-align: center;
 }
 .chat {
+  background-color: whitesmoke;
   cursor: pointer;
   padding: 0.5rem 1rem;
   z-index: 10;
   position: fixed;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.5rem;
+  right: 1.5rem;
   border-radius: 1rem;
   border: 1px solid rgba(123, 123, 123, 0.475);
+}
+.newslistbox {
+  overflow: scroll;
+  height: 24rem;
+  margin-top: 1rem;
+  margin-right: 2rem;
+  border: 1px solid rgba(123, 123, 123, 0.475);
+  border-radius: 1rem;
+  padding-bottom: 2rem;
+}
+.newsitem {
+  padding: 1rem;
+  padding-bottom: 0.5rem;
+  margin: 1rem 2rem;
+  border: 1px solid rgba(123, 123, 123, 0.647);
+  border-radius: 0.5rem;
+}
+.newsitem > div:nth-child(2){
+    text-align: right;
+    color: #9A9A9A;
+}
+.writebox {
+  z-index: 9;
+  position: fixed;
+  bottom: 3rem;
+  width: 20rem;
+}
+.writebox > div:nth-child(1) {
+  color: #9a9a9a;
+  background-color: #ffffffd5;
+  margin-left: 1rem;
+  width: fit-content;
+}
+.writebox > input:nth-child(2) {
+  background-color: #ffeba4;
+  height: 1.9rem;
+  width: 18rem;
+  margin-left: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+}
+.writebox > img {
+  cursor: pointer;
+  position: absolute;
+  width: 2rem;
+  right: 1.5rem;
 }
 </style>

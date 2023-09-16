@@ -3,9 +3,23 @@
     <NavBar @openUserModal="openUserModal = true" />
     <div class="float">
       <div class="flex">
+      
         <div>
           <span>
             {{ post.title }}
+          </span>
+          <span>
+            {{
+              extrYear(post.createAt) +
+              ". " +
+              extrMonth(post.createAt) +
+              ". " +
+              extrDate(post.createAt) +
+              " " +
+              extrMinutes(post.createAt) +
+              ":" +
+              extrSeconds(post.createAt)
+            }}
           </span>
           <span>
             {{ post.author + "님" }}
@@ -47,6 +61,21 @@ export default {
   },
   methods: {
     ...mapActions("post", ["getPost"]),
+    extrYear(d) {
+      return new Date(d).getFullYear();
+    },
+    extrMonth(d) {
+      return new Date(d).getUTCMonth() + 1;
+    },
+    extrDate(d) {
+      return new Date(d).getDate();
+    },
+    extrMinutes(d) {
+      return new Date(d).getMinutes();
+    },
+    extrSeconds(d) {
+      return new Date(d).getSeconds();
+    },
   },
   components: {
     NavBar,
