@@ -13,11 +13,11 @@
 
         <div>
           <div class="line">
-            <span>공유</span>
+            <div>공유</div>
+            <span class="subt">음식을 나누고, 용기도 나눠요.</span>
             <span class="right" @click="this.$router.push('/WriteView')"
               >게시글 작성</span
             >
-            <div class="subt">음식을 나누고, 용기도 나눠요.</div>
             <input
               @keyup.enter="search(searchtext)"
               type="text"
@@ -77,7 +77,6 @@
             </template>
 
             <div class="writebox">
-              <div>동네 소식 작성하기</div>
               <input v-model="writeNews" type="text" />
               <img src="../../assets/send.png" @click="sendNews" />
             </div>
@@ -178,13 +177,14 @@ export default {
   margin-bottom: 1rem;
 }
 .right {
-  border: 1px solid rgba(0, 0, 0, 0.586);
+  border: 1px solid rgba(172, 172, 172, 0.586);
   float: right;
   font-size: 1rem;
   font-weight: bold;
   background-color: #fff5d1;
   padding: 0.5rem 1.2rem;
-  margin-right: 2rem;
+  margin-right: 3rem;
+  margin-bottom: 1rem;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -218,10 +218,10 @@ export default {
 }
 .flex > div:nth-child(1) {
   padding-top: 10.5rem;
-  flex: 1;
+  flex: 1.3;
 }
 .flex > div:nth-child(2) {
-  flex: 4;
+  flex: 5.5;
 }
 .flex > div:nth-child(3) {
   padding-top: 11rem;
@@ -344,16 +344,10 @@ export default {
   bottom: 3rem;
   width: 20rem;
 }
-.writebox > div:nth-child(1) {
-  color: #9a9a9a;
-  background-color: #ffffffd5;
-  margin-left: 1rem;
-  width: fit-content;
-}
-.writebox > input:nth-child(2) {
-  background-color: #ffeba4;
+.writebox > input:nth-child(1) {
+  background-color: #ffeba470;
   height: 1.9rem;
-  width: 18rem;
+  width: 15rem;
   margin-left: 1rem;
   border-radius: 0.5rem;
   border: none;
@@ -363,6 +357,6 @@ export default {
   cursor: pointer;
   position: absolute;
   width: 2rem;
-  right: 1.5rem;
+  right: 5rem;
 }
 </style>

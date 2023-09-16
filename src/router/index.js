@@ -10,6 +10,7 @@ import PayDetailView from '../views/content/PayDetailView.vue'
 import ShareView from '../views/content/ShareView.vue'
 import PostView from '../views/content/PostView.vue'
 import WriteView from '../views/content/WriteView.vue'
+import PayInfoView from '../views/content/PayInfoView.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -82,6 +83,11 @@ const router = createRouter({
       path: '/WriteView',
       name: 'WriteView',
       component: WriteView
+    },
+    {
+      path: '/PayInfoView',
+      name: 'PayInfoView',
+      component: PayInfoView
     },
   ]
 })
