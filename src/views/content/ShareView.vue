@@ -4,8 +4,13 @@
     <div class="float">
       <div class="flex">
         <div>
-          <span class="news">우리 동네 소식</span>
+          <div class="box" v-for="(menu, mindex) in menuList" :key="mindex">
+            <div class="boxitem">
+              {{ menu }}
+            </div>
+          </div>
         </div>
+
         <div>
           <div class="line">
             <span>공유</span>
@@ -18,12 +23,45 @@
               onblur="this.placeholder = '검색어를 입력하여 검색할 수 있어요.'"
             />
           </div>
+
           <span class="loc">연산동</span>
           <span class="desc">주변 122개 동네의 게시물을 검색합니다.</span>
+
+          <div class="listbox">
+            <template v-for="(post, pindex) in posts" :key="pindex">
+              <div
+                class="item"
+                @click="
+                  this.setSelectedIdx(post.idx);
+                  this.$router.push('/PostView');
+                "
+              >
+                <div class="pleft">
+                  <img src="../../assets/shopLogo.png" />
+                </div>
+
+                <div class="pcenter">
+                  <span class="tit">{{ post.title }}</span>
+                  <span class="smname">{{ post.menuName }}</span>
+                </div>
+
+                <div class="pright">
+                  <span class="sloc">{{ post.place + "에서 공유하길 원해요." }}</span>
+                  <span class="speop">{{
+                    post.people + "명이 나누었으면 좋겠어요."
+                  }}</span>
+                  <span class="stime">{{ post.time + "쯤 주문했으면 좋겠어요." }}</span>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div class="serve">아래로 내리면 더 많은 게시물을 볼 수 있어요.</div>
         </div>
         <div>
-          <span class="forso">고민석님께 추천드려요</span>
+          <span class="news">우리 동네 소식</span>
         </div>
+
+        <div class="chat">채팅</div>
       </div>
     </div>
     <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
@@ -36,36 +74,28 @@ import UserModal from "../../components/common/UserModal.vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
-  name: "CartView",
+  name: "ShareView",
   data() {
     return {
       openUserModal: false,
+      menuList: ["치킨", "피자", "일식", "중식", "분식", "족발/보쌈"],
     };
   },
   computed: {
-    ...mapState("cart", {
-      cartInfo: (state) => state.cartInfo,
+    ...mapState("post", {
+      posts: (state) => state.posts,
     }),
   },
   methods: {
-    ...mapMutations("cart", ["setQuantity"]),
-    ...mapActions("cart", ["putCartInfo", "deleteCart"]),
-    async qModify(m, i, q) {
-      const data = [
-        {
-          idx: i,
-          quantity: parseInt(q + m),
-        },
-      ];
-      if (data[0].quantity <= 0) {
-        return;
-      }
-      await this.putCartInfo(data);
-    },
+    ...mapMutations("post", ["setSelectedIdx"]),
+    ...mapActions("post", ["getPosts"]),
   },
   components: {
     NavBar,
     UserModal,
+  },
+  mounted() {
+    this.getPosts();
   },
 };
 </script>
@@ -75,7 +105,7 @@ export default {
   background-color: white;
   position: relative;
   width: 100%;
-  padding-top: 8rem;
+  padding-top: 6rem;
 }
 .line {
   width: 100%;
@@ -117,32 +147,110 @@ export default {
   display: flex;
   align-items: top;
   justify-content: space-around;
+  flex-basis: 0;
 }
 .flex > div {
   margin: 0 0.7rem;
 }
 .flex > div:nth-child(1) {
   padding-top: 10.5rem;
-
-  flex-grow: 1;
+  flex: 1;
 }
 .flex > div:nth-child(2) {
-  flex-grow: 2.1;
+  flex: 4;
 }
 .flex > div:nth-child(3) {
   padding-top: 10.5rem;
-  flex-grow: 1;
+  flex: 2;
 }
-.news {
-  font-size: 1.2rem;
+.box {
+  cursor: pointer;
+  margin: 0 auto;
+  width: 6.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.boxitem {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  border: 1px solid rgba(123, 123, 123, 0.475);
 }
 .loc {
   font-size: 2rem;
 }
 .desc {
-  margin-left: 1rem;
+  color: #d0d0d0;
+  margin-left: 2rem;
 }
-.forso {
+.news {
+  font-size: 1.4rem;
+}
+
+.listbox {
+  overflow: scroll;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(123, 123, 123, 0.475);
+  border-bottom: 1px solid rgba(123, 123, 123, 0.475);
+  height: 26rem;
+}
+.item {
+  cursor: pointer;
+  display: flex;
+  height: 6rem;
+  border-bottom: 1px solid rgba(123, 123, 123, 0.475);
+}
+.pleft {
+  flex: 1;
+}
+.pleft > img {
+  width: 5rem;
+  height: 5rem;
+  margin: 0.5rem 1rem;
+}
+.pcenter {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+.smname {
+  padding-top: 0.5rem;
+}
+.pright {
+  margin: 1rem 0;
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+.tit {
+  font-weight: bold;
   font-size: 1.2rem;
+  padding-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+.sloc {
+  padding-top: 0.2rem;
+  font-size: 0.9rem;
+}
+.speop {
+  padding-top: 0.2rem;
+  font-size: 0.9rem;
+}
+.stime {
+  padding-top: 0.2rem;
+  font-size: 0.9rem;
+}
+.serve {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+.chat {
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  z-index: 10;
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(123, 123, 123, 0.475);
 }
 </style>
