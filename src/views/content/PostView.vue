@@ -97,7 +97,7 @@
                       <span class="sname">
                         {{ post.shopName}}
                       </span>
-                      <span class="sshop"> 가게 살펴보기 </span>
+                      <span class="sshop" @click="toShopInfo"> 가게 살펴보기 </span>
                     </div>
 
                     <div>
@@ -136,6 +136,9 @@ export default {
     }),
   },
   methods: {
+    toShopInfo(){
+      this.$router.push('/ShopInfoView')
+    },
     ...mapActions("post", ["getPost"]),
     extrYear(d) {
       return new Date(d).getFullYear();
