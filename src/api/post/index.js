@@ -29,6 +29,46 @@ export default {
     const data = await response.json()
     return data
   },
+  async getSearchPosts(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/posts/search`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
+  async getNotices() {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/notices`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+  async postNotice(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/notices/write`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
+  
+  
 
 
 

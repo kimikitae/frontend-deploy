@@ -33,10 +33,11 @@
         </div>
         <div class="item">
           <div class="line2">작성한 게시물</div>
-
-          <div class="postlist" v-for="(it, index) in userInfo.posts" :key="index">
-            <div class="content">{{ it.title }}</div>
-            <hr />
+          <div class="postlist">
+            <template v-for="(it, index) in userInfo.posts" :key="index">
+              <div class="content">{{ it.title }}</div>
+              <hr />
+            </template>
           </div>
         </div>
       </div>
@@ -70,12 +71,12 @@ export default {
     }),
   },
   methods: {
-    toOrderList(s){
-      this.$emit('orderInfo', s)
-      router.push('/OrderView')
+    toOrderList(s) {
+      this.$emit("orderInfo", s);
+      router.push("/OrderView");
     },
-    toReviewView(){
-      router.push('/ReviewView')
+    toReviewView() {
+      router.push("/ReviewView");
     },
     ...mapActions("token", ["tryLogin"]),
   },
