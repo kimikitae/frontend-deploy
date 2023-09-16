@@ -45,7 +45,7 @@
 
           <div class="editInfo1">
             <textarea v-model="reviewInfo.content" :placeholder="oldReview.content"
-            onfocus="this.placeholder = ''"/>
+            onfocus="this.placeholder = ''"></textarea>
           </div>
         </div>
         <div class="button" @click="writeReview">
