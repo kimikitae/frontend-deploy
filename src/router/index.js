@@ -8,6 +8,7 @@ import ReviewView from '../views/content/ReviewView.vue'
 import OrderView from '../views/content/OrderView.vue'
 import PayDetailView from '../views/content/PayDetailView.vue'
 import ShareView from '../views/content/ShareView.vue'
+import PostView from '../views/content/PostView.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -70,6 +71,11 @@ const router = createRouter({
       path: '/ShareView',
       name: 'ShareView',
       component: ShareView
+    },
+    {
+      path: '/PostView',
+      name: 'PostView',
+      component: PostView
     },
   ]
 })
