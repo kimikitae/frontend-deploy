@@ -20,7 +20,7 @@ export default {
 
 <style scoped>
 .frame {
-  height: 45rem;
+  height: 100vh;
   font-size: 4rem;
   text-align: center;
   display: flex;

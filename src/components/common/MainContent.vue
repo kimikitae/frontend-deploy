@@ -71,6 +71,7 @@ export default {
   background-color: white;
 }
 .content {
+  height: 100vh;
   margin: 0 3rem;
   margin-bottom: 6rem;
   display: flex;
