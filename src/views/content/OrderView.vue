@@ -98,9 +98,10 @@ export default {
     },
     toPayDetail(idx){
       this.setIdx(idx)
+      this.setViewStatus(0)
       router.push('/PayView')
     },
-    ...mapMutations("order", ["setIdx"]),
+    ...mapMutations("order", ["setIdx", "setViewStatus"]),
     ...mapActions("order", ["getOrderInfo", "getCancelOderInfo"]),
     extrMonth(d) {
       return new Date(d).getUTCMonth();

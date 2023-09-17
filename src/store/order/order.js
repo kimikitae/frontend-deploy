@@ -7,7 +7,8 @@ export default {
   state: {
     orderInfo: [],
     selectedIdx: 0,
-    order:{ }
+    order:{ },
+    viewStatus: 0,  
   },
   getters: {},
   mutations: {
@@ -20,6 +21,9 @@ export default {
     setIdx(state, selectedIdx){
       state.selectedIdx = selectedIdx
     },
+    setViewStatus(state, viewStatus){
+      state.viewStatus = viewStatus
+    }
   },
   actions: {
     async getOrderInfo(context, info) {

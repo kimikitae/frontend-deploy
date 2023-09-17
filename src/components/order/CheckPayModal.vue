@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 import router from "../../router";
 
 export default {
@@ -34,8 +34,10 @@ export default {
   },
   methods: {
     toPayView(){
+      this.setViewStatus(1)
       router.push('/PayView')
     },
+    ...mapMutations("order", ["setViewStatus"]),
     ...mapActions("order", ["deleteOrder"]),
   },
   components: {},

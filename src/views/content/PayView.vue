@@ -4,17 +4,23 @@
     <div class="float">
       <div class="flex">
         <div class="item">
-          <div class="line">결제 상세</div>
-          <div class="date">
-            {{
-              extrYear(order.createAt) +
-              ". " +
-              extrMonth(order.createAt) +
-              ". " +
-              extrDate(order.createAt) +
-              " 주문"
-            }}
+          <div class="line">
+            <template v-if="viewStatus == 0"> 결제 상세 </template>
+            <template v-else-if="viewStatus == 1"> 결제 완료! </template>
           </div>
+          <div class="date">
+            <template v-if="viewStatus == 0">
+              {{
+                extrYear(order.createAt) +
+                ". " +
+                extrMonth(order.createAt) +
+                ". " +
+                extrDate(order.createAt) +
+                " 주문"
+              }}
+            </template>
+          </div>
+
           <div class="box1">
             <div class="topi">주문상품 정보</div>
             <hr />
@@ -45,7 +51,7 @@
             </div>
           </div>
 
-          <div class="box1">
+          <div class="box1" v-if="viewStatus == 0">
             <div class="topi">배달 정보</div>
             <hr />
             <div class="boxflex">
@@ -58,13 +64,41 @@
             </div>
           </div>
 
+          <div class="box1" v-if="viewStatus == 1">
+            <div class="topi">공유 정보</div>
+            <hr />
+
+            <div class="boxflex">
+              <div class="flexch">
+                <span>
+                  공유 장소
+                </span>
+
+                <span>
+                  연산동
+                </span>
+              </div>
+
+              <div class="flexch">
+                <span>
+                  공유 시간
+                </span>
+
+                <span>
+                  17:30 분 
+                </span>
+              </div>
+            </div>
+
+          </div>
+
           <div class="shad">
             <div class="box2">
               <div class="ptext">결제 금액</div>
               <div class="tprice">{{ order.totalPrice + "원" }}</div>
             </div>
 
-            <div class="box3">메인으로 돌아가기</div>
+            <div class="box3" @click="this.$router.push('/')">메인으로 돌아가기</div>
           </div>
         </div>
       </div>
@@ -89,6 +123,7 @@ export default {
   computed: {
     ...mapState("order", {
       order: (state) => state.order,
+      viewStatus: (state) => state.viewStatus,
     }),
     ...mapState("user", {
       userName: (state) => state.userInfo.userName,
@@ -125,7 +160,7 @@ export default {
 </script>
 
 <style scoped>
-.date{
+.date {
   font-size: 1.4rem;
   padding-bottom: 0.5rem;
 }
