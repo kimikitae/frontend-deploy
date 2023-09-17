@@ -43,7 +43,7 @@
             </div>
           </div>
 
-          <div class="cbtn">장소 선택 완료</div>
+          <div class="cbtn" @click="selectPlace">장소 선택 완료</div>
         </div>
       </div>
     </main>
@@ -73,6 +73,9 @@ export default {
       };
       this.postShops(data);
     },
+    selectPlace(){
+        this.$emit("closePlaceModal");
+    }
   },
   mounted() {
     const data = {

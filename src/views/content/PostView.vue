@@ -250,6 +250,7 @@ export default {
   border: 1px solid rgba(123, 123, 123, 0.647);
 }
 .btn2 {
+  cursor: pointer;
   width: 6rem;
   border-radius: 0.5rem;
   text-align: center;
