@@ -39,6 +39,11 @@ export default {
   width: 100%;
   height: 100%;
   font-family: Arial, sans-serif;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 header {
   line-height: 1.5;

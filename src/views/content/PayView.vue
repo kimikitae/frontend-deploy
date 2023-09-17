@@ -79,7 +79,7 @@ import UserModal from "../../components/common/UserModal.vue";
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "PayDetailView",
+  name: "PayView",
   data() {
     return {
       openUserModal: false,

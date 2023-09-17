@@ -77,7 +77,14 @@
             </template>
 
             <div class="writebox">
-              <input v-model="writeNews" type="text" />
+              <input
+                @keyup.enter="sendNews"
+                v-model="writeNews"
+                type="text"
+                placeholder="동네 소식 작성하기"
+                onfocus="this.placeholder = ''"
+                onblur="this.placeholder = '동네 소식 작성하기'"
+              />
               <img src="../../assets/send.png" @click="sendNews" />
             </div>
           </div>
@@ -114,13 +121,14 @@ export default {
   methods: {
     ...mapMutations("post", ["setSelectedIdx"]),
     ...mapActions("post", ["getPosts", "getSearchPosts", "getNotices", "postNotice"]),
-    async search(title){
-        const data = { 
-            title: title
-        }
-        await this.getSearchPosts(data)
+    async search(title) {
+      const data = {
+        title: title,
+      };
+      await this.getSearchPosts(data);
     },
     async sendNews() {
+      if(this.writeNews == "")return
       const data = {
         content: this.writeNews,
       };
@@ -129,8 +137,8 @@ export default {
       }
     },
     elapsedTime(date) {
-      const start = new Date(date)
-      const end = new Date()
+      const start = new Date(date);
+      const end = new Date();
 
       const diff = (end - start) / 1000;
 
@@ -334,13 +342,13 @@ export default {
   border: 1px solid rgba(123, 123, 123, 0.647);
   border-radius: 0.5rem;
 }
-.newsitem > div:nth-child(2){
-    text-align: right;
-    color: #9A9A9A;
+.newsitem > div:nth-child(2) {
+  text-align: right;
+  color: #9a9a9a;
 }
 .writebox {
   z-index: 9;
-  position: fixed;
+  position: absolute;
   bottom: 3rem;
   width: 20rem;
 }
@@ -352,6 +360,7 @@ export default {
   border-radius: 0.5rem;
   border: none;
   outline: none;
+  padding-left: 0.8rem;
 }
 .writebox > img {
   cursor: pointer;

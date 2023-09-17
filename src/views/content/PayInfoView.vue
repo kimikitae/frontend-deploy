@@ -106,17 +106,19 @@
               </div>
             </div>
           </div>
-          <div class="payBtn">결제하기</div>
+          <div class="payBtn" @click="openCheckPayModal = true">결제하기</div>
         </div>
     </div>
   </div>
   <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
+  <CheckPayModal v-if="openCheckPayModal" @closeCheckPayModal="openCheckPayModal = false"/>
   </main>
 </template>
 
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
+import CheckPayModal from "../../components/order/CheckPayModal.vue";
 import { mapActions } from "vuex";
 
 export default {
@@ -124,6 +126,7 @@ export default {
   data() {
     return {
       openUserModal: false,
+      openCheckPayModal: false
     };
   },
   computed: {},
@@ -133,6 +136,7 @@ export default {
   components: {
     NavBar,
     UserModal,
+    CheckPayModal
   },
 };
 </script>
@@ -311,5 +315,6 @@ export default {
   font-weight: bold;
   position: fixed;;
   bottom: 0;
+  cursor: pointer;
 }
 </style>

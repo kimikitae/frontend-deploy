@@ -6,6 +6,7 @@ import cart from './cart/cart.js'
 import review from './review/review.js'
 import order from './order/order.js'
 import post from './post/post.js'
+import shop from './shop/shop.js'
 
 export default createStore({
   state: {},
@@ -19,10 +20,11 @@ export default createStore({
     review,
     order,
     post,
+    shop,
   },
   plugins: [
     createPersistedState({
-      paths: ['token','user','cart', 'review', 'order', 'post']
+      paths: ['token','user','cart', 'review', 'order', 'post', 'shop']
     })
   ]
 })

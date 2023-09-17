@@ -98,7 +98,7 @@ export default {
     },
     toPayDetail(idx){
       this.setIdx(idx)
-      router.push('/PayDetailView')
+      router.push('/PayView')
     },
     ...mapMutations("order", ["setIdx"]),
     ...mapActions("order", ["getOrderInfo", "getCancelOderInfo"]),

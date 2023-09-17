@@ -6,7 +6,7 @@ import InfoView from '../views/content/InfoView.vue'
 import CartView from '../views/content/CartView.vue'
 import ReviewView from '../views/content/ReviewView.vue'
 import OrderView from '../views/content/OrderView.vue'
-import PayDetailView from '../views/content/PayDetailView.vue'
+import PayView from '../views/content/PayView.vue'
 import ShareView from '../views/content/ShareView.vue'
 import PostView from '../views/content/PostView.vue'
 import WriteView from '../views/content/WriteView.vue'
@@ -66,9 +66,9 @@ const router = createRouter({
       component: OrderView
     },
     {
-      path: '/PayDetailView',
-      name: 'PayDetailView',
-      component: PayDetailView
+      path: '/PayView',
+      name: 'PayView',
+      component: PayView
     },
     {
       path: '/ShareView',

@@ -3,12 +3,19 @@
     <main>
       <div class="modalframe">
         <div class="content-box">
-          <h3>정말 주문을 취소하시겠어요?</h3>
-          <div class="desc">상대방이 당신을 기다리고 있어요.</div>
+          <div class="title">
+            잠깐!<br />
+            아래의 공유 정보가 맞나요?
+          </div>
+          <div class="desc">
+            연산동에서 공유하길 원해요.<br />
+            2명이 나누었으면 좋겠어요.<br />
+            17:30분쯤 주문했으면 좋겠어요.
+          </div>
         </div>
         <div class="flex">
-          <div class="button lef" @click="cancelOrder">네, 취소할래요</div>
-          <div class="button rig" @click="this.$emit('closeCancelOrderModal')">아니에요</div>
+          <div class="button lef" @click="toPayView">네,맞아요</div>
+          <div class="button rig" @click="this.$emit('closeCheckPayModal')">아니에요</div>
         </div>
       </div>
     </main>
@@ -17,29 +24,17 @@
 
 <script>
 import { mapActions } from "vuex";
+import router from "../../router";
 
 export default {
-  name: "CancelOrderModal",
-  props: {
-    idx: String,
-  },
+  name: "CheckPayModal",
+  props: {},
   data() {
     return {};
   },
   methods: {
-    setRating(rating) {
-      this.reviewInfo.starPoint = rating;
-    },
-    async cancelOrder() {
-      const data = {
-        idx: this.idx,
-      };
-      const a = await this.deleteOrder(data);
-      if (a) {
-        this.$emit("closeCancelOrderModal");
-      } else {
-        return;
-      }
+    toPayView(){
+      router.push('/PayView')
     },
     ...mapActions("order", ["deleteOrder"]),
   },
@@ -64,7 +59,7 @@ export default {
   margin: 0 auto;
   margin-top: 15rem;
   width: 20rem;
-  height: 12.5rem;
+  height: fit-content;
   background-color: white;
   border-radius: 0.5rem;
   border: none;
@@ -87,9 +82,11 @@ export default {
   top: 1rem;
 }
 
-h3 {
-  padding-top: 1rem;
-  padding-bottom: 1.5rem;
+.title {
+  font-weight: bold;
+  font-size: 1.25rem;
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
   text-align: center;
 }
 .desc {
@@ -121,13 +118,12 @@ h3 {
   cursor: pointer;
   background-color: #fff5d1;
 }
-.lef{
-    border-radius: 0 0 0 0.5rem;
-
+.lef {
+  border-radius: 0 0 0 0.5rem;
 }
-.rig{
-    border-radius: 0 0 0.5rem 0;
+.rig {
+  border-radius: 0 0 0.5rem 0;
 
-    border-left: solid 1px rgba(50, 50, 50, 0.354);
+  border-left: solid 1px rgba(50, 50, 50, 0.354);
 }
 </style>

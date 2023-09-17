@@ -20,11 +20,11 @@
           onfocus="this.placeholder = ''" onblur="this.placeholder = '내용을 입력하세요'"></textarea>
           <div class="box1">
             <span>공유 메뉴를 선택하세요</span>
-            <div class="plus">+</div>
+            <div class="plus" @click="openMenuModal = true">+</div>
           </div>
           <div class="box1">
             <span>공유 장소를 선택하세요</span>
-            <div class="plus">+</div>
+            <div class="plus" @click="openPlaceModal = true">+</div>
           </div>
           <div class="box1">
             <span>공유 인원를 선택하세요</span>
@@ -42,23 +42,31 @@
       </div>
     </div>
     <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
+    <MenuModal v-if="openMenuModal" @closeMenuModal="openMenuModal = false" />
+    <PlaceModal v-if="openPlaceModal" @closePlaceModal="openPlaceModal = false" />
   </main>
 </template>
 
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
+import MenuModal from "../../components/post/MenuModal.vue"
+import PlaceModal from "../../components/post/PlaceModal.vue"
 
 export default {
   name: "WriteView",
   data() {
     return {
       openUserModal: false,
+      openMenuModal: false,
+      openPlaceModal: false,
     };
   },
   components: {
     NavBar,
     UserModal,
+    MenuModal,
+    PlaceModal,
   },
 };
 </script>
@@ -108,6 +116,7 @@ export default {
 }
 
 .plus {
+  cursor: pointer;
   float: right;
   border: 1px solid #D0D0D0;
   border-radius: 0.3rem;
