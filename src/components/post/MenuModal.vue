@@ -156,7 +156,7 @@ export default {
 
 .listitem {
   border: 1px solid rgba(123, 123, 123, 0.239);
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   margin-bottom: 1px;
   cursor: pointer;
 }

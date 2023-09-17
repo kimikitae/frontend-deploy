@@ -1,58 +1,49 @@
 <template>
   <div class="zidx">
     <main>
-      <div class="modalframe" v-if="mode == 0">
-        <div @click="this.$emit('closeReviewModal')" class="close">X</div>
+      <div class="modalframe">
+        <div @click="this.$emit('closePlaceModal')" class="close">X</div>
         <div class="content-box">
-          <h1>리뷰 작성</h1>
-          <div class="desc">
-            가게 사장님을 위해<br />솔직하고 담백한 리뷰를 작성해주세요.
-          </div>
-          <star-rating
-            class="setstar"
-            :star-size="25"
-            @update:rating="setRating"
-            :show-rating="false"
-            inactive-color="#9A9A9A"
-            active-color="#FEE503"
-          ></star-rating>
-
-          <div class="editInfo1">
-            <textarea v-model="reviewInfo.content" />
-          </div>
+          <div class="title">장소 선택</div>
+          <input
+            type="text"
+            v-model="searchtext"
+            placeholder="지명 및 도로명을 입력하세요. 예) 연산동"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '지명 및 도로명을 입력하세요. 예) 연산동'"
+          />
         </div>
-        <div class="button" @click="writeReview">
-          <span> 리뷰 등록하기 </span>
-        </div>
-      </div>
 
-      <div class="modalframe" v-if="mode == 1">
-        <div @click="this.$emit('closeReviewModal')" class="close">X</div>
-        <div class="content-box">
-          <h1>리뷰 수정</h1>
-          <div class="desc">
-            가게 사장님을 위해<br />솔직하고 담백한 리뷰를 작성해주세요.
-          </div>
-          <star-rating
-            class="setstar"
-            :star-size="25"
-            :rating="oldReview.starPoint"
-            :read-only="true"
-            :show-rating="false"
-            inactive-color="#9A9A9A"
-            active-color="#FEE503"
-          ></star-rating>
-
-          <div class="editInfo1">
-            <textarea
-              v-model="reviewInfo.content"
-              :placeholder="oldReview.content"
-              onfocus="this.placeholder = ''"
-            ></textarea>
-          </div>
+        <div class="listbox">
+          <template v-for="(shop, sindex) in shops" :key="sindex">
+            <div class="listitem">
+              <div class="fbox">
+                <div class="fline1">부산광역시 연제구 연산동</div>
+                <div class="fline2">133,291 명이 살고 있어요.</div>
+              </div>
+            </div>
+            <div class="listitem">
+              <div class="fbox">
+                <div class="fline1">충남 논산시 연산면</div>
+                <div class="fline2">123 명이 살고 있어요.</div>
+              </div>
+            </div>
+          </template>
         </div>
-        <div class="button" @click="writeReview">
-          <span> 리뷰 수정하기 </span>
+
+        <div class="bott">
+          <div class="desc">선택된 위치</div>
+
+          <div class="listitem1">
+            <div class="fbox">
+              <div class="fline1">
+                <span> 부산광역시 연제구 연산동 </span>
+              </div>
+              <div class="fline2">133,291 명이 살고 있어요.</div>
+            </div>
+          </div>
+
+          <div class="cbtn">장소 선택 완료</div>
         </div>
       </div>
     </main>
@@ -60,56 +51,34 @@
 </template>
 
 <script>
-import StarRating from "vue-star-rating";
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "ReviewModal",
-  props: {
-    mode: Number,
-    idx: String,
-    oldReview: Object,
-  },
+  name: "PlaceModal",
   data() {
     return {
-      reviewInfo: {
-        starPoint: 0,
-        content: "",
-      },
+      searchtext: "",
     };
   },
-  methods: {
-    setRating(rating) {
-      this.reviewInfo.starPoint = rating;
-    },
-    async writeReview() {
-      let data, a;
-      if (this.mode == 0) {
-        data = {
-          idx: this.idx,
-          content: this.reviewInfo.content,
-          starPoint: this.reviewInfo.starPoint,
-        };
-        a = await this.postReview(data);
-      } else if (this.mode == 1) {
-        data = {
-          idx: this.oldReview.idx,
-          content: this.reviewInfo.content,
-          starPoint: this.oldReview.starPoint,
-        };
-        a = await this.putReview(data);
-      }
-
-      if (a) {
-        this.$emit("closeReviewModal");
-      } else {
-        return;
-      }
-    },
-    ...mapActions("review", ["postReview", "putReview"]),
+  computed: {
+    ...mapState("shop", {
+      shops: (state) => state.shops,
+    }),
   },
-  components: {
-    StarRating,
+  methods: {
+    ...mapActions("shop", ["postShops"]),
+    search(menuName) {
+      const data = {
+        menuName: menuName,
+      };
+      this.postShops(data);
+    },
+  },
+  mounted() {
+    const data = {
+      menuName: "",
+    };
+    this.postShops(data);
   },
 };
 </script>
@@ -129,9 +98,9 @@ export default {
   z-index: 200;
   display: block;
   margin: 0 auto;
-  margin-top: 10rem;
-  width: 30rem;
-  height: 31rem;
+  margin-top: 6rem;
+  width: 32rem;
+  height: 40rem;
   background-color: white;
   border-radius: 0.5rem;
   border: none;
@@ -140,6 +109,7 @@ export default {
 }
 
 .modalframe {
+  padding-top: 0.5rem;
   position: relative;
 }
 
@@ -150,45 +120,92 @@ export default {
 }
 
 .content-box {
-  position: relative;
-  top: 1rem;
+  margin-top: 0.5rem;
 }
 
-h1 {
+.title {
+  font-size: 2rem;
   padding-top: 1rem;
-  text-align: center;
+  padding-left: 2rem;
 }
-.desc {
-  text-align: center;
-}
-.setstar {
-  margin-top: 4px;
-  justify-content: center;
-  align-items: center;
-}
-.editInfo1 {
-  margin-top: 0.8rem;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-textarea {
-  width: 26rem;
-  height: 14rem;
-  font-size: 1.3rem;
-  color: black;
+.content-box > input {
+  font-size: 1.1rem;
   background-color: #f6f6f6;
-  border-radius: 0.5rem;
   border: none;
   outline: none;
-  resize: none;
+  width: 83%;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  display: block;
+  margin: 0 auto;
+  margin-top: 1rem;
+}
+.content-box > input::placeholder {
+  color: #d0d0d0;
+  font-size: 1.05rem;
 }
 
-input::-webkit-inner-spin-button {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
+.listbox {
+  width: calc(83% + 3rem);
+  margin: 0 auto;
+  margin-top: 1.5rem;
+  overflow-y: scroll;
+  height: 11rem;
+}
+
+.listitem {
+  border: 1px solid rgba(123, 123, 123, 0.239);
+  border-radius: 0.5rem;
+  margin-bottom: 1px;
+  cursor: pointer;
+}
+
+.bott {
+  width: 100%;
+  position: absolute;
+  bottom: -18rem;
+}
+
+.desc {
+  padding-top: 3rem;
+  padding-bottom: 0.5rem;
+  padding-left: 2.5rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.listitem1 {
+  width: calc(83% + 3rem);
+  margin: 0 auto;
+  border: 1px solid rgba(123, 123, 123, 0.239);
+  border-radius: 0.5rem;
+  margin-bottom: 1px;
+  cursor: pointer;
+}
+.fbox {
+  margin-left: 1rem;
+  display: inline-flex;
+  flex-direction: column;
+  vertical-align: top;
+}
+.fline1 {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+.fline2 {
+  margin-top: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.cbtn {
+  margin: 2rem 2rem;
+  text-align: center;
+  font-size: 1.3rem;
+  line-height: 400%;
+  height: 5rem;
+  cursor: pointer;
+  background-color: #fff5d1;
+  font-weight: bold;
 }
 
 @keyframes fadeInUp {
@@ -201,22 +218,5 @@ input::-webkit-inner-spin-button {
     transform: translate(0px, 0);
     opacity: 1;
   }
-}
-
-.button {
-  border-radius: 0 0 0.5rem 0.5rem;
-  cursor: pointer;
-  position: relative;
-  top: 4rem;
-  height: 3.5rem;
-  background-color: #fff5d1;
-  line-height: 370%;
-}
-
-span {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 }
 </style>
