@@ -40,7 +40,7 @@
                   <span class="place">
                     {{ post.place + "에 거주하고 있어요." }}
                   </span>
-                  <span class="btn2"> 프로필 보기 </span>
+                  <span class="btn2" @click="this.$router.push('/InfoView')"> 프로필 보기 </span>
                 </div>
               </div>
             </div>

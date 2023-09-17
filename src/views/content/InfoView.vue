@@ -78,9 +78,9 @@ export default {
     toReviewView() {
       router.push("/ReviewView");
     },
-    async toPost(idx){
-      await this.setSelectedIdx(idx); 
-      this.$router.push('/PostView')
+    async toPost(idx) {
+      this.setSelectedIdx(idx);
+      await this.$router.push("/PostView");
     },
     ...mapActions("token", ["tryLogin"]),
     ...mapMutations("post", ["setSelectedIdx"]),
