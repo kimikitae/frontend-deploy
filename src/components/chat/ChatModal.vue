@@ -2,49 +2,181 @@
   <div class="zidx">
     <main>
       <div class="modalframe">
-        <!-- <div @click="this.$emit('closePlaceModal')" class="close">X</div>
-        <div class="content-box">
-          <div class="title">장소 선택</div>
-          <input
-            type="text"
-            v-model="searchtext"
-            placeholder="지명 및 도로명을 입력하세요. 예) 연산동"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = '지명 및 도로명을 입력하세요. 예) 연산동'"
-          />
-        </div>
+        <img
+          src="../../assets/3dots.png"
+          @click="this.$emit('closeChatModal')"
+          class="close"
+        />
 
-        <div class="listbox">
-          <template v-for="(shop, sindex) in shops" :key="sindex">
-            <div class="listitem">
-              <div class="fbox">
-                <div class="fline1">부산광역시 연제구 연산동</div>
-                <div class="fline2">133,291 명이 살고 있어요.</div>
+        <div class="flex">
+          <div class="roomlistbox">
+            <div class="roomitem">
+              <div class="flex0">
+                <div class="fimg">
+                  <img src="../../assets/user.png" />
+                </div>
+
+                <div class="flex1">
+                  <span> 고민석님과의 공유 채팅방 </span>
+
+                  <span> 바로 공유 결제 시작하실까요? </span>
+                </div>
               </div>
+
+              <hr />
             </div>
-            <div class="listitem">
-              <div class="fbox">
-                <div class="fline1">충남 논산시 연산면</div>
-                <div class="fline2">123 명이 살고 있어요.</div>
-              </div>
-            </div>
-          </template>
-        </div>
 
-        <div class="bott">
-          <div class="desc">선택된 위치</div>
+            <div class="roomitem">
+              <div class="flex0">
+                <div class="fimg">
+                  <img src="../../assets/user.png" />
+                </div>
 
-          <div class="listitem1">
-            <div class="fbox">
-              <div class="fline1">
-                <span> 부산광역시 연제구 연산동 </span>
+                <div class="flex1">
+                  <span> 고민석님과의 공유 채팅방 </span>
+
+                  <span> 바로 공유 결제 시작하실까요? </span>
+                </div>
               </div>
-              <div class="fline2">133,291 명이 살고 있어요.</div>
+
+              <hr />
             </div>
           </div>
 
-          <div class="cbtn" @click="selectPlace">장소 선택 완료</div>
-        </div> -->
+          <div class="chatbox">
+            <div class="chatitem">
+              <template v-if="true">
+                <div>
+                  <img src="../../assets/user.png" class="im" />
+                </div>
+
+                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
+              </template>
+
+              <template v-else-if="false">
+                <div class="itx">
+                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
+                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
+                  가능하신가요?안녕하세요. 공유 가능하신가요?
+                </div>
+                <div>
+                  <img src="../../assets/userIcon.png" class="im" />
+                </div>
+              </template>
+            </div>
+
+            <div class="chatitem">
+              <template v-if="false">
+                <div>
+                  <img src="../../assets/user.png" class="im" />
+                </div>
+
+                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
+              </template>
+
+              <template v-else-if="true">
+                <div class="itx">
+                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
+                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
+                  가능하신가요?안녕하세요. 공유 가능하신가요?
+                </div>
+                <div>
+                  <img src="../../assets/userIcon.png" class="im" />
+                </div>
+              </template>
+            </div>
+
+            <div class="chatitem">
+              <template v-if="true">
+                <div>
+                  <img src="../../assets/user.png" class="im" />
+                </div>
+
+                <div class="utx">바로 공유 결제 시작하실까요?</div>
+              </template>
+
+              <template v-else-if="false">
+                <div class="itx">
+                  ewqewq
+                </div>
+                <div>
+                  <img src="../../assets/userIcon.png" class="im" />
+                </div>
+              </template>
+            </div>
+
+            <div class="chatitem">
+              <template v-if="false">
+                <div>
+                  <img src="../../assets/user.png" class="im" />
+                </div>
+
+                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
+              </template>
+
+              <template v-else-if="true">
+                <div class="itx">
+                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
+                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
+                  가능하신가요?안녕하세요. 공유 가능하신가요?
+                </div>
+                <div>
+                  <img src="../../assets/userIcon.png" class="im" />
+                </div>
+              </template>
+            </div>
+
+            <div class="chatitem">
+              <template v-if="false">
+                <div>
+                  <img src="../../assets/user.png" class="im" />
+                </div>
+
+                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
+              </template>
+
+              <template v-else-if="true">
+                <div class="itx">
+                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
+                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
+                  가능하신가요?안녕하세요. 공유 가능하신가요?
+                </div>
+                <div>
+                  <img src="../../assets/userIcon.png" class="im" />
+                </div>
+              </template>
+            </div>
+
+            <div class="chatitem">
+              <template v-if="false">
+                <div>
+                  <img src="../../assets/user.png" class="im" />
+                </div>
+
+                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
+              </template>
+
+              <template v-else-if="true">
+                <div class="itx">
+                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
+                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
+                  가능하신가요?안녕하세요. 공유 가능하신가요?
+                </div>
+                <div>
+                  <img src="../../assets/userIcon.png" class="im" />
+                </div>
+              </template>
+            </div>
+
+            <div class="writebox">
+              <span>
+                TIP. 상단의 점 세개 아이콘을 눌러 채팅방 관리를 할 수 있습니다.
+              </span>
+              <input type="text" />
+              <img src="../../assets/send.png" />
+            </div>
+          </div>
+        </div>
       </div>
     </main>
   </div>
@@ -54,10 +186,11 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  name: "PlaceModal",
+  name: "ChatModal",
   data() {
     return {
       searchtext: "",
+      ami: "u",
     };
   },
   computed: {
@@ -101,9 +234,9 @@ export default {
   z-index: 200;
   display: block;
   margin: 0 auto;
-  margin-top: 6rem;
-  width: 32rem;
-  height: 40rem;
+  margin-top: 2%;
+  width: 58rem;
+  height: 90%;
   background-color: white;
   border-radius: 0.5rem;
   border: none;
@@ -114,101 +247,171 @@ export default {
 .modalframe {
   padding-top: 0.5rem;
   position: relative;
+  height: 100%;
 }
 
 .close {
+  width: 2rem;
   margin-right: 0.5rem;
   float: right;
   cursor: pointer;
 }
 
-.content-box {
-  margin-top: 0.5rem;
-}
-
-.title {
-  font-size: 2rem;
-  padding-top: 1rem;
-  padding-left: 2rem;
-}
-.content-box > input {
-  font-size: 1.1rem;
-  background-color: #f6f6f6;
-  border: none;
-  outline: none;
-  width: 83%;
-  padding: 1.5rem;
-  border-radius: 1rem;
-  display: block;
-  margin: 0 auto;
-  margin-top: 1rem;
-}
-.content-box > input::placeholder {
-  color: #d0d0d0;
-  font-size: 1.05rem;
-}
-
-.listbox {
-  width: calc(83% + 3rem);
-  margin: 0 auto;
-  margin-top: 1.5rem;
-  overflow-y: scroll;
-  height: 11rem;
-}
-
-.listitem {
-  border: 1px solid rgba(123, 123, 123, 0.239);
-  border-radius: 0.5rem;
-  margin-bottom: 1px;
-  cursor: pointer;
-}
-
-.bott {
+.flex {
+  height: calc(100% - 4rem);
   width: 100%;
-  position: absolute;
-  bottom: -18rem;
+  display: flex;
 }
 
-.desc {
-  padding-top: 3rem;
-  padding-bottom: 0.5rem;
-  padding-left: 2.5rem;
-  font-size: 1.3rem;
-  font-weight: bold;
+.roomlistbox {
+  width: 100%;
+  height: max-content;
+  flex: 2;
 }
 
-.listitem1 {
-  width: calc(83% + 3rem);
-  margin: 0 auto;
-  border: 1px solid rgba(123, 123, 123, 0.239);
-  border-radius: 0.5rem;
-  margin-bottom: 1px;
-  cursor: pointer;
+.roomitem {
+  width: calc(100% - 3rem);
+  margin: 1.5rem 1.5rem;
 }
-.fbox {
-  margin-left: 1rem;
-  display: inline-flex;
-  flex-direction: column;
-  vertical-align: top;
-}
-.fline1 {
-  margin-top: 1rem;
-  font-weight: bold;
-}
-.fline2 {
-  margin-top: 0.8rem;
+
+.flex0 {
+  display: flex;
   margin-bottom: 0.5rem;
 }
+.fimg {
+  width: 3rem;
+  height: 3rem;
+}
+.fimg > img {
+  width: 100%;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+}
 
-.cbtn {
-  margin: 2rem 2rem;
-  text-align: center;
-  font-size: 1.3rem;
-  line-height: 400%;
-  height: 5rem;
-  cursor: pointer;
-  background-color: #fff5d1;
+.flex1 {
+  margin-left: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 3rem);
+}
+.flex1 > span:nth-child(1) {
+  font-size: 0.9rem;
   font-weight: bold;
+}
+.flex1 > span:nth-child(2) {
+  padding-top: 0.8rem;
+  font-size: 0.8rem;
+}
+
+hr {
+  margin: 0 auto;
+  width: 95%;
+}
+
+.chatbox {
+  width: 100%;
+  height: 100%;
+  flex: 3;
+  border-left: 1px solid rgba(172, 172, 172, 0.586);
+  overflow-y: scroll;
+}
+
+.chatitem {
+  padding: 0 1.5rem;
+  width: calc(100% - 3rem);
+  display: flex;
+  margin-bottom: 2rem;
+}
+.itx {
+  margin-right: 1rem;
+  margin-left: 40%;
+  margin-top: 0.2rem;
+  line-height: 140%;
+  font-size: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.7rem;
+  background-color: #fff5d1;
+}
+
+.utx {
+  margin-left: 1rem;
+  margin-right: 40%;
+  margin-top: 0.2rem;
+  line-height: 140%;
+  font-size: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.7rem;
+  background-color: #f3f0f0;
+}
+
+
+
+.im {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
+}
+
+.uimg {
+  /* width: 3rem;
+  height: 3rem;
+  border-radius: 3rem;
+  margin-left: 2rem;
+  padding-top: 1rem; */
+  float: left;
+}
+
+.u {
+  float: left;
+
+  background-color: #f3f0f0;
+}
+.iimg {
+  float: right;
+
+  /* border-radius: 3rem;
+  margin-left: 2rem;
+  padding-top: 1rem; */
+}
+
+.i {
+  float: right;
+
+  background-color: #fff5d1;
+  /* line-height: 140%;
+  font-size: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.7rem; */
+}
+
+.writebox {
+  z-index: 9;
+  position: absolute;
+  bottom: 2rem;
+  width: 60%;
+}
+.writebox > span {
+  color: #9a9a9a;
+  font-size: 0.8rem;
+  padding-left: 7%;
+}
+.writebox > input {
+  background-color: #ffeba4ca;
+  height: 1.9rem;
+  width: 85%;
+  margin-left: 5%;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  padding-left: 0.8rem;
+}
+.writebox > img {
+  cursor: pointer;
+  position: absolute;
+  margin: 0.1rem 0;
+  width: 1.8rem;
+  right: 10%;
 }
 
 @keyframes fadeInUp {

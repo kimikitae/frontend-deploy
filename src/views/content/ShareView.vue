@@ -90,16 +90,18 @@
           </div>
         </div>
 
-        <div class="chat">채팅</div>
+        <div class="chat" @click="openChatModal = true">채팅</div>
       </div>
     </div>
     <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
+    <ChatModal v-if="openChatModal" @closeChatModal="openChatModal = false"/>
   </main>
 </template>
 
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
+import ChatModal from "../../components/chat/ChatModal.vue";
 import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
@@ -107,6 +109,7 @@ export default {
   data() {
     return {
       openUserModal: false,
+      openChatModal: false,
       menuList: ["치킨", "피자", "일식", "중식", "분식", "족발/보쌈"],
       searchtext: "",
       writeNews: "",
@@ -163,6 +166,7 @@ export default {
   components: {
     NavBar,
     UserModal,
+    ChatModal
   },
   mounted() {
     this.getPosts();
@@ -353,7 +357,7 @@ export default {
   width: 20rem;
 }
 .writebox > input:nth-child(1) {
-  background-color: #ffeba470;
+  background-color: #ffeba4ca;
   height: 1.9rem;
   width: 15rem;
   margin-left: 1rem;
@@ -365,7 +369,8 @@ export default {
 .writebox > img {
   cursor: pointer;
   position: absolute;
-  width: 2rem;
-  right: 5rem;
+  margin: 0.1rem 0;
+  width: 1.8rem;
+  right: 4rem;
 }
 </style>
