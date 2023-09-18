@@ -7,6 +7,7 @@ import review from './review/review.js'
 import order from './order/order.js'
 import post from './post/post.js'
 import shop from './shop/shop.js'
+import chat from './chat/chat.js'
 
 export default createStore({
   state: {},
@@ -21,10 +22,11 @@ export default createStore({
     order,
     post,
     shop,
+    chat
   },
   plugins: [
     createPersistedState({
-      paths: ['token','user','cart', 'review', 'order', 'post', 'shop']
+      paths: ['token','user','cart', 'review', 'order', 'post', 'shop', 'chat']
     })
   ]
 })
