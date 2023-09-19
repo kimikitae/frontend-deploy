@@ -10,222 +10,202 @@
 
         <div class="flex">
           <div class="roomlistbox">
-            <div class="roomitem">
-              <div class="flex0">
-                <div class="fimg">
-                  <img src="../../assets/user.png" />
-                </div>
+            <template v-for="(room, rindex) in chats" :key="rindex">
+              <div class="roomitem" @click="inRoom(room.idx)">
+                <div class="flex0">
+                  <div class="fimg">
+                    <img src="../../assets/user.png" />
+                  </div>
 
-                <div class="flex1">
-                  <span> 고민석님과의 공유 채팅방 </span>
-
-                  <span> 바로 공유 결제 시작하실까요? </span>
+                  <div class="flex1">
+                    <span> {{ room.chatTitle }} </span>
+                    <span> {{ room.lastMsg }} </span>
+                  </div>
                 </div>
+                <hr />
               </div>
-
-              <hr />
-            </div>
-
-            <div class="roomitem">
-              <div class="flex0">
-                <div class="fimg">
-                  <img src="../../assets/user.png" />
-                </div>
-
-                <div class="flex1">
-                  <span> 고민석님과의 공유 채팅방 </span>
-
-                  <span> 바로 공유 결제 시작하실까요? </span>
-                </div>
-              </div>
-
-              <hr />
-            </div>
+            </template>
           </div>
 
-          <div class="chatbox">
-            <div class="chatitem">
-              <template v-if="true">
-                <div>
-                  <img src="../../assets/user.png" class="im" />
-                </div>
+          <template v-if="seletedRoom"
+            ><div class="chatbox">
+              <template v-for="(message, cindex) in chat.messages" :key="cindex">
+                <div class="chatitem">
+                  <template v-if="message.userName != userInfo.userName">
+                    <div>
+                      <img src="../../assets/user.png" class="im" />
+                    </div>
 
-                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
+                    <div class="utx">{{ message.content }}</div>
+                  </template>
+
+                  <template v-else-if="message.userName == userInfo.userName">
+                    <div class="dommy"></div>
+                    <div class="itx">
+                      {{ message.content }}
+                    </div>
+                    <div class="iright">
+                      <img src="../../assets/userIcon.png" class="im" />
+                    </div>
+                  </template>
+                </div>
               </template>
 
-              <template v-else-if="false">
-                <div class="itx">
-                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
-                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
-                  가능하신가요?안녕하세요. 공유 가능하신가요?
-                </div>
-                <div>
-                  <img src="../../assets/userIcon.png" class="im" />
+              <template v-for="(message, cindex) in recvList" :key="cindex">
+                <div class="chatitem">
+                  <template v-if="message.userName != userInfo.userName">
+                    <div>
+                      <img src="../../assets/user.png" class="im" />
+                    </div>
+
+                    <div class="utx">{{ message.content }}</div>
+                  </template>
+
+                  <template v-else-if="message.userName == userInfo.userName">
+                    <div class="dommy"></div>
+                    <div class="itx">
+                      {{ message.content }}
+                    </div>
+                    <div class="iright">
+                      <img src="../../assets/userIcon.png" class="im" />
+                    </div>
+                  </template>
                 </div>
               </template>
+
+              <div class="writebox">
+                <span>
+                  TIP. 상단의 점 세개 아이콘을 눌러 채팅방 관리를 할 수 있습니다.
+                </span>
+                <input
+                  type="text"
+                  v-model="message"
+                  @keyup.enter="sendMessage(chat.idx)"
+                />
+                <img src="../../assets/send.png" @click="sendMessage(chat.idx)" />
+              </div>
             </div>
+          </template>
 
-            <div class="chatitem">
-              <template v-if="false">
-                <div>
-                  <img src="../../assets/user.png" class="im" />
-                </div>
-
-                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
-              </template>
-
-              <template v-else-if="true">
-                <div class="itx">
-                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
-                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
-                  가능하신가요?안녕하세요. 공유 가능하신가요?
-                </div>
-                <div>
-                  <img src="../../assets/userIcon.png" class="im" />
-                </div>
-              </template>
-            </div>
-
-            <div class="chatitem">
-              <template v-if="true">
-                <div>
-                  <img src="../../assets/user.png" class="im" />
-                </div>
-
-                <div class="utx">바로 공유 결제 시작하실까요?</div>
-              </template>
-
-              <template v-else-if="false">
-                <div class="itx">
-                  ewqewq
-                </div>
-                <div>
-                  <img src="../../assets/userIcon.png" class="im" />
-                </div>
-              </template>
-            </div>
-
-            <div class="chatitem">
-              <template v-if="false">
-                <div>
-                  <img src="../../assets/user.png" class="im" />
-                </div>
-
-                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
-              </template>
-
-              <template v-else-if="true">
-                <div class="itx">
-                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
-                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
-                  가능하신가요?안녕하세요. 공유 가능하신가요?
-                </div>
-                <div>
-                  <img src="../../assets/userIcon.png" class="im" />
-                </div>
-              </template>
-            </div>
-
-            <div class="chatitem">
-              <template v-if="false">
-                <div>
-                  <img src="../../assets/user.png" class="im" />
-                </div>
-
-                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
-              </template>
-
-              <template v-else-if="true">
-                <div class="itx">
-                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
-                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
-                  가능하신가요?안녕하세요. 공유 가능하신가요?
-                </div>
-                <div>
-                  <img src="../../assets/userIcon.png" class="im" />
-                </div>
-              </template>
-            </div>
-
-            <div class="chatitem">
-              <template v-if="false">
-                <div>
-                  <img src="../../assets/user.png" class="im" />
-                </div>
-
-                <div class="utx">안녕하세요. 공유 가능하신가요?</div>
-              </template>
-
-              <template v-else-if="true">
-                <div class="itx">
-                  안녕하세요. 공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요.
-                  공유 가능하신가요?안녕하세요. 공유 가능하신가요?안녕하세요. 공유
-                  가능하신가요?안녕하세요. 공유 가능하신가요?
-                </div>
-                <div>
-                  <img src="../../assets/userIcon.png" class="im" />
-                </div>
-              </template>
-            </div>
-
-            <div class="writebox">
-              <span>
-                TIP. 상단의 점 세개 아이콘을 눌러 채팅방 관리를 할 수 있습니다.
-              </span>
-              <input type="text" />
-              <img src="../../assets/send.png" />
-            </div>
-          </div>
+          <div v-else class="nochatbox">왼쪽에서 채팅방을 선택 하세요!</div>
         </div>
       </div>
 
-      <ChatMenuModal v-if="openChatMenuModal" @closeChatMenuModal="openChatMenuModal = false"
+      <ChatMenuModal
+        v-if="openChatMenuModal"
+        @closeChatMenuModal="openChatMenuModal = false"
         @closeChatModal="this.$emit('closeChatModal')"
-        />
+      />
     </main>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
-import ChatMenuModal from "./ChatMenuModal.vue"
+import ChatMenuModal from "./ChatMenuModal.vue";
+import Stomp from "webstomp-client";
+import SockJS from "sockjs-client";
 
 export default {
   name: "ChatModal",
   data() {
     return {
+      userName: "das",
+      message: "",
+      recvList: [],
       openChatMenuModal: false,
       searchtext: "",
-      ami: "u",
       seletedRoom: 0,
+      subscription: {}
     };
   },
   computed: {
-    ...mapState("shop", {
-      shops: (state) => state.shops,
+    ...mapState("chat", {
+      chats: (state) => state.chats,
+      chat: (state) => state.chat,
+    }),
+    ...mapState("user", {
+      userInfo: (state) => state.userInfo,
     }),
   },
   methods: {
-    ...mapActions("shop", ["postShops"]),
-    search(menuName) {
+    ...mapActions("chat", ["getChatRooms", "getChatRoom"]),
+    async inRoom(idx) {
+      console.log("검색"+ this.seletedRoom)
+      const prev = this.seletedRoom;
+      if(prev != 0){
+        this.disconnect();
+      }
+      this.seletedRoom = idx;
       const data = {
-        menuName: menuName,
+        idx: this.seletedRoom,
       };
-      this.postShops(data);
+      this.getChatRoom(data);
+      if (prev != idx) {
+        this.connect();
+      }
     },
-    selectPlace() {
-      this.$emit("closePlaceModal");
+    sendMessage() {
+      if (this.userName !== "" && this.message !== "") {
+        this.send();
+        this.message = "";
+      }
+      let chatUl = document.querySelector('.chatbox');
+        chatUl.scrollTop = chatUl.scrollHeight;
+    },
+    send() {
+      console.log("Send message:" + this.message);
+      if (this.stompClient && this.stompClient.connected) {
+        const msg = {
+          userName: this.userInfo.userName,
+          content: this.message,
+        };
+        const s = "/send/" + this.seletedRoom;
+        this.stompClient.send(s, JSON.stringify(msg), {});
+      }
+    },
+    connect() {
+      const serverURL = "http://localhost:8080/ws";
+      let socket = new SockJS(serverURL);
+      this.stompClient = Stomp.over(socket);
+      console.log(`소켓 연결을 시도합니다. 서버 주소: ${serverURL}`);
+      this.stompClient.connect(
+        {},
+        (frame) => {
+          // 소켓 연결 성공
+          this.connected = true;
+          console.log("소켓 연결 성공", frame);
+          // 서버의 메시지 전송 endpoint를 구독합니다.
+          // 이런형태를 pub sub 구조라고 합니다.
+          const s = "/send/" + this.seletedRoom;
+          this.subscription = this.stompClient.subscribe(s, (res) => {
+            console.log("구독으로 받은 메시지 입니다.", res.body);
+            // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
+            this.recvList.push(JSON.parse(res.body));
+            console.log(this.recvList)
+          });
+        },
+        (error) => {
+          // 소켓 연결 실패
+          console.log("소켓 연결 실패", error);
+          this.connected = false;
+        }
+      );
+    },
+    async disconnect() {
+      const s = "/send/" + this.seletedRoom;
+      this.recvList = []
+      console.log("구독 종료할게요:" + s);
+      await this.subscription.unsubscribe();
     },
   },
   mounted() {
-    const data = {
-      menuName: "",
-    };
-    this.postShops(data);
+    this.getChatRooms();
+
   },
-  components:{
+  components: {
     ChatMenuModal,
-  }
+  },
 };
 </script>
 
@@ -327,17 +307,28 @@ hr {
   border-left: 1px solid rgba(172, 172, 172, 0.586);
   overflow-y: scroll;
 }
-
+.nochatbox {
+  width: 100%;
+  height: 92%;
+  flex: 3;
+  text-align: center;
+  line-height: 3000%;
+  border-left: 1px solid rgba(172, 172, 172, 0.586);
+}
 .chatitem {
   padding: 0 1.5rem;
   width: calc(100% - 3rem);
   display: flex;
   margin-bottom: 2rem;
 }
+.dommy {
+  width: max-content;
+}
 .itx {
   margin-right: 1rem;
   margin-left: 40%;
   margin-top: 0.2rem;
+  margin-left: auto;
   line-height: 140%;
   font-size: 0.8rem;
   padding: 0.8rem 1rem;
@@ -356,12 +347,13 @@ hr {
   background-color: #f3f0f0;
 }
 
-
-
 .im {
   width: 3rem;
   height: 3rem;
   border-radius: 3rem;
+}
+.iright {
+  margin-left: auto;
 }
 
 .uimg {

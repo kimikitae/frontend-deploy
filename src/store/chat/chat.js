@@ -5,37 +5,55 @@ export default {
   namespaced: true,
 
   state: {
-    posts: [],
-    selectedIdx: 0,
-    post: {},
-    notices: [],
+    chats: [],
+    chat:{
+
+    }
   },
   getters: {},
   mutations: {
-    setPosts(state, posts) {
-      state.posts = posts
+    setChats(state, chats) {
+      state.chats = chats
     },
-    setSelectedIdx(state, selectedIdx) {
-      state.selectedIdx = selectedIdx
-    },
-    setPost(state, post) {
-      state.post = post
-    },
-    setNotices(state, notices) {
-      state.notices = notices
+    setChat(state, chat) {
+      state.chat = chat
     },
   },
   actions: {
-    async getPosts(context) {
-      const data = await api.getPosts()
+    async getChatRooms(context) {
+      const data = await api.getChatRooms()
       if (data.success) {
-        await context.commit('setPosts', data.response.posts)
+        await context.commit('setChats', data.response.chats)
         return true
       } else {
         alert(data.error.status + data.error.message)
         return false
       }
     },
+    async getChatRoom(context, info) {
+      const data = await api.getChatRoom(info)
+      if (data.success) {
+        await context.commit('setChat', data.response)
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
     async getPost(context) {
       const info = {
         idx: context.state.selectedIdx,

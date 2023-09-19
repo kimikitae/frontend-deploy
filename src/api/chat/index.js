@@ -5,9 +5,9 @@ const server = 'http://localhost:8080'
 import store from '../../store/index'
 
 export default {
-  async getOrderInfo() {
+  async getChatRooms() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/orders`, {
+    const response = await fetch(`${server}/chats`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -17,6 +17,25 @@ export default {
     const data = await response.json()
     return data
   },
+  async getChatRoom(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/chats/${info.idx}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+
+
+
+
+
+
+
   async getCancelOrderInfo() {
     const tok = store.state.token.accessToken
     const response = await fetch(`${server}/orders/cancel`, {
