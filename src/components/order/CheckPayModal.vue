@@ -15,7 +15,7 @@
         </div>
         <div class="flex">
           <div class="button lef" @click="toPayView">네,맞아요</div>
-          <div class="button rig" @click="this.$emit('closeCheckPayModal')">아니에요</div>
+          <div class="button rig" @click="this.$router.push('/ShareView')">아니에요</div>
         </div>
       </div>
     </main>
