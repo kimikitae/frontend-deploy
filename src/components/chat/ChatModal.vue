@@ -102,7 +102,7 @@
                   v-model="message"
                   @keyup.enter="sendMessage(chat.idx)"
                 />
-                <img src="../../assets/send.png" @click="sendMessage(chat.idx)" />
+                <img src="../../assets/send.png" @click="this.getChatRooms();" />
               </div>
             </div>
           </template>
@@ -221,9 +221,6 @@ export default {
     },
   },
   mounted() {
-    this.getChatRooms();
-  },
-  beforeUpdate() {
     this.getChatRooms();
   },
   components: {
