@@ -19,26 +19,43 @@
               </div>
             </div>
           </div>
-          <div class="menulist">
-            <div class="content" @click="toOrderList('ing')">내 주문 내역</div>
-            <hr />
-            <div class="content" @click="toReviewView">리뷰 관리</div>
-            <hr />
-            <div class="content" @click="openUserEditModal = true">정보 수정하기</div>
-            <hr />
-            <div class="content" @click="toOrderList('cancel')">주문 취소 목록</div>
-            <hr />
-            <div class="content">내 주소 관리</div>
-          </div>
+          <template v-if="userInfo.role == 'USER'">
+            <div class="menulist">
+              <div class="content" @click="toOrderList('ing')">내 주문 내역</div>
+              <hr />
+              <div class="content" @click="toReviewView">리뷰 관리</div>
+              <hr />
+              <div class="content" @click="openUserEditModal = true">정보 수정하기</div>
+              <hr />
+              <div class="content" @click="toOrderList('cancel')">주문 취소 목록</div>
+              <hr />
+              <div class="content">내 주소 관리</div>
+            </div>
+          </template>
+          <template v-else-if="userInfo.role == 'SHOPPER'">
+            <div class="menulist">
+              <div class="content" @click="openUserEditModal = true">내 정보 수정</div>
+              <hr />
+              <div class="content" @click="toOrderList('cancel')">매장 정보 수정</div>
+              <hr />
+              <div class="content">매장 등록</div>
+            </div>
+          </template>
         </div>
+
         <div class="item">
-          <div class="line2">작성한 게시물</div>
+          <template v-if="userInfo.posts.length">
+            <div class="line2">작성한 게시물</div>
           <div class="postlist">
             <template v-for="(it, index) in userInfo.posts" :key="index">
               <div class="content" @click="toPost(it.idx)">{{ it.title }}</div>
               <hr />
             </template>
           </div>
+          </template>
+          <template v-else>
+            <div class="line2">작성한 게시물이 없어용..ㅜㅜ</div>
+          </template>
         </div>
       </div>
     </div>
@@ -145,7 +162,7 @@ export default {
   cursor: pointer;
   margin-top: 5rem;
   width: 35rem;
-  height: 15.5rem;
+  /* height: 15.5rem; */
 }
 .postlist {
   background-color: white;
@@ -156,7 +173,7 @@ export default {
   margin: 0 auto;
   margin-top: 1.5rem;
   width: 35rem;
-  height: 6.2rem;
+  /* height: 6.2rem; */
   overflow: auto;
 }
 

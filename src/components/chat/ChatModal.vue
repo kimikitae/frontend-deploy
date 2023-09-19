@@ -4,7 +4,7 @@
       <div class="modalframe">
         <img
           src="../../assets/3dots.png"
-          @click="this.$emit('closeChatModal')"
+          @click="openChatMenuModal = true"
           class="close"
         />
 
@@ -178,19 +178,26 @@
           </div>
         </div>
       </div>
+
+      <ChatMenuModal v-if="openChatMenuModal" @closeChatMenuModal="openChatMenuModal = false"
+        @closeChatModal="this.$emit('closeChatModal')"
+        />
     </main>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from "vuex";
+import ChatMenuModal from "./ChatMenuModal.vue"
 
 export default {
   name: "ChatModal",
   data() {
     return {
+      openChatMenuModal: false,
       searchtext: "",
       ami: "u",
+      seletedRoom: 0,
     };
   },
   computed: {
@@ -216,6 +223,9 @@ export default {
     };
     this.postShops(data);
   },
+  components:{
+    ChatMenuModal,
+  }
 };
 </script>
 
@@ -272,6 +282,7 @@ export default {
 .roomitem {
   width: calc(100% - 3rem);
   margin: 1.5rem 1.5rem;
+  cursor: pointer;
 }
 
 .flex0 {
@@ -311,7 +322,7 @@ hr {
 
 .chatbox {
   width: 100%;
-  height: 100%;
+  height: 92%;
   flex: 3;
   border-left: 1px solid rgba(172, 172, 172, 0.586);
   overflow-y: scroll;
