@@ -27,61 +27,69 @@
             </template>
           </div>
 
-          <template v-if="seletedRoom"
-            ><div class="chatbox">
+          <template v-if="seletedRoom">
+            <div class="chatbox">
               <template v-for="(message, cindex) in chat.messages" :key="cindex">
-                <div class="chatitem">
-                  <template v-if="message.userName != userInfo.userName">
-                    <div>
-                      <img src="../../assets/user.png" class="im" />
-                    </div>
-                    <div class="center">
-                    {{ message.userName }}
-                    </div>
+                <div
+                  :class="{
+                    uchatitem: message.userName != userInfo.userName,
+                    ichatitem: message.userName == userInfo.userName,
+                  }"
+                >
+                  <div>
+                    <img src="../../assets/user.png" class="im" />
+                  </div>
 
-                    <div class="utx">{{ message.content }}</div>
-                  </template>
-
-                  <template v-else-if="message.userName == userInfo.userName">
-                    <div class="dommy"></div>
-                    <div class="itx">
+                  <div class="tx">
+                    <div
+                      :class="{
+                        uname: message.userName != userInfo.userName,
+                        iname: message.userName == userInfo.userName,
+                      }"
+                    >
+                      {{ message.userName }}
+                    </div>
+                    <div
+                      :class="{
+                        ucontent: message.userName != userInfo.userName,
+                        icontent: message.userName == userInfo.userName,
+                      }"
+                    >
                       {{ message.content }}
                     </div>
-                    <div class="center">
-                    {{ message.userName }}
-                    </div>
-                    <div class="iright">
-                      <img src="../../assets/userIcon.png" class="im" />
-                    </div>
-                  </template>
+                  </div>
                 </div>
               </template>
 
               <template v-for="(message, cindex) in recvList" :key="cindex">
-                <div class="chatitem">
-                  <template v-if="message.userName != userInfo.userName">
-                    <div>
-                      <img src="../../assets/user.png" class="im" />
-                    </div>
-                    <div class="center">
-                    {{ message.userName }}
-                    </div>
+                <div
+                  :class="{
+                    uchatitem: message.userName != userInfo.userName,
+                    ichatitem: message.userName == userInfo.userName,
+                  }"
+                >
+                  <div>
+                    <img src="../../assets/user.png" class="im" />
+                  </div>
 
-                    <div class="utx">{{ message.content }}</div>
-                  </template>
-
-                  <template v-else-if="message.userName == userInfo.userName">
-                    <div class="dommy"></div>
-                    <div class="itx">
+                  <div class="tx">
+                    <div
+                      :class="{
+                        uname: message.userName != userInfo.userName,
+                        iname: message.userName == userInfo.userName,
+                      }"
+                    >
+                      {{ message.userName }}
+                    </div>
+                    <div
+                      :class="{
+                        ucontent: message.userName != userInfo.userName,
+                        icontent: message.userName == userInfo.userName,
+                      }"
+                    >
                       {{ message.content }}
                     </div>
-                    <div class="center">
-                    {{ message.userName }}
-                    </div>
-                    <div class="iright">
-                      <img src="../../assets/userIcon.png" class="im" />
-                    </div>
-                  </template>
+                  </div>
                 </div>
               </template>
 
@@ -128,7 +136,7 @@ export default {
       openChatMenuModal: false,
       searchtext: "",
       seletedRoom: 0,
-      subscription: {}
+      subscription: {},
     };
   },
   computed: {
@@ -143,9 +151,9 @@ export default {
   methods: {
     ...mapActions("chat", ["getChatRooms", "getChatRoom"]),
     async inRoom(idx) {
-      console.log("검색"+ this.seletedRoom)
+      console.log("검색" + this.seletedRoom);
       const prev = this.seletedRoom;
-      if(prev != 0){
+      if (prev != 0) {
         this.disconnect();
       }
       this.seletedRoom = idx;
@@ -157,13 +165,11 @@ export default {
         this.connect();
       }
     },
-    sendMessage() {
+    async sendMessage() {
       if (this.userName !== "" && this.message !== "") {
         this.send();
         this.message = "";
       }
-      let chatUl = document.querySelector('.chatbox');
-        chatUl.scrollTop = chatUl.scrollHeight;
     },
     send() {
       console.log("Send message:" + this.message);
@@ -194,8 +200,10 @@ export default {
             console.log("구독으로 받은 메시지 입니다.", res.body);
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
             this.recvList.push(JSON.parse(res.body));
-            console.log(this.recvList)
+            console.log(this.recvList);
             this.getChatRooms();
+            let mySpace = document.querySelector(".chatbox");
+            mySpace.scrollTop = mySpace.scrollHeight;
           });
         },
         (error) => {
@@ -207,7 +215,7 @@ export default {
     },
     async disconnect() {
       const s = "/send/" + this.seletedRoom;
-      this.recvList = []
+      this.recvList = [];
       console.log("구독 종료할게요:" + s);
       await this.subscription.unsubscribe();
     },
@@ -215,7 +223,7 @@ export default {
   mounted() {
     this.getChatRooms();
   },
-  beforeUpdate(){
+  beforeUpdate() {
     this.getChatRooms();
   },
   components: {
@@ -330,33 +338,41 @@ hr {
   line-height: 3000%;
   border-left: 1px solid rgba(172, 172, 172, 0.586);
 }
-.chatitem {
+.uchatitem {
   padding: 0 1.5rem;
   width: calc(100% - 3rem);
   display: flex;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
-.itx {
-  margin-right: 1rem;
-  margin-left: 40%;
-  margin-top: 0.2rem;
-  margin-left: auto;
-  line-height: 140%;
-  font-size: 0.8rem;
-  padding: 0.8rem 1rem;
-  border-radius: 0.7rem;
-  background-color: #fff5d1;
-}
-.center{
-    flex: 1;
-}
-.iright {
-  margin-left: auto;
+.ichatitem {
+  padding: 0 1.5rem;
+  width: calc(100% - 3rem);
+  display: flex;
+  margin-bottom: 1rem;
+  flex-direction: row-reverse;
 }
 
-.utx {
+.tx {
+  display: flex;
+  flex-direction: column;
+}
+.uname {
+  margin-left: 0.5rem;
+  text-align: left;
+  margin-right: auto;
+}
+.iname {
+  text-align: right;
+  margin-right: 0.5rem;
+  margin-left: auto;
+}
+.ucontent {
+  max-width: 20rem;
+  word-wrap: break-word;
+
+  margin-right: auto;
   margin-left: 1rem;
-  margin-right: 40%;
+
   margin-top: 0.2rem;
   line-height: 140%;
   font-size: 0.8rem;
@@ -364,47 +380,24 @@ hr {
   border-radius: 0.7rem;
   background-color: #f3f0f0;
 }
+.icontent {
+  max-width: 20rem;
+  word-wrap: break-word;
 
+  margin-left: auto;
+  margin-right: 1rem;
+
+  margin-top: 0.2rem;
+  line-height: 140%;
+  font-size: 0.8rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.7rem;
+  background-color: #fff5d1;
+}
 .im {
   width: 3rem;
   height: 3rem;
   border-radius: 3rem;
-}
-
-
-.uimg {
-  /* width: 3rem;
-  height: 3rem;
-  border-radius: 3rem;
-  margin-left: 2rem;
-  padding-top: 1rem; */
-  float: left;
-}
-.dommy {
-  width: max-content;
-}
-
-.u {
-  float: left;
-
-  background-color: #f3f0f0;
-}
-.iimg {
-  float: right;
-
-  /* border-radius: 3rem;
-  margin-left: 2rem;
-  padding-top: 1rem; */
-}
-
-.i {
-  float: right;
-
-  background-color: #fff5d1;
-  /* line-height: 140%;
-  font-size: 0.8rem;
-  padding: 0.8rem 1rem;
-  border-radius: 0.7rem; */
 }
 
 .writebox {
