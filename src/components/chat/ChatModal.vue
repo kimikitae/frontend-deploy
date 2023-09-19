@@ -35,6 +35,9 @@
                     <div>
                       <img src="../../assets/user.png" class="im" />
                     </div>
+                    <div class="center">
+                    {{ message.userName }}
+                    </div>
 
                     <div class="utx">{{ message.content }}</div>
                   </template>
@@ -43,6 +46,9 @@
                     <div class="dommy"></div>
                     <div class="itx">
                       {{ message.content }}
+                    </div>
+                    <div class="center">
+                    {{ message.userName }}
                     </div>
                     <div class="iright">
                       <img src="../../assets/userIcon.png" class="im" />
@@ -57,6 +63,9 @@
                     <div>
                       <img src="../../assets/user.png" class="im" />
                     </div>
+                    <div class="center">
+                    {{ message.userName }}
+                    </div>
 
                     <div class="utx">{{ message.content }}</div>
                   </template>
@@ -65,6 +74,9 @@
                     <div class="dommy"></div>
                     <div class="itx">
                       {{ message.content }}
+                    </div>
+                    <div class="center">
+                    {{ message.userName }}
                     </div>
                     <div class="iright">
                       <img src="../../assets/userIcon.png" class="im" />
@@ -183,6 +195,7 @@ export default {
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
             this.recvList.push(JSON.parse(res.body));
             console.log(this.recvList)
+            this.getChatRooms();
           });
         },
         (error) => {
@@ -201,7 +214,9 @@ export default {
   },
   mounted() {
     this.getChatRooms();
-
+  },
+  beforeUpdate(){
+    this.getChatRooms();
   },
   components: {
     ChatMenuModal,
@@ -321,9 +336,6 @@ hr {
   display: flex;
   margin-bottom: 2rem;
 }
-.dommy {
-  width: max-content;
-}
 .itx {
   margin-right: 1rem;
   margin-left: 40%;
@@ -334,6 +346,12 @@ hr {
   padding: 0.8rem 1rem;
   border-radius: 0.7rem;
   background-color: #fff5d1;
+}
+.center{
+    flex: 1;
+}
+.iright {
+  margin-left: auto;
 }
 
 .utx {
@@ -352,9 +370,7 @@ hr {
   height: 3rem;
   border-radius: 3rem;
 }
-.iright {
-  margin-left: auto;
-}
+
 
 .uimg {
   /* width: 3rem;
@@ -363,6 +379,9 @@ hr {
   margin-left: 2rem;
   padding-top: 1rem; */
   float: left;
+}
+.dommy {
+  width: max-content;
 }
 
 .u {
@@ -402,12 +421,13 @@ hr {
 .writebox > input {
   background-color: #ffeba4ca;
   height: 1.9rem;
-  width: 85%;
+  width: calc(85% - 3rem);
   margin-left: 5%;
   border-radius: 1rem;
   border: none;
   outline: none;
   padding-left: 0.8rem;
+  padding-right: 3rem;
 }
 .writebox > img {
   cursor: pointer;
