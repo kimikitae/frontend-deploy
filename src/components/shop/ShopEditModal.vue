@@ -3,22 +3,28 @@
     <main>
       <div class="modalframe">
         <div @click="this.$emit('closeShopEditModal')" class="close">X</div>
-        <div class="content-box">
-          <h1>정보 수정</h1>
-          <div class="editInfo1">
-            <label class="text"> 닉네임 </label>
-            <input type="text" v-model="editInfo.newNickname" />
-          </div>
-          <div class="editInfo">
-            <label class="text"> 이전 비밀번호 </label>
-            <input type="password" v-model="editInfo.oldPassword" />
-          </div>
-          <div class="editInfo">
-            <label class="text"> 새 비밀번호 </label>
-            <input type="password" v-model="editInfo.newPassword" />
-          </div>
+        <div class="line">
+          <div class="title">매장 정보 수정</div>
+          <div class="dbtn">매장 삭제</div>
         </div>
-        <div class="button" @click="editUserInfo">
+        <div class="editInfo1">
+          <label class="text"> 가게명 </label>
+          <input type="text" v-model="editInfo.newName" />
+        </div>
+        <div class="editInfo">
+          <label class="text"> 가게 주소 </label>
+          <input type="text" v-model="editInfo.newAddress" />
+        </div>
+        <div class="editInfo">
+          <label class="text"> 배달팁 </label>
+          <input type="text" v-model="editInfo.newTip" />
+        </div>
+        <div class="editInfo">
+          <label class="text1"> 가게 정보 </label>
+          <textarea v-model="editInfo.newDescription" />
+        </div>
+
+        <div class="button" @click="editShopInfo">
           <span> 정보 수정하기 </span>
         </div>
       </div>
@@ -35,42 +41,36 @@ export default {
   data() {
     return {
       editInfo: {
-        newNickname: "",
-        oldPassword: "",
-        newPassword: "",
+        newName: "",
+        newAddress: "",
+        newTip: "",
+        newDescription: "",
       },
     };
   },
   methods: {
-    editUserInfo() {
-      this.$emit("closeUserEditModal");
+    editShopInfo() {
+      this.$emit("closeShopEditModal");
       if (
-        (this.editInfo.oldPassword != null && this.editInfo.newPassword != null) ||
-        this.editInfo.newNickname != null
+        this.editInfo.newName != null &&
+        this.editInfo.newAddress != null &&
+        this.editInfo.newTip != null &&
+        this.editInfo.newDescription != null
       ) {
         const data = {
-          newNickname: this.editInfo.newNickname,
-          oldPassword: this.editInfo.oldPassword,
-          newPassword: this.editInfo.newPassword,
+            newName: this.editInfo.newName,
+            newAddress: this.editInfo.newAddress,
+            newTip: this.editInfo.newTip,
+            newDescription: this.editInfo.newDescription
         };
-        if (data.newNickname == "" || data.newNickname == null) data.newNickname = null;
-        if (
-          data.oldPassword == "" ||
-          data.oldPassword == null ||
-          data.newPassword == "" ||
-          data.newPassword == null
-        ) {
-          data.oldPassword = null;
-          data.newPassword = null;
-        }
-        this.putInfo(data);
+        this.putShopInfo(data);
         router.push("/InfoView");
       } else {
         alert("다시 입력하세여");
         return;
       }
     },
-    ...mapActions("user", ["putInfo"]),
+    ...mapActions("shop", ["putShopInfo"]),
   },
 };
 </script>
@@ -90,9 +90,9 @@ export default {
   z-index: 200;
   display: block;
   margin: 0 auto;
-  margin-top: 10rem;
+  margin-top: 6rem;
   width: 30rem;
-  height: 35rem;
+  height: 40rem;
   background-color: white;
   border-radius: 0.5rem;
   border: none;
@@ -101,6 +101,7 @@ export default {
 }
 
 .modalframe {
+  padding-top: 0.5rem;
   position: relative;
 }
 
@@ -110,21 +111,30 @@ export default {
   cursor: pointer;
 }
 
-.content-box {
-  position: relative;
-  top: 1rem;
+.line {
+  display: flex;
+  margin-top: 2rem;
+  margin-left: 3rem;
 }
-
-h1 {
-  padding-top: 1rem;
-  text-align: center;
+.dbtn {
+    color: white;
+  border-radius: 0.5rem;
+  padding: 0 1rem;
+  line-height: 200%;
+  font-size: 1.15rem;
+  margin-right: 2rem;
+  margin-left: auto;
+  background-color: #fd6363;
+}
+.title {
+  font-size: 2rem;
 }
 
 .editInfo1 {
   text-align: center;
   float: right;
   margin-top: 2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 3px;
   margin-right: 40px;
 }
 
@@ -138,6 +148,20 @@ h1 {
 
 .text {
   padding-right: 1rem;
+}
+.text1{
+    padding-bottom: 10rem;
+}
+textarea {
+  width: 17rem;
+  height: 10rem;
+  font-size: 1.3rem;
+  color: black;
+  background-color: #f6f6f6;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  resize: none;
 }
 
 input {

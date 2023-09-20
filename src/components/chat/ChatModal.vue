@@ -147,10 +147,14 @@ export default {
     ...mapState("user", {
       userInfo: (state) => state.userInfo,
     }),
+    ...mapState("token", {
+      tok: (state) => state.token.accessToken,
+    }),
   },
   methods: {
     ...mapActions("chat", ["getChatRooms", "getChatRoom"]),
     async inRoom(idx) {
+      this.getChatRooms();
       console.log("검색" + this.seletedRoom);
       const prev = this.seletedRoom;
       if (prev != 0) {
@@ -180,6 +184,9 @@ export default {
         };
         const s = "/send/" + this.seletedRoom;
         this.stompClient.send(s, JSON.stringify(msg), {});
+        //  {
+        //   Authorization: this.tok,
+        // }
       }
     },
     connect() {
@@ -199,8 +206,8 @@ export default {
           this.subscription = this.stompClient.subscribe(s, (res) => {
             console.log("구독으로 받은 메시지 입니다.", res.body);
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
-            this.recvList.push(JSON.parse(res.body));
-            console.log(this.recvList);
+            let d = JSON.parse(res.body)
+            this.recvList.push((d.body.response));
             this.getChatRooms();
             let mySpace = document.querySelector(".chatbox");
             mySpace.scrollTop = mySpace.scrollHeight;

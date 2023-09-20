@@ -18,6 +18,20 @@ export default {
     const data = await response.json()
     return data
   },
+  async putShopInfo(info) {
+    const tok = store.state.token.accessToken
+    console.log(info)
+    const response = await fetch(`${server}/shops/update`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
 
 
 

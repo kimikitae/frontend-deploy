@@ -48,7 +48,7 @@ export default {
     const content = {
       content: info.content
     }
-    const response = await fetch(`${server}/reviews/1/update`, {
+    const response = await fetch(`${server}/reviews/${info.idx}/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
