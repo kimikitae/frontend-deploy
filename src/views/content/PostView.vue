@@ -17,9 +17,9 @@
                   ". " +
                   extrDate(post.createAt) +
                   " " +
-                  extrMinutes(post.createAt) +
+                  extrHours(post.createAt) +
                   ":" +
-                  extrSeconds(post.createAt)
+                  extrMinutes(post.createAt)
                 }}
               </span>
               <span> 삭제 </span>
@@ -149,12 +149,13 @@ export default {
     extrDate(d) {
       return new Date(d).getDate();
     },
+    extrHours(d) {
+      return new Date(d).getHours();
+    },
     extrMinutes(d) {
       return new Date(d).getMinutes();
     },
-    extrSeconds(d) {
-      return new Date(d).getSeconds();
-    },
+    
   },
   components: {
     NavBar,
