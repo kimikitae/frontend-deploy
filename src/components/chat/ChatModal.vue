@@ -114,7 +114,7 @@
       <ChatMenuModal
         v-if="openChatMenuModal"
         @closeChatMenuModal="openChatMenuModal = false"
-        @closeChatModal="this.$emit('closeChatModal')"
+        @closeChatModal="this.$emit('closeChatModal'); this.disconnect()"
       />
     </main>
   </div>

@@ -3,11 +3,11 @@
     <img class="logo" src="../../assets/appLogo.png">
     <div class="input">
       <img src="../../assets/user.png">
-      <input type="text" placeholder="User name" v-model="loginId">
+      <input type="text" placeholder="User name" v-model="loginId" @keyup.enter="login">
     </div>
     <div class="input">
       <img src="../../assets/lock.png">
-      <input type="password" placeholder="Password" v-model="loginPassword">
+      <input type="password" placeholder="Password" v-model="loginPassword" @keyup.enter="login">
     </div>
     <button @click="login">LOGIN</button>
     <div class="usersupport">

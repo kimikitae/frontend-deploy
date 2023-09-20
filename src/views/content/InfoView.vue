@@ -36,7 +36,7 @@
             <div class="menulist">
               <div class="content" @click="openUserEditModal = true">내 정보 수정</div>
               <hr />
-              <div class="content" @click="toOrderList('cancel')">매장 정보 수정</div>
+              <div class="content" @click="openShopEditModal = true">매장 정보 수정</div>
               <hr />
               <div class="content">매장 등록</div>
             </div>
@@ -64,6 +64,7 @@
       v-if="openUserEditModal"
       @closeUserEditModal="openUserEditModal = false"
     />
+    <ShopEditModal v-if="openShopEditModal" @closeShopEditModal="openShopEditModal = false"/>
   </main>
 </template>
 
@@ -71,15 +72,17 @@
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import UserEditModal from "../../components/user/UserEditModal.vue";
+import ShopEditModal from "../../components/shop/ShopEditModal.vue";
 import { mapActions, mapState, mapMutations } from "vuex";
 import router from "../../router";
 
 export default {
-  name: "HomeView",
+  name: "InfoView",
   data() {
     return {
       openUserModal: false,
       openUserEditModal: false,
+      openShopEditModal: false
     };
   },
   computed: {
@@ -106,6 +109,7 @@ export default {
     NavBar,
     UserModal,
     UserEditModal,
+    ShopEditModal
   },
 };
 </script>
