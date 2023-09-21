@@ -3,60 +3,99 @@
     <NavBar @openUserModal="openUserModal = true" />
     <div class="float">
       <div class="flex">
-        <div class="item">
-          <div class="upside">
-            <div class="circle">
-              <img src="../../assets/user.png" class="userIcon" />
+        <template v-if="userInfo.idx == uIdx">
+          <div class="item">
+            <div class="upside">
+              <div class="circle">
+                <img src="../../assets/user.png" class="userIcon" />
+              </div>
+              <div class="line1">
+                <div class="uname">{{ userInfo.userName }}님</div>
+                <div>
+                  {{
+                    userInfo.orderCount == 0 || userInfo.orderCount == null
+                      ? "용기나눔을 이용한 기록이 없어요."
+                      : "용기나눔과" + userInfo.orderCount + "번 거래 했어요."
+                  }}
+                </div>
+              </div>
             </div>
-            <div class="line1">
-              <div class="uname">{{ userInfo.userName }}님</div>
-              <div>
-                {{
-                  userInfo.orderCount == 0 || userInfo.orderCount == null
-                    ? "용기나눔을 이용한 기록이 없어요."
-                    : "용기나눔과" + userInfo.orderCount + "번 거래 했어요."
-                }}
+            <template v-if="userInfo.role == 'USER'">
+              <div class="menulist">
+                <div class="content" @click="toOrderList('ing')">내 주문 내역</div>
+                <hr />
+                <div class="content" @click="toReviewView">리뷰 관리</div>
+                <hr />
+                <div class="content" @click="openUserEditModal = true">정보 수정하기</div>
+                <hr />
+                <div class="content" @click="toOrderList('cancel')">주문 취소 목록</div>
+                <hr />
+                <div class="content">내 주소 관리</div>
+              </div>
+            </template>
+            <template v-else-if="userInfo.role == 'SHOPPER'">
+              <div class="menulist">
+                <div class="content" @click="openUserEditModal = true">내 정보 수정</div>
+                <hr />
+                <div class="content" @click="openShopEditModal = true">
+                  매장 정보 수정
+                </div>
+                <hr />
+                <div class="content" @click="opneShopRegistModal = true">매장 등록</div>
+              </div>
+            </template>
+          </div>
+
+          <div class="item">
+            <template v-if="userInfo.posts.length">
+              <div class="line2">작성한 게시물</div>
+              <div class="postlist">
+                <template v-for="(it, index) in userInfo.posts" :key="index">
+                  <div class="content" @click="toPost(it.idx)">{{ it.title }}</div>
+                  <hr />
+                </template>
+              </div>
+            </template>
+            <template v-else>
+              <div class="line2">작성한 게시물이 없어용..ㅜㅜ</div>
+            </template>
+          </div>
+        </template>
+
+        <template v-else>
+          <div class="item">
+            <div class="upside">
+              <div class="circle">
+                <img src="../../assets/user.png" class="userIcon" />
+              </div>
+              <div class="line1">
+                <div class="uname">{{ yourInfo.userName }}님</div>
+                <div>
+                  {{
+                    yourInfo.orderCount == 0 || yourInfo.orderCount == null
+                      ? "용기나눔을 이용한 기록이 없어요."
+                      : "용기나눔과" + yourInfo.orderCount + "번 거래 했어요."
+                  }}
+                </div>
               </div>
             </div>
           </div>
-          <template v-if="userInfo.role == 'USER'">
-            <div class="menulist">
-              <div class="content" @click="toOrderList('ing')">내 주문 내역</div>
-              <hr />
-              <div class="content" @click="toReviewView">리뷰 관리</div>
-              <hr />
-              <div class="content" @click="openUserEditModal = true">정보 수정하기</div>
-              <hr />
-              <div class="content" @click="toOrderList('cancel')">주문 취소 목록</div>
-              <hr />
-              <div class="content">내 주소 관리</div>
-            </div>
-          </template>
-          <template v-else-if="userInfo.role == 'SHOPPER'">
-            <div class="menulist">
-              <div class="content" @click="openUserEditModal = true">내 정보 수정</div>
-              <hr />
-              <div class="content" @click="openShopEditModal = true">매장 정보 수정</div>
-              <hr />
-              <div class="content" @click="opneShopRegistModal = true">매장 등록</div>
-            </div>
-          </template>
-        </div>
 
-        <div class="item">
-          <template v-if="userInfo.posts.length">
-            <div class="line2">작성한 게시물</div>
-          <div class="postlist">
-            <template v-for="(it, index) in userInfo.posts" :key="index">
-              <div class="content" @click="toPost(it.idx)">{{ it.title }}</div>
-              <hr />
+          <div class="item">
+            <template v-if="yourInfo.posts.length">
+              <div class="line2">작성한 게시물</div>
+              <div class="postlist">
+                <template v-for="(it, index) in yourInfo.posts" :key="index">
+                  <div class="content" @click="toPost(it.idx)">{{ it.title }}</div>
+                  <hr />
+                </template>
+              </div>
+            </template>
+            <template v-else>
+              <div class="line2">작성한 게시물이 없어용..ㅜㅜ</div>
             </template>
           </div>
-          </template>
-          <template v-else>
-            <div class="line2">작성한 게시물이 없어용..ㅜㅜ</div>
-          </template>
-        </div>
+        </template>
       </div>
     </div>
     <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
@@ -64,8 +103,14 @@
       v-if="openUserEditModal"
       @closeUserEditModal="openUserEditModal = false"
     />
-    <ShopEditModal v-if="openShopEditModal" @closeShopEditModal="openShopEditModal = false"/>
-    <ShopRegistModal v-if="opneShopRegistModal" @closeShopRegistModal="opneShopRegistModal = false"/>
+    <ShopEditModal
+      v-if="openShopEditModal"
+      @closeShopEditModal="openShopEditModal = false"
+    />
+    <ShopRegistModal
+      v-if="opneShopRegistModal"
+      @closeShopRegistModal="opneShopRegistModal = false"
+    />
   </main>
 </template>
 
@@ -91,6 +136,8 @@ export default {
   computed: {
     ...mapState("user", {
       userInfo: (state) => state.userInfo,
+      uIdx: (state) => state.uIdx,
+      yourInfo: (state) => state.yourInfo
     }),
   },
   methods: {
@@ -113,7 +160,10 @@ export default {
     UserModal,
     UserEditModal,
     ShopEditModal,
-    ShopRegistModal
+    ShopRegistModal,
+  },
+  mounted() {
+    
   },
 };
 </script>
@@ -136,6 +186,7 @@ export default {
   margin-bottom: 1rem;
 }
 .upside {
+  width: 35rem;
   margin: 0 auto;
 }
 .circle {

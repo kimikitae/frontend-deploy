@@ -47,6 +47,19 @@ export default {
     const data = await response.json()
     return data
   },
+  async getUInfo() {
+    const idx = store.state.user.uIdx
+    console.log(idx)
+    const response = await fetch(`${server}/users/${idx}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': tok
+      }
+    })
+    const data = await response.json()
+    return data
+  },
   async putInfo(info) {
     const tok = store.state.token.accessToken
     const response = await fetch(`${server}/users/update`, {

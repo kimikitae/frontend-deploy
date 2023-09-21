@@ -14,11 +14,16 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapMutations, mapActions, mapState } from "vuex";
 import router from "@/router";
 
 export default {
   name: "UserModal",
+  computed:{
+    ...mapState("user", {
+      userInfo: (state) => state.userInfo
+    })
+  },
   methods: {
     async toLogOut() {
       localStorage.removeItem("vuex");
@@ -29,6 +34,8 @@ export default {
     toInfo() {
       this.$emit("closeUserModal");
       this.getInfo();
+      const a = this.userInfo.idx
+      this.setUIdx(a)
       router.push("/InfoView");
     },
     toCart() {
@@ -37,6 +44,7 @@ export default {
       router.push("/CartView");
     },
     ...mapMutations("token", ["setToken"]),
+    ...mapMutations("user", ["setUIdx"]),
     ...mapActions("user", ["getInfo"]),
     ...mapActions("cart", ["getCartInfo"]),
   },

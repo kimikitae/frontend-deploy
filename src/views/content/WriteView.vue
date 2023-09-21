@@ -32,7 +32,7 @@
           </div>
           <div class="box1">
             <span>공유 인원를 선택하세요</span>
-            <div class="plus">
+            <div class="sele">
               <select name="items1">
                 <option value="HTML">2명</option>
                 <option value="자바스크립트">3명</option>
@@ -62,7 +62,7 @@ import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import MenuModal from "../../components/post/MenuModal.vue";
 import PlaceModal from "../../components/post/PlaceModal.vue";
-import { mapActions } from "vuex";
+// import { mapActions } from "vuex";
 
 export default {
   name: "WriteView",
@@ -75,7 +75,7 @@ export default {
     };
   },
   methods:{
-    ...mapActions("shop", ["getShop"])
+    // ...mapActions("shop", ["getShop"])
   },
   components: {
     NavBar,
@@ -84,7 +84,7 @@ export default {
     PlaceModal,
   },
   mounted(){
-    this.getShop()
+    // this.getShop()
   }
 };
 </script>
@@ -140,6 +140,10 @@ export default {
   border-radius: 0.3rem;
   width: 1rem;
   text-align: center;
+}
+
+.sele{
+  
 }
 
 .title {

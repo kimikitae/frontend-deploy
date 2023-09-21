@@ -40,7 +40,7 @@
                   <span class="place">
                     {{ post.place + "에 거주하고 있어요." }}
                   </span>
-                  <span class="btn2" @click="this.$router.push('/InfoView')">
+                  <span class="btn2" @click="toInfoView(post.authorIdx)">
                     프로필 보기
                   </span>
                 </div>
@@ -136,14 +136,26 @@ export default {
     ...mapState("post", {
       post: (state) => state.post,
     }),
+    ...mapState("user", {
+      userInfo: (state) => state.userInfo,
+    }),
   },
   methods: {
+    toInfoView(aidx){
+      if(aidx != this.userInfo.idx){
+        this.setUIdx(aidx)
+        this.getUInfo();
+      }
+      this.$router.push("/InfoView");
+    },
     toShopInfo(idx) {
       this.setIdx(idx)
       this.$router.push("/ShopInfoView");
     },
+    ...mapActions("user", ["getUInfo"]),
     ...mapActions("post", ["getPost"]),
     ...mapMutations("shop", ["setIdx"]),
+    ...mapMutations("user", ["setUIdx"]),
     extrYear(d) {
       return new Date(d).getFullYear();
     },
