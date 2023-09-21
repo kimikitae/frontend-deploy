@@ -5,41 +5,71 @@
         <div @click="this.$emit('closeShopEditModal')" class="close">X</div>
         <div class="line">
           <div class="title">매장 정보 수정</div>
-          <div class="dbtn">매장 삭제</div>
+          <div class="dbtn" @click="openCheckShopModal = true">매장 삭제</div>
         </div>
         <div class="editInfo1">
           <label class="text"> 가게명 </label>
-          <input type="text" v-model="editInfo.newName" />
+          <input
+            type="text"
+            v-model="editInfo.newName"
+            :placeholder="myShop.shopName"
+            @focus="placeholder = ' '"
+            @blur="placeholder = myShop.shopName"
+          />
         </div>
         <div class="editInfo">
           <label class="text"> 가게 주소 </label>
-          <input type="text" v-model="editInfo.newAddress" />
+          <input
+            type="text"
+            v-model="editInfo.newAddress"
+            :placeholder="myShop.shopAddress"
+            @focus="placeholder = ' '"
+            @blur="placeholder = myShop.shopAddress"
+          />
         </div>
         <div class="editInfo">
           <label class="text"> 배달팁 </label>
-          <input type="text" v-model="editInfo.newTip" />
+          <input
+            type="text"
+            v-model="editInfo.newTip"
+            :placeholder="myShop.tip"
+            @focus="placeholder = ' '"
+            @blur="placeholder = myShop.tip"
+          />
         </div>
         <div class="editInfo">
           <label class="text1"> 가게 정보 </label>
-          <textarea v-model="editInfo.newDescription" />
+          <textarea
+            v-model="editInfo.newDescription"
+            :placeholder="myShop.description"
+            @focus="placeholder = ' '"
+            @blur="placeholder = myShop.description"
+          />
         </div>
 
         <div class="button" @click="editShopInfo">
-          <span> 정보 수정하기 </span>
+          <span> 매장 정보 수정하기 </span>
         </div>
       </div>
+
+      <CheckShopModal
+        v-if="openCheckShopModal"
+        @closeCheckShopModal="openCheckShopModal = false"
+        @delShop="deleteShop()"
+      />
     </main>
   </div>
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import router from "@/router";
+import CheckShopModal from "./CheckShopModal.vue";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "ShopEditModal",
   data() {
     return {
+      openCheckShopModal: false,
       editInfo: {
         newName: "",
         newAddress: "",
@@ -48,9 +78,14 @@ export default {
       },
     };
   },
+  computed: {
+    ...mapState("shop", {
+      myShop: (state) => state.myShop,
+    }),
+    // ...mapGetters("shop", ["getIdx"]),
+  },
   methods: {
     editShopInfo() {
-      this.$emit("closeShopEditModal");
       if (
         this.editInfo.newName != null &&
         this.editInfo.newAddress != null &&
@@ -58,19 +93,36 @@ export default {
         this.editInfo.newDescription != null
       ) {
         const data = {
-            newName: this.editInfo.newName,
-            newAddress: this.editInfo.newAddress,
-            newTip: this.editInfo.newTip,
-            newDescription: this.editInfo.newDescription
+          idx: this.myShop.idx,
+          newName: this.editInfo.newName,
+          newAddress: this.editInfo.newAddress,
+          newTip: this.editInfo.newTip,
+          newDescription: this.editInfo.newDescription,
         };
         this.putShopInfo(data);
-        router.push("/InfoView");
+        this.$emit("closeShopEditModal");
       } else {
-        alert("다시 입력하세여");
         return;
       }
     },
-    ...mapActions("shop", ["putShopInfo"]),
+    async deleteShop() {
+      const info = {
+        idx: this.myShop.idx,
+      };
+      const a = await this.delShop(info);
+      if (a) {
+        this.$emit("closeShopEditModal");
+      } else {
+        return;
+      }
+    },
+    ...mapActions("shop", ["putShopInfo", "getMyShop", "delShop"]),
+  },
+  mounted() {
+    this.getMyShop();
+  },
+  components: {
+    CheckShopModal,
   },
 };
 </script>
@@ -92,7 +144,7 @@ export default {
   margin: 0 auto;
   margin-top: 6rem;
   width: 30rem;
-  height: 40rem;
+  height: 31rem;
   background-color: white;
   border-radius: 0.5rem;
   border: none;
@@ -117,7 +169,7 @@ export default {
   margin-left: 3rem;
 }
 .dbtn {
-    color: white;
+  color: white;
   border-radius: 0.5rem;
   padding: 0 1rem;
   line-height: 200%;
@@ -125,6 +177,7 @@ export default {
   margin-right: 2rem;
   margin-left: auto;
   background-color: #fd6363;
+  cursor: pointer;
 }
 .title {
   font-size: 2rem;
@@ -135,7 +188,7 @@ export default {
   float: right;
   margin-top: 2rem;
   margin-bottom: 3px;
-  margin-right: 40px;
+  margin-right: 4rem;
 }
 
 .editInfo {
@@ -143,37 +196,45 @@ export default {
   float: right;
   margin-top: 6px;
   margin-bottom: 3px;
-  margin-right: 40px;
+  margin-right: 4rem;
 }
 
 .text {
-  padding-right: 1rem;
+  padding-right: 1.5rem;
 }
-.text1{
-    padding-bottom: 10rem;
+.text1 {
+  position: relative;
+  top: 0.8rem;
+  vertical-align: top;
+  padding-right: 1.5rem;
 }
 textarea {
-  width: 17rem;
+  width: 16rem;
   height: 10rem;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   color: black;
   background-color: #f6f6f6;
   border-radius: 0.5rem;
   border: none;
   outline: none;
   resize: none;
+  font-family: Arial, sans-serif;
+  padding-left: 1rem;
+  padding-top: 0.7rem;
+  padding-right: 0.5rem;
 }
 
 input {
-  font-size: 1.7rem;
+  font-size: 1.1rem;
   color: black;
-  padding: 0.2rem 0;
-  text-align: center;
+  padding: 0.5rem 0;
   background-color: #f6f6f6;
   border-radius: 0.5rem;
-  width: 17rem;
+  width: 16rem;
   border: none;
   outline: none;
+  padding-left: 1rem;
+  padding-right: 0.5rem;
 }
 
 input::-webkit-inner-spin-button {
@@ -198,7 +259,7 @@ input::-webkit-inner-spin-button {
   border-radius: 0 0 0.5rem 0.5rem;
   cursor: pointer;
   position: relative;
-  top: 27rem;
+  top: 23rem;
   height: 3.5rem;
   background-color: #fff5d1;
   line-height: 370%;

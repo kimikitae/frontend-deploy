@@ -137,6 +137,7 @@ export default {
 }
 
 textarea {
+  font-family: Arial, sans-serif;
   width: 36.3rem;
   height: 20rem;
   font-size: 1.35em;

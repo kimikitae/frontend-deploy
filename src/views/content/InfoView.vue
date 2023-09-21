@@ -38,7 +38,7 @@
               <hr />
               <div class="content" @click="openShopEditModal = true">매장 정보 수정</div>
               <hr />
-              <div class="content">매장 등록</div>
+              <div class="content" @click="opneShopRegistModal = true">매장 등록</div>
             </div>
           </template>
         </div>
@@ -65,6 +65,7 @@
       @closeUserEditModal="openUserEditModal = false"
     />
     <ShopEditModal v-if="openShopEditModal" @closeShopEditModal="openShopEditModal = false"/>
+    <ShopRegistModal v-if="opneShopRegistModal" @closeShopRegistModal="opneShopRegistModal = false"/>
   </main>
 </template>
 
@@ -73,6 +74,7 @@ import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import UserEditModal from "../../components/user/UserEditModal.vue";
 import ShopEditModal from "../../components/shop/ShopEditModal.vue";
+import ShopRegistModal from "../../components/shop/ShopRegistModal.vue";
 import { mapActions, mapState, mapMutations } from "vuex";
 import router from "../../router";
 
@@ -82,7 +84,8 @@ export default {
     return {
       openUserModal: false,
       openUserEditModal: false,
-      openShopEditModal: false
+      openShopEditModal: false,
+      opneShopRegistModal: false,
     };
   },
   computed: {
@@ -109,7 +112,8 @@ export default {
     NavBar,
     UserModal,
     UserEditModal,
-    ShopEditModal
+    ShopEditModal,
+    ShopRegistModal
   },
 };
 </script>

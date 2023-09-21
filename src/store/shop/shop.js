@@ -6,13 +6,27 @@ export default {
 
   state: {
     shops: [],
+    myShop: {},
+    brand:{}
   },
   getters: {
+    // getIdx(state) {
+    //   return state.myShop.idx
+    // },
   },
   mutations: {
     setShops(state, shops) {
       state.shops = shops
     },
+    setMyShop(state, myShop) {
+      state.myShop = myShop
+    },
+    setBrand(state, brand) {
+      state.brand = brand
+    },
+    resetShop(state){
+      state.myShop = null
+    }
   },
   actions: {
     async postShops(context, info) {
@@ -35,7 +49,47 @@ export default {
         return false
       }
     },
-    
+    async getMyShop(context) {
+      const data = await api.getMyShop()
+      console.log(data)
+      if (data.success) {
+        context.commit('setMyShop', data.response)
+        return true
+      } else {
+        router.go(0)
+        return false
+      }
+    },
+    async delShop(context, info) {
+      const data = await api.deleteShop(info)
+      if (data.success) {
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+    async searchBrand(context, info) {
+      const data = await api.postBrand(info)
+      if (data.success) {
+        context.commit('setBrand', data.response)
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+    async postShopInfo(context, info) {
+      const data = await api.postShopInfo(info)
+      if (data.success) {
+        router.go(0)
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+
 
 
 

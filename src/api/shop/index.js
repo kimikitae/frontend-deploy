@@ -21,7 +21,7 @@ export default {
   async putShopInfo(info) {
     const tok = store.state.token.accessToken
     console.log(info)
-    const response = await fetch(`${server}/shops/update`, {
+    const response = await fetch(`${server}/shops/${info.idx}/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -32,9 +32,58 @@ export default {
     const data = await response.json()
     return data
   },
-
-
-
+  async getMyShop() {
+    const tok = store.state.token.accessToken
+    const idx = store.state.user.userInfo.idx
+    const response = await fetch(`${server}/users/${idx}/shop`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+  async deleteShop(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/shops/${info.idx}/unregist`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+  async postBrand(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/shops/brand`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
+  async postShopInfo(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/shops/regist`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
+  
 
 
 

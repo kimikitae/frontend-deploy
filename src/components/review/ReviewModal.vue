@@ -171,6 +171,7 @@ h1 {
   align-items: center;
 }
 textarea {
+  font-family: Arial, sans-serif;
   width: 26rem;
   height: 14rem;
   font-size: 1.3rem;
