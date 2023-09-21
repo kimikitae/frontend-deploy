@@ -7,7 +7,9 @@ export default {
   state: {
     shops: [],
     myShop: {},
-    brand:{}
+    brand:{},
+    shop:{},
+    selectedIdx:""
   },
   getters: {
     // getIdx(state) {
@@ -26,6 +28,12 @@ export default {
     },
     resetShop(state){
       state.myShop = null
+    },
+    setIdx(state, selectedIdx){
+      state.selectedIdx = selectedIdx
+    },
+    setShop(state, shop){
+      state.shop = shop
     }
   },
   actions: {
@@ -89,6 +97,17 @@ export default {
         return false
       }
     },
+    async getShop(context) {
+      const data = await api.getShop()
+      if (data.success) {
+        context.commit('setShop', data.response)
+        return true
+      } else {
+        router.go(0)
+        return false
+      }
+    },
+    
 
 
 

@@ -83,6 +83,20 @@ export default {
     const data = await response.json()
     return data
   },
+  async getShop() {
+    const tok = store.state.token.accessToken
+    const idx = store.state.shop.selectedIdx
+    const response = await fetch(`${server}/shops/${idx}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+  
   
 
 

@@ -10,14 +10,18 @@
           <div class="line1">
             <span>게시물을 작성하고 용기를 나누어 보세요.</span>
           </div>
-          <input class="title"
-              type="text"
-              placeholder="제목을 입력하세요"
-              onfocus="this.placeholder = ''"
-              onblur="this.placeholder = '제목을 입력하세요'"
+          <input
+            class="title"
+            type="text"
+            placeholder="제목을 입력하세요"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '제목을 입력하세요'"
           />
-          <textarea placeholder="내용을 입력하세요"
-          onfocus="this.placeholder = ''" onblur="this.placeholder = '내용을 입력하세요'"></textarea>
+          <textarea
+            placeholder="내용을 입력하세요"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '내용을 입력하세요'"
+          ></textarea>
           <div class="box1">
             <span>공유 메뉴를 선택하세요</span>
             <div class="plus" @click="openMenuModal = true">+</div>
@@ -28,14 +32,20 @@
           </div>
           <div class="box1">
             <span>공유 인원를 선택하세요</span>
-            <div class="plus"><img src="../../assets/Downarrow.png"></div>
+            <div class="plus">
+              <select name="items1">
+                <option value="HTML">2명</option>
+                <option value="자바스크립트">3명</option>
+                <option value="CSS">4명</option>
+              </select>
+            </div>
           </div>
           <div class="box1">
             <span>공유 시간를 선택하세요</span>
-            <input class="time" type="time" value="xxx" min="yyy" max="zzz">
+            <input class="time" type="time" v-model="time" min="yyy" max="zzz" />
           </div>
           <div class="line2">
-            <div class="btn2">등록</div>
+            <div class="btn2" @click="console.log(time)">등록</div>
             <div class="btn1">취소</div>
           </div>
         </div>
@@ -50,8 +60,9 @@
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
-import MenuModal from "../../components/post/MenuModal.vue"
-import PlaceModal from "../../components/post/PlaceModal.vue"
+import MenuModal from "../../components/post/MenuModal.vue";
+import PlaceModal from "../../components/post/PlaceModal.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "WriteView",
@@ -60,7 +71,11 @@ export default {
       openUserModal: false,
       openMenuModal: false,
       openPlaceModal: false,
+      time: "",
     };
+  },
+  methods:{
+    ...mapActions("shop", ["getShop"])
   },
   components: {
     NavBar,
@@ -68,6 +83,9 @@ export default {
     MenuModal,
     PlaceModal,
   },
+  mounted(){
+    this.getShop()
+  }
 };
 </script>
 
@@ -118,7 +136,7 @@ export default {
 .plus {
   cursor: pointer;
   float: right;
-  border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
   border-radius: 0.3rem;
   width: 1rem;
   text-align: center;
@@ -166,7 +184,7 @@ textarea {
 
 .btn1 {
   width: 5rem;
-  border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
   float: right;
   margin-left: 2rem;
   border-radius: 0.5rem;
@@ -177,12 +195,12 @@ textarea {
 
 .btn2 {
   width: 5rem;
-  border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
   float: right;
   margin-left: 2rem;
   border-radius: 0.5rem;
   text-align: center;
   padding: 0.5rem;
-  background-color: #FFF5D1;
+  background-color: #fff5d1;
 }
 </style>

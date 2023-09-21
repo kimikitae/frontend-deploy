@@ -40,7 +40,9 @@
                   <span class="place">
                     {{ post.place + "에 거주하고 있어요." }}
                   </span>
-                  <span class="btn2" @click="this.$router.push('/InfoView')"> 프로필 보기 </span>
+                  <span class="btn2" @click="this.$router.push('/InfoView')">
+                    프로필 보기
+                  </span>
                 </div>
               </div>
             </div>
@@ -94,10 +96,10 @@
                   <img src="../../assets/shopLogo.png" />
                   <div class="bflex1">
                     <div>
-                      <span class="sname">
-                        {{ post.shopName}}
-                      </span>
-                      <span class="sshop" @click="toShopInfo"> 가게 살펴보기 </span>
+                      <div class="sname">
+                        {{ post.shopName }}
+                      </div>
+                      <div class="sshop" @click="toShopInfo(post.idx)">가게 살펴보기</div>
                     </div>
 
                     <div>
@@ -120,7 +122,7 @@
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 // import router from "../../router";
 
 export default {
@@ -136,10 +138,12 @@ export default {
     }),
   },
   methods: {
-    toShopInfo(){
-      this.$router.push('/ShopInfoView')
+    toShopInfo(idx) {
+      this.setIdx(idx)
+      this.$router.push("/ShopInfoView");
     },
     ...mapActions("post", ["getPost"]),
+    ...mapMutations("shop", ["setIdx"]),
     extrYear(d) {
       return new Date(d).getFullYear();
     },
@@ -155,7 +159,6 @@ export default {
     extrMinutes(d) {
       return new Date(d).getMinutes();
     },
-    
   },
   components: {
     NavBar,
@@ -339,33 +342,35 @@ export default {
   height: 5rem;
   border-radius: 3rem;
 }
-.sshop{
-  padding-left: 23rem;
-  float: right;
+.sshop {
+  flex: 1;
+  text-align: right;
+  margin-right: 2rem;
   font-size: 0.8rem;
   color: #d0d0d0;
   cursor: pointer;
   text-decoration: underline;
 }
-.bflex1{
-  width: max-content;
+.sname {
+  flex: 1;
+  margin-top: 0.5rem;
+}
+.bflex1 {
+  width: calc(100% - 6rem);
   display: flex;
   flex-direction: column;
 }
 .bflex1 > div:nth-child(1) {
-  width: max-content;
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   flex: 1;
   font-size: 1.1rem;
+  width: 100%;
+  display: flex;
 }
 .bflex1 > div:nth-child(2) {
   flex: 1;
   font-size: 1.1rem;
 }
-.sname{
-  margin-top: 1rem;
-}
-.tip{
-
+.tip {
 }
 </style>
