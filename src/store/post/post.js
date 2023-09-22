@@ -9,6 +9,15 @@ export default {
     selectedIdx: 0,
     post: {},
     notices: [],
+    writeInfo: {
+      title: '',
+      content: '',
+      options: [],
+      idx: 0,
+      place: '',
+      people: '',
+      time: '',
+    },
   },
   getters: {},
   mutations: {
@@ -24,6 +33,17 @@ export default {
     setNotices(state, notices) {
       state.notices = notices
     },
+    setMenu(state, info){
+      state.writeInfo.options = info.options
+      state.writeInfo.idx = info.idx
+    },
+    setTCTP(state, info){
+      state.writeInfo.title = info.title
+      state.writeInfo.content = info.content
+      state.writeInfo.time = info.time
+      state.writeInfo.people = info.people
+      state.writeInfo.place = info.place
+    }
   },
   actions: {
     async getPosts(context) {
@@ -73,6 +93,16 @@ export default {
       const data = await api.postNotice(info)
       if (data.success) {
         router.go(0)
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+    async writePost(context) {
+      const data = await api.writePost(context.state.writeInfo)
+      if (data.success) {
+        router.push('/ShareView')
         return true
       } else {
         alert(data.error.status + data.error.message)

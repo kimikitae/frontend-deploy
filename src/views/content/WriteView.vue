@@ -11,6 +11,7 @@
             <span>게시물을 작성하고 용기를 나누어 보세요.</span>
           </div>
           <input
+            v-model="writeInfo.title"
             class="title"
             type="text"
             placeholder="제목을 입력하세요"
@@ -18,6 +19,7 @@
             onblur="this.placeholder = '제목을 입력하세요'"
           />
           <textarea
+            v-model="writeInfo.content"
             placeholder="내용을 입력하세요"
             onfocus="this.placeholder = ''"
             onblur="this.placeholder = '내용을 입력하세요'"
@@ -33,19 +35,25 @@
           <div class="box1">
             <span>공유 인원를 선택하세요</span>
             <div class="sele">
-              <select name="items1">
-                <option value="HTML">2명</option>
-                <option value="자바스크립트">3명</option>
-                <option value="CSS">4명</option>
+              <select name="items1" v-model="writeInfo.people">
+                <option value="2">2명</option>
+                <option value="3">3명</option>
+                <option value="4">4명</option>
               </select>
             </div>
           </div>
           <div class="box1">
             <span>공유 시간를 선택하세요</span>
-            <input class="time" type="time" v-model="time" min="yyy" max="zzz" />
+            <input
+              class="time"
+              type="time"
+              v-model="writeInfo.time"
+              min="yyy"
+              max="zzz"
+            />
           </div>
           <div class="line2">
-            <div class="btn2" @click="console.log(time)">등록</div>
+            <div class="btn2" @click="write">등록</div>
             <div class="btn1">취소</div>
           </div>
         </div>
@@ -60,9 +68,9 @@
 <script>
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
-import MenuModal from "../../components/post/MenuModal.vue";
 import PlaceModal from "../../components/post/PlaceModal.vue";
-// import { mapActions } from "vuex";
+import MenuModal from "../../components/post/MenuModal.vue";
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "WriteView",
@@ -71,11 +79,32 @@ export default {
       openUserModal: false,
       openMenuModal: false,
       openPlaceModal: false,
-      time: "",
+      writeInfo: {
+        title: "",
+        content: "",
+        time: "",
+        people: "",
+        place: "연산 99동",
+      },
     };
   },
-  methods:{
-    // ...mapActions("shop", ["getShop"])
+  methods: {
+    ...mapMutations("post", ["setTCTP"]),
+    ...mapActions("post", ["writePost"]),
+    async write() {
+      this.setTCTP(this.writeInfo);
+      if (
+        this.writeInfo.title != "" &&
+        this.writeInfo.content != "" &&
+        this.writeInfo.time != "" &&
+        this.writeInfo.people != ""
+      ) {
+        await this.writePost();
+      } else {
+        alert("다시!");
+        return;
+      }
+    },
   },
   components: {
     NavBar,
@@ -83,9 +112,7 @@ export default {
     MenuModal,
     PlaceModal,
   },
-  mounted(){
-    // this.getShop()
-  }
+  mounted() {},
 };
 </script>
 
@@ -130,7 +157,7 @@ export default {
 .box1 {
   margin-left: 1rem;
   margin-top: 1.5rem;
-  width: 12rem;
+  width: 13rem;
 }
 
 .plus {
@@ -142,8 +169,9 @@ export default {
   text-align: center;
 }
 
-.sele{
-  
+.sele {
+  display: inline;
+  margin-left: 1rem;
 }
 
 .title {
@@ -198,6 +226,7 @@ textarea {
 }
 
 .btn2 {
+  cursor: pointer;
   width: 5rem;
   border: 1px solid #d0d0d0;
   float: right;

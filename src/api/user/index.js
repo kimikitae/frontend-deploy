@@ -49,7 +49,6 @@ export default {
   },
   async getUInfo() {
     const idx = store.state.user.uIdx
-    console.log(idx)
     const response = await fetch(`${server}/users/${idx}`, {
       method: 'GET',
       headers: {

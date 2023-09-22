@@ -10,15 +10,15 @@
             @keyup.enter="search(searchtext)"
             type="text"
             v-model="searchtext"
-            placeholder="메뉴를 입력하세요"
+            placeholder="가게 이름을 입력하세요"
             onfocus="this.placeholder = ''"
-            onblur="this.placeholder = '메뉴를 입력하세요'"
+            onblur="this.placeholder = '가게 이름을 입력하세요'"
           />
         </div>
 
         <div class="listbox">
           <template v-for="(shop, sindex) in shops" :key="sindex">
-            <div class="listitem">
+            <div class="listitem" @click="selectMenu(shop.idx)">
               <img src="../../assets/shopLogo.png" />
               <div class="fbox">
                 <div class="fline1">
@@ -40,17 +40,26 @@
         </div>
       </div>
     </main>
+    <MenuDetailModal
+      v-if="openMenuDetailModal"
+      @closeMenuDetailModal="openMenuDetailModal = false"
+      @setMenu="openMenuDetailModal = false;
+      this.$emit('closeMenuModal')
+      "
+    />
   </div>
 </template>
 
 <script>
+import MenuDetailModal from "./MenuDetailModal.vue";
 import StarRating from "vue-star-rating";
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 
 export default {
   name: "MenuModal",
   data() {
     return {
+      openMenuDetailModal: false,
       searchtext: "",
     };
   },
@@ -61,11 +70,16 @@ export default {
   },
   methods: {
     ...mapActions("shop", ["postShops"]),
+    ...mapMutations("shop", ["setIdx"]),
     search(menuName) {
       const data = {
         menuName: menuName,
       };
       this.postShops(data);
+    },
+    selectMenu(sidx) {
+      this.openMenuDetailModal = true;
+      this.setIdx(sidx);
     },
   },
   mounted() {
@@ -76,6 +90,7 @@ export default {
   },
   components: {
     StarRating,
+    MenuDetailModal,
   },
 };
 </script>
