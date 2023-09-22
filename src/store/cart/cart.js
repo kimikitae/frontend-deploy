@@ -1,5 +1,5 @@
 import api from '../../api/cart/index.js'
-// import router from '../../router/index.js'
+import router from '../../router/index.js'
 
 export default {
   namespaced: true,
@@ -26,6 +26,7 @@ export default {
         context.commit('setCartInfo', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -36,6 +37,7 @@ export default {
         await context.dispatch('getCartInfo')
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -46,6 +48,7 @@ export default {
         await context.dispatch('getCartInfo')
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }

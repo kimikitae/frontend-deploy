@@ -43,6 +43,7 @@ export default {
         context.commit('setShops', data.response.shops)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -53,6 +54,7 @@ export default {
         router.go(0)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -73,6 +75,7 @@ export default {
       if (data.success) {
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -83,6 +86,7 @@ export default {
         context.commit('setBrand', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -93,6 +97,7 @@ export default {
         router.go(0)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }

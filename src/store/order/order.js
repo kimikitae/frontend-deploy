@@ -1,5 +1,5 @@
 import api from '../../api/order/index.js'
-// import router from '../../router/index.js'
+import router from '../../router/index.js'
 
 export default {
   namespaced: true,
@@ -42,6 +42,7 @@ export default {
         console.log(context.state.orderInfo[0])
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -55,6 +56,7 @@ export default {
         await context.dispatch('getOrderInfo', info)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -65,6 +67,7 @@ export default {
         await context.commit('setOrder', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -75,6 +78,7 @@ export default {
         await context.commit('setIdx', data.response.orderIdx)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -85,6 +89,7 @@ export default {
         await context.commit('setPayInfo', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
