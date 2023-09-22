@@ -43,7 +43,7 @@
                   <template v-else>
                     <template v-for="(item, index) in menu.items" :key="index">
                       <span>{{ item.optionName }}</span>
-                      <span v-if="index < menu.items.length - 1">,&nbsp;</span>
+                      <span v-if="index < menu.items.length - 1">, &nbsp; </span>
                     </template>
                   </template>
                 </div>
@@ -70,26 +70,17 @@
 
             <div class="boxflex">
               <div class="flexch">
-                <span>
-                  공유 장소
-                </span>
+                <span> 공유 장소 </span>
 
-                <span>
-                  연산동
-                </span>
+                <span> 연산동 </span>
               </div>
 
               <div class="flexch">
-                <span>
-                  공유 시간
-                </span>
+                <span> 공유 시간 </span>
 
-                <span>
-                  17:30 분 
-                </span>
+                <span> 17:30 분 </span>
               </div>
             </div>
-
           </div>
 
           <div class="shad">
@@ -154,7 +145,12 @@ export default {
     UserModal,
   },
   mounted() {
-    this.getOrder();
+    if(this.viewStatus == 0){
+      this.getOrder();
+    } else if(this.viewStatus == 1){
+      this.getdsa();
+    }
+    
   },
 };
 </script>

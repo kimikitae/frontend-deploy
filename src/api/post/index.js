@@ -19,6 +19,7 @@ export default {
   },
   async getPost(info) {
     const tok = store.state.token.accessToken
+    console.log(info)
     const response = await fetch(`${server}/posts/${info.idx}`, {
       method: 'GET',
       headers: {

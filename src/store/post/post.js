@@ -56,10 +56,7 @@ export default {
         return false
       }
     },
-    async getPost(context) {
-      const info = {
-        idx: context.state.selectedIdx,
-      }
+    async getPost(context, info) {
       const data = await api.getPost(info)
       if (data.success) {
         await context.commit('setPost', data.response)

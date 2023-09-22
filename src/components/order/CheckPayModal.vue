@@ -8,9 +8,10 @@
             아래의 공유 정보가 맞나요?
           </div>
           <div class="desc">
-            연산동에서 공유하길 원해요.<br />
-            2명이 나누었으면 좋겠어요.<br />
-            17:30분쯤 주문했으면 좋겠어요.
+            {{ post.place + "에서 공유하길 원해요." }}<br />
+            {{ post.people + "명이 나누었으면 좋겠어요." }}<br />
+            {{ post.time + "쯤 주문했으면 좋겠어요." }}
+            
           </div>
         </div>
         <div class="flex">
@@ -23,7 +24,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from "vuex";
+import { mapState, mapActions, mapMutations } from "vuex";
 import router from "../../router";
 
 export default {
@@ -32,15 +33,28 @@ export default {
   data() {
     return {};
   },
+  computed:{
+    ...mapState("chat",{
+      postIdx: (state) => state.chat.postIdx,
+    }),
+    ...mapState("post",{
+      post: (state) => state.post,
+    })
+  },
   methods: {
     toPayView(){
       this.setViewStatus(1)
       router.push('/PayView')
     },
     ...mapMutations("order", ["setViewStatus"]),
-    ...mapActions("order", ["deleteOrder"]),
+    ...mapActions("post", ["getPost"]),
   },
-  components: {},
+  mounted(){
+    const info = {
+      idx: this.postIdx,
+    };
+    this.getPost(info);
+  }
 };
 </script>
 
