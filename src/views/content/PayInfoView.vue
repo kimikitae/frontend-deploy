@@ -10,108 +10,51 @@
 
           <div class="box1">
             <div class="shopImage">
-              <img src="../../assets/shopLogo.png" width="100%">
+              <img src="../../assets/shopLogo.png" />
             </div>
 
             <div class="shopInfo">
-              <div class="shopName"> 
-                굽네치킨 부산 안락점 
-              </div>
-              <div class="shopAddress">
-                부산광역시 동래구 안락동
-              </div>
+              <div class="shopName">{{ payInfo.shopName }}</div>
+              <div class="shopAddress">{{ payInfo.shopAddress }}</div>
             </div>
           </div>
+
           <div class="optionBox">
-            <!-- v-for -->
-            <div>
-              <div class="menuName">1. 고추바사삭</div>
-              <div class="price">21000원</div>
+            <template v-for="(menu, mindex) in payInfo.menus" :key="mindex">
+              <div class="menuName">{{ mindex + 1 + ". " + menu.menuName }}</div>
+              <div class="price">{{ menu.menuPrice + "원" }}</div>
               <div class="box3">옵션</div>
-              <!-- 옵션 리스트 v-for -->
-              <div>
+              <template v-for="(option, oindex) in menu.options" :key="oindex">
                 <div class="optionBox2">
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
+                  <div class="optionName">{{ option.optionName }}</div>
+                  <div class="optionPrice">{{ "+" + option.optionPrice + "원" }}</div>
                 </div>
-              </div>
-            </div>
-            <div>
-              <div class="menuName">1. 고추바사삭</div>
-              <div class="price">21000원</div>
-              <div class="box3">옵션</div>
-              <!-- 옵션 리스트 v-for -->
-              <div>
-                <div class="optionBox2">
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="menuName">1. 고추바사삭</div>
-              <div class="price">21000원</div>
-              <div class="box3">옵션</div>
-              <!-- 옵션 리스트 v-for -->
-              <div>
-                <div class="optionBox2">
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div class="menuName">1. 고추바사삭</div>
-              <div class="price">21000원</div>
-              <div class="box3">옵션</div>
-              <!-- 옵션 리스트 v-for -->
-              <div>
-                <div class="optionBox2">
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
-                  <div class="optionName">뼈치킨</div>
-                  <div class="optionPrice">+0원</div>
-                </div>
-              </div>
-            </div>
+              </template>
+            </template>
           </div>
+
           <div class="shareBox">
             <div class="line2">공유 참여자</div>
             <div class="share">
-              <div>
+              <template v-for="(person, pindex) in payInfo.peoples" :key="pindex">
                 <div class="sharePeopleBox">
                   <div class="imageBox">
-                    <img src="../../assets/userIcon.png" width="60rem" height="60rem">
+                    <img src="../../assets/userIcon.png" />
                   </div>
-                  <div class="nameBox">허은진님</div>
+                  <div class="nameBox">{{ person }}</div>
                 </div>
-                <div class="sharePeopleBox">
-                  <div class="imageBox">
-                    <img src="../../assets/userIcon.png" width="60rem" height="60rem">
-                  </div>
-                  <div class="nameBox">허은진님</div>
-                </div>
-                <div class="sharePeopleBox">
-                  <div class="imageBox">
-                    <img src="../../assets/userIcon.png" width="60rem" height="60rem">
-                  </div>
-                  <div class="nameBox">허은진님</div>
-                </div>
-              </div>
+              </template>
             </div>
           </div>
           <div class="payBtn" @click="openCheckPayModal = true">결제하기</div>
         </div>
+      </div>
     </div>
-  </div>
-  <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
-  <CheckPayModal v-if="openCheckPayModal" @closeCheckPayModal="openCheckPayModal = false"/>
+    <UserModal v-if="openUserModal" @closeUserModal="openUserModal = false" />
+    <CheckPayModal
+      v-if="openCheckPayModal"
+      @closeCheckPayModal="openCheckPayModal = false"
+    />
   </main>
 </template>
 
@@ -119,24 +62,31 @@
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import CheckPayModal from "../../components/order/CheckPayModal.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   name: "PayInfoView",
   data() {
     return {
       openUserModal: false,
-      openCheckPayModal: false
+      openCheckPayModal: false,
     };
   },
-  computed: {},
+  computed: {
+    ...mapState("order", {
+      payInfo: (state) => state.payInfo,
+    }),
+  },
   methods: {
-    ...mapActions("token", ["tryLogin"]),
+    ...mapActions("order", ["getPayInfo"]),
   },
   components: {
     NavBar,
     UserModal,
-    CheckPayModal
+    CheckPayModal,
+  },
+  mounted() {
+    this.getPayInfo();
   },
 };
 </script>
@@ -159,7 +109,7 @@ export default {
 }
 
 .item {
-  width: 62rem;
+  width: 58.15rem;
   margin: 0 auto;
   margin-top: 3rem;
 }
@@ -183,10 +133,13 @@ export default {
   height: 6rem;
   float: left;
 }
+.shopImage > img{
+  width: 100%;
+}
 
 .shopInfo {
   margin-top: 1rem;
-  margin-left: 1rem;  
+  margin-left: 1rem;
   width: 20rem;
   height: 6rem;
   float: left;
@@ -206,12 +159,12 @@ export default {
   width: 58.15rem;
   height: 30rem;
   overflow-y: scroll;
-  border-top: 1px solid #D0D0D0;
-  border-bottom: 1px solid #D0D0D0;
+  border-top: 1px solid #d0d0d0;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 .optionBox::-webkit-scrollbar {
-    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
 
 .box2 {
@@ -238,7 +191,7 @@ export default {
   padding-left: 17rem;
   padding-top: 1rem;
   height: 2rem;
-  border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
   float: left;
 }
 
@@ -260,7 +213,7 @@ export default {
 }
 
 .optionBox2 {
-  border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
   float: left;
   width: 58rem;
 }
@@ -272,7 +225,7 @@ export default {
 }
 
 .share {
-  border: 1px solid #D0D0D0;
+  border: 1px solid #d0d0d0;
   height: 10rem;
   width: 58rem;
   overflow-y: scroll;
@@ -280,7 +233,7 @@ export default {
 }
 
 .share::-webkit-scrollbar {
-    display: none; /* 크롬, 사파리, 오페라, 엣지 */
+  display: none; /* 크롬, 사파리, 오페라, 엣지 */
 }
 
 .sharePeopleBox {
@@ -289,16 +242,19 @@ export default {
 }
 
 .imageBox {
-  width: 20%;
   margin-left: 0.5rem;
   margin-top: 0.5rem;
   float: left;
+}
+.imageBox > img {
+  width: 60px;
+  height: 60px;
 }
 
 .nameBox {
   width: 60%;
   font-size: 1.2rem;
-  margin-left: 0.1rem;
+  margin-left: 3rem;
   margin-top: 1.5rem;
   float: left;
 }
@@ -307,13 +263,13 @@ export default {
   width: 58.15rem;
   margin-top: 5rem;
   height: 3rem;
-  border: 1px solid #D0D0D0;
-  background-color: #FFF5D1;
+  border: 1px solid #d0d0d0;
+  background-color: #fff5d1;
   text-align: center;
   padding-top: 1rem;
   font-size: 1.5rem;
   font-weight: bold;
-  position: fixed;;
+  position: fixed;
   bottom: 0;
   cursor: pointer;
 }

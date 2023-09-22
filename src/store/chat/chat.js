@@ -6,9 +6,7 @@ export default {
 
   state: {
     chats: [],
-    chat:{
-
-    }
+    chat:{}
   },
   getters: {},
   mutations: {
