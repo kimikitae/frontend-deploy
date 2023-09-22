@@ -52,6 +52,7 @@ export default {
         await context.commit('setPosts', data.response.posts)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -62,6 +63,7 @@ export default {
         await context.commit('setPost', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -72,6 +74,7 @@ export default {
         await context.commit('setPosts', data.response.posts)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -82,6 +85,7 @@ export default {
         await context.commit('setNotices', data.response.notices)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }

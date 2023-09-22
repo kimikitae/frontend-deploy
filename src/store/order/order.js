@@ -69,6 +69,16 @@ export default {
         return false
       }
     },
+    async getSave(context) {
+      const data = await api.getSave()
+      if (data.success) {
+        await context.commit('setIdx', data.response.orderIdx)
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
     async getPayInfo(context) {
       const data = await api.getPayInfo()
       if (data.success) {
