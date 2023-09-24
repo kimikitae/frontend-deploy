@@ -2,7 +2,9 @@
   <main>
     <div class="frame">
       <div class="content">
-        <div class="win"><img src="../../assets/content_1.png" style="width: 24rem; height: 16rem;"></div>
+        <div class="win">
+          <img src="../../assets/content_1.png" style="width: 24rem; height: 16rem" />
+        </div>
         <div class="ment">
           <div class="aa">
             &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;최소 주문 금액<br />
@@ -14,41 +16,41 @@
       <div class="content">
         <div class="ment">
           <div class="aa">
-            음식이 너무 많이 남아서 <br/>
+            음식이 너무 많이 남아서 <br />
             곤란하셨나요?
           </div>
         </div>
-        <div class="win"><img src="../../assets/content_2.png" style="width: 24rem; height: 16rem;"></div>
+        <div class="win">
+          <img src="../../assets/content_2.png" style="width: 24rem; height: 16rem" />
+        </div>
       </div>
 
       <div class="content1">
-        <div class="center">
-            용기 나눔은 이런 고객님들께<br/>
-            추천드려요.
+        <div class="center1">
+          용기 나눔은 이런 고객님들께<br />
+          추천드려요.
         </div>
       </div>
 
       <div class="content2">
-        <div class="center1">
-            최소 주문 금액이 부담스러우신 고객님<br/><br/>
+        <div class="center2">
+          최소 주문 금액이 부담스러우신 고객님<br /><br />
 
-            배달 음식이 많이 남아 처리가 곤란하신 고객님<br/><br/>
+          배달 음식이 많이 남아 처리가 곤란하신 고객님<br /><br />
 
-            영업 종료 후 음식이 많이 남으신 가게 사장님
+          영업 종료 후 음식이 많이 남으신 가게 사장님
         </div>
       </div>
 
       <div class="content3">
-        <div class="center2">
-            용기나눔에서<br/>
-            모두 해결하세요
+        <div class="center3">
+          용기나눔에서<br />
+          모두 해결하세요
         </div>
       </div>
     </div>
   </main>
 </template>
-
-
 
 <script>
 export default {
@@ -63,7 +65,7 @@ export default {
 
 <style scoped>
 .frame {
-  background-color: #E9E9E9;
+  background-color: #e9e9e9;
   position: relative;
   width: calc(100% - 1rem);
   margin-left: 0.5rem;
@@ -78,21 +80,23 @@ export default {
   display: flex;
   justify-content: center;
 }
-.content1{
-  margin-top: 9rem;
+.content1 {
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 100vh;
 }
-.content2{
-  margin-top: 5rem;
+.content2 {
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 100vh;
 }
-.content3{
-  margin-top: 10rem;
-  padding-bottom: 16rem;
+.content3 {
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 .win {
   margin: 2rem 3rem;
@@ -116,15 +120,15 @@ export default {
   display: table-cell;
   vertical-align: middle;
 }
-.center{
+.center1 {
   font-size: 2rem;
   text-align: center;
 }
-.center1{
+.center2 {
   font-size: 1.4rem;
   text-align: center;
 }
-.center2{
+.center3 {
   font-size: 2.2rem;
   text-align: center;
 }
