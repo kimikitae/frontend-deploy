@@ -30,7 +30,7 @@
                 <hr />
                 <div class="content" @click="toOrderList('cancel')">주문 취소 목록</div>
                 <hr />
-                <div class="content" >내 주소 관리</div>
+                <div class="content" @click="openPlaceModal = true">내 주소 관리</div>
               </div>
             </template>
             <template v-else-if="userInfo.role == 'SHOPPER'">
@@ -111,6 +111,10 @@
       v-if="opneShopRegistModal"
       @closeShopRegistModal="opneShopRegistModal = false"
     />
+    <PlaceModal
+      v-if="openPlaceModal"
+      @closePlaceModal="openPlaceModal = false"
+    />
   </main>
 </template>
 
@@ -120,6 +124,7 @@ import UserModal from "../../components/common/UserModal.vue";
 import UserEditModal from "../../components/user/UserEditModal.vue";
 import ShopEditModal from "../../components/shop/ShopEditModal.vue";
 import ShopRegistModal from "../../components/shop/ShopRegistModal.vue";
+import PlaceModal from "../../components/user/PlaceModal.vue";
 import { mapActions, mapState, mapMutations } from "vuex";
 import router from "../../router";
 
@@ -127,6 +132,7 @@ export default {
   name: "InfoView",
   data() {
     return {
+      openPlaceModal: false,
       openUserModal: false,
       openUserEditModal: false,
       openShopEditModal: false,
@@ -161,6 +167,7 @@ export default {
     UserEditModal,
     ShopEditModal,
     ShopRegistModal,
+    PlaceModal,
   },
   mounted() {
     

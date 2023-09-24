@@ -27,7 +27,8 @@ export default {
     uIdx: null,
     yourInfo:{
 
-    }
+    },
+    addresses:[]
   },
   getters: {},
   mutations: {
@@ -43,6 +44,9 @@ export default {
     setYourInfo(state, yourInfo) {
       state.yourInfo = yourInfo
     },
+    setAddress(state, addresses){
+      state.addresses = addresses
+    }
   },
   actions: {
     async getInfo(context, info) {
@@ -75,6 +79,27 @@ export default {
       } else {
         router.push('/')
         alert(data.error.status, data.error.message)
+        return false
+      }
+    },
+    async getAddress(context) {
+      const data = await api.getAddress()
+      if (data.success) {
+        await context.commit('setAddress', data.response.addresses)
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status, data.error.message)
+        return false
+      }
+    },
+    async addAddress(context, info) {
+      const data = await api.postAddress(info)
+      if (data.success) {
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status + data.error.message)
         return false
       }
     },

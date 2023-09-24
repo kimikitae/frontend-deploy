@@ -201,8 +201,6 @@ export default {
 
         },
       }).open();
-
-      console.log(this.writeInfo)
     },
   },
   components: {

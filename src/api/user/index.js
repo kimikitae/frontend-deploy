@@ -72,4 +72,29 @@ export default {
     const data = await response.json()
     return data
   },
+  async getAddress() {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/users/address`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      }
+    })
+    const data = await response.json()
+    return data
+  },
+  async postAddress(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/users/address/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': tok
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
 }
