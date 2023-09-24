@@ -2,7 +2,7 @@
   <main>
     <div class="frame">
       <div class="content">
-        <div class="win">사진</div>
+        <div class="win"><img src="../../assets/content_1.png" style="width: 24rem; height: 16rem;"></div>
         <div class="ment">
           <div class="aa">
             &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;최소 주문 금액<br />
@@ -18,7 +18,7 @@
             곤란하셨나요?
           </div>
         </div>
-        <div class="win">사진</div>
+        <div class="win"><img src="../../assets/content_2.png" style="width: 24rem; height: 16rem;"></div>
       </div>
 
       <div class="content1">
@@ -63,6 +63,7 @@ export default {
 
 <style scoped>
 .frame {
+  background-color: #E9E9E9;
   position: relative;
   width: calc(100% - 1rem);
   margin-left: 0.5rem;
@@ -101,7 +102,6 @@ export default {
   background-color: white;
   border-radius: 1.5rem;
   border: none;
-  box-shadow: 2px 2px 10px 4px #43434324;
 }
 .ment {
   display: table;
@@ -111,6 +111,7 @@ export default {
   height: 16rem;
 }
 .aa {
+  font-size: 2rem;
   display: table-cell;
   vertical-align: middle;
 }
