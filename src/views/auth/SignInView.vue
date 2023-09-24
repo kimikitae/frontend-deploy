@@ -17,6 +17,8 @@
       <span> | </span>
       <a href="/SignUpView">회원가입</a>
     </div>
+    <div class="kakao" @click=""> 카카오로 로그인
+    </div>
   </main>
 </template>
 
@@ -113,5 +115,15 @@ button {
 a {
   text-decoration: none;
   color: black;
+}
+
+.kakao {
+  width: 20rem;
+  height: 3rem;
+  border: 1px solid #D9D9D9;
+  margin-left: 38rem;
+  margin-top: 2rem;
+  border-radius: 5px;
+  background-color: #F7E600;
 }
 </style>
