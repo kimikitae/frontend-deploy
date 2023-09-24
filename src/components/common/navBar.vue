@@ -1,8 +1,7 @@
 <template>
   <main>
     <div class="frame">
-      <img class="logo" src="../../assets/appLogo.png" @click="toMain" />
-      <span class="title" @click="toMain">용기나눔</span>
+      <img class="logo" src="../../assets/appLogo.jpeg" @click="toMain" />
       <span class="menu" @click="this.$router.push('/ShareView')">공유</span>
       <span class="menu">동네이야기</span>
       <span class="menu">더보기</span>
@@ -69,7 +68,9 @@ export default {
 .logo {
   position: relative;
   left: 0.5rem;
-  width: 3rem;
+  padding-top: 0.5rem;
+  width: 9rem;
+  height: 2rem;
   cursor: pointer;
 }
 
@@ -83,7 +84,7 @@ export default {
 .menu {
   font-size: 1.2rem;
   margin-left: 2rem;
-  vertical-align: 50%;
+  vertical-align: 40%;
   cursor: pointer;
 }
 .right {

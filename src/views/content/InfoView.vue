@@ -30,7 +30,7 @@
                 <hr />
                 <div class="content" @click="toOrderList('cancel')">주문 취소 목록</div>
                 <hr />
-                <div class="content">내 주소 관리</div>
+                <div class="content" >내 주소 관리</div>
               </div>
             </template>
             <template v-else-if="userInfo.role == 'SHOPPER'">
