@@ -22,7 +22,7 @@ export default {
       router.push('/PayInfoView')
     },
     exit() {
-      this.$emit("closeChatModal");
+      this.$emit("deleteChatModal");
       router.push("/ShareView");
     },
     ...mapMutations("token", ["setToken"]),

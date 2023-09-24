@@ -40,6 +40,17 @@ export default {
         return false
       }
     },
+    async deleteChat(context, info) {
+      const data = await api.deleteChat(info)
+      if (data.success) {
+        router.go(0)
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
     
 
 

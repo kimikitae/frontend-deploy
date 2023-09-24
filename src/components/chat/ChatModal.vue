@@ -1,5 +1,5 @@
 <template>
-  <div class="zidx">
+  <div class="zidx" @click="this.$emit('closeChatModal')">
     <main>
       <div class="modalframe">
         <img
@@ -27,7 +27,7 @@
             </template>
           </div>
 
-          <template v-if="seletedRoom">
+          <template v-if="selectedRoom">
             <div class="chatbox">
               <template v-for="(message, cindex) in chat.messages" :key="cindex">
                 <div
@@ -115,6 +115,7 @@
         v-if="openChatMenuModal"
         @closeChatMenuModal="openChatMenuModal = false"
         @closeChatModal="this.$emit('closeChatModal'); this.disconnect()"
+        @deleteChatModal="delChat"
       />
     </main>
   </div>
@@ -134,7 +135,7 @@ export default {
       recvList: [],
       openChatMenuModal: false,
       searchtext: "",
-      seletedRoom: 0,
+      selectedRoom: 0,
       subscription: {},
     };
   },
@@ -148,16 +149,16 @@ export default {
     }),
   },
   methods: {
-    ...mapActions("chat", ["getChatRooms", "getChatRoom"]),
+    ...mapActions("chat", ["getChatRooms", "getChatRoom", "deleteChat"]),
     async inRoom(idx) {
       this.getChatRooms();
-      const prev = this.seletedRoom;
+      const prev = this.selectedRoom;
       if (prev != 0) {
         this.disconnect();
       }
-      this.seletedRoom = idx;
+      this.selectedRoom = idx;
       const data = {
-        idx: this.seletedRoom,
+        idx: this.selectedRoom,
       };
       this.getChatRoom(data);
       if (prev != idx) {
@@ -172,6 +173,14 @@ export default {
         this.message = "";
       }
     },
+    delChat(){
+      this.disconnect()
+      const info = {
+        selectedRoom: this.selectedRoom
+      }
+      this.deleteChat(info)
+      this.$emit('closeChatModal');
+    },
     send() {
       console.log("Send message:" + this.message);
       if (this.stompClient && this.stompClient.connected) {
@@ -179,7 +188,7 @@ export default {
           userName: this.userInfo.userName,
           content: this.message,
         };
-        const s = "/send/" + this.seletedRoom;
+        const s = "/send/" + this.selectedRoom;
         this.stompClient.send(s, JSON.stringify(msg), {});
       }
     },
@@ -197,7 +206,7 @@ export default {
           console.log("소켓 연결 성공", frame);
           // 서버의 메시지 전송 endpoint를 구독합니다.
           // 이런형태를 pub sub 구조라고 합니다.
-          const s = "/chats/" + this.seletedRoom;
+          const s = "/chats/" + this.selectedRoom;
           this.subscription = this.stompClient.subscribe(s, (res) => {
             // console.log("구독으로 받은 메시지 입니다.", res.body);
             // 받은 데이터를 json으로 파싱하고 리스트에 넣어줍니다.
@@ -216,7 +225,7 @@ export default {
       );
     },
     async disconnect() {
-      const s = "/send/" + this.seletedRoom;
+      const s = "/send/" + this.selectedRoom;
       this.recvList = [];
       console.log("구독 종료할게요:" + s);
       await this.subscription.unsubscribe();

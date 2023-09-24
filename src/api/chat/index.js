@@ -29,7 +29,19 @@ export default {
     const data = await response.json()
     return data
   },
-
+  async deleteChat(info) {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/chats/${info.selectedRoom}/delete`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+  
 
 
 

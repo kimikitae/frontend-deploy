@@ -111,6 +111,7 @@ export default {
   height: 16rem;
 }
 .aa {
+  background-color: aqua;
   font-size: 2rem;
   display: table-cell;
   vertical-align: middle;
