@@ -99,7 +99,7 @@
                       <div class="sname">
                         {{ post.shopName }}
                       </div>
-                      <div class="sshop" @click="toShopInfo(post.idx)">가게 살펴보기</div>
+                      <div class="sshop" @click="toShopInfo(post.shopIdx)">가게 살펴보기</div>
                     </div>
 
                     <div>
@@ -135,21 +135,22 @@ export default {
   computed: {
     ...mapState("post", {
       post: (state) => state.post,
+      selectedIdx: (state) => state.selectedIdx
     }),
     ...mapState("user", {
       userInfo: (state) => state.userInfo,
     }),
   },
   methods: {
-    toInfoView(aidx){
-      if(aidx != this.userInfo.idx){
-        this.setUIdx(aidx)
+    toInfoView(aidx) {
+      if (aidx != this.userInfo.idx) {
+        this.setUIdx(aidx);
         this.getUInfo();
       }
       this.$router.push("/InfoView");
     },
     toShopInfo(idx) {
-      this.setIdx(idx)
+      this.setIdx(idx);
       this.$router.push("/ShopInfoView");
     },
     ...mapActions("user", ["getUInfo"]),
@@ -177,7 +178,10 @@ export default {
     UserModal,
   },
   mounted() {
-    this.getPost();
+    const info = {
+      idx: this.selectedIdx,
+    };
+    this.getPost(info);
   },
 };
 </script>

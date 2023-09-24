@@ -6,9 +6,7 @@ export default {
 
   state: {
     chats: [],
-    chat:{
-
-    }
+    chat:{}
   },
   getters: {},
   mutations: {
@@ -26,6 +24,7 @@ export default {
         await context.commit('setChats', data.response.chats)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -36,6 +35,7 @@ export default {
         await context.commit('setChat', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }

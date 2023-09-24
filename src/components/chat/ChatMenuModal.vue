@@ -18,6 +18,7 @@ export default {
   name: "ChatMenuModal",
   methods: {
     async toPay() {
+      this.$emit("closeChatModal");
       router.push('/PayInfoView')
     },
     exit() {

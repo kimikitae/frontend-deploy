@@ -53,4 +53,32 @@ export default {
     const data = await response.json()
     return data
   },
+  async getSave() {
+    const tok = store.state.token.accessToken
+    const response = await fetch(`${server}/orders/save`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+    })
+    const data = await response.json()
+    return data
+  },
+  async getPayInfo() {
+    const tok = store.state.token.accessToken
+    const info = { 
+      postIdx: store.state.chat.chat.postIdx
+    }
+    const response = await fetch(`${server}/orders/info`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: tok,
+      },
+      body: JSON.stringify(info),
+    })
+    const data = await response.json()
+    return data
+  },
 }

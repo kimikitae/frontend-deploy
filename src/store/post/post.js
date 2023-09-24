@@ -52,19 +52,18 @@ export default {
         await context.commit('setPosts', data.response.posts)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
     },
-    async getPost(context) {
-      const info = {
-        idx: context.state.selectedIdx,
-      }
+    async getPost(context, info) {
       const data = await api.getPost(info)
       if (data.success) {
         await context.commit('setPost', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -75,6 +74,7 @@ export default {
         await context.commit('setPosts', data.response.posts)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -85,6 +85,7 @@ export default {
         await context.commit('setNotices', data.response.notices)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -105,6 +106,7 @@ export default {
         router.push('/ShareView')
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }

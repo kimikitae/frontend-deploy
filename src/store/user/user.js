@@ -1,5 +1,5 @@
 import api from '../../api/user/index.js'
-// import router from '../../router/index.js'
+import router from '../../router/index.js'
 
 export default {
   namespaced: true,
@@ -51,6 +51,7 @@ export default {
         await context.commit('setUserInfo', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status, data.error.message)
         return false
       }
@@ -61,6 +62,7 @@ export default {
         await context.commit('setYourInfo', data.response)
         return true
       } else {
+        router.push('/')
         alert(data.error.status, data.error.message)
         return false
       }
@@ -71,6 +73,7 @@ export default {
         await context.commit('setUserNickname', info.newNickname)
         return true
       } else {
+        router.push('/')
         alert(data.error.status, data.error.message)
         return false
       }

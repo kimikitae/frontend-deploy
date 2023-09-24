@@ -1,5 +1,5 @@
 import api from '../../api/order/index.js'
-// import router from '../../router/index.js'
+import router from '../../router/index.js'
 
 export default {
   namespaced: true,
@@ -7,8 +7,9 @@ export default {
   state: {
     orderInfo: [],
     selectedIdx: 0,
-    order:{ },
-    viewStatus: 0,  
+    order: {},
+    viewStatus: 0,
+    payInfo: {},
   },
   getters: {},
   mutations: {
@@ -18,12 +19,15 @@ export default {
     setOrder(state, order) {
       state.order = order
     },
-    setIdx(state, selectedIdx){
+    setIdx(state, selectedIdx) {
       state.selectedIdx = selectedIdx
     },
-    setViewStatus(state, viewStatus){
+    setViewStatus(state, viewStatus) {
       state.viewStatus = viewStatus
-    }
+    },
+    setPayInfo(state, payInfo) {
+      state.payInfo = payInfo
+    },
   },
   actions: {
     async getOrderInfo(context, info) {
@@ -38,6 +42,7 @@ export default {
         console.log(context.state.orderInfo[0])
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -46,11 +51,12 @@ export default {
       const data = await api.deleteOrder(info)
       if (data.success) {
         const info = {
-          stats: 'ing'
+          stats: 'ing',
         }
         await context.dispatch('getOrderInfo', info)
         return true
       } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
@@ -61,6 +67,29 @@ export default {
         await context.commit('setOrder', data.response)
         return true
       } else {
+        router.push('/')
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+    async getSave(context) {
+      const data = await api.getSave()
+      if (data.success) {
+        await context.commit('setIdx', data.response.orderIdx)
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
+    async getPayInfo(context) {
+      const data = await api.getPayInfo()
+      if (data.success) {
+        await context.commit('setPayInfo', data.response)
+        return true
+      } else {
+        router.push('/')
         alert(data.error.status + data.error.message)
         return false
       }
