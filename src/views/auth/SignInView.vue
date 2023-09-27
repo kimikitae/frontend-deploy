@@ -17,7 +17,7 @@
       <span> | </span>
       <a href="/SignUpView">회원가입</a>
     </div>
-    <div class="kakao" @click=""> 카카오로 로그인
+    <div class="kakao" @click="getTest"> 카카오로 로그인
     </div>
   </main>
 </template>
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     ...mapActions('token', ['tryLogin']),
-    ...mapActions('user', ['getInfo']),
+    ...mapActions('user', ['getInfo', 'getTest']),
     chk_null(cmp) { // 비어있는지 체크하는 함수
       if (cmp.trim().length == 0) { return true }
       return false

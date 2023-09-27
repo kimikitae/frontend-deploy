@@ -103,5 +103,17 @@ export default {
         return false
       }
     },
+    async getTest() {
+      const data = await api.getTest()
+      if (data.success) {
+        console.log(data)
+        // await context.commit('setAddress', data.response.addresses)
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status, data.error.message)
+        return false
+      }
+    },
   },
 }

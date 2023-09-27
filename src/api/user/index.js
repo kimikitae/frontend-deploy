@@ -97,4 +97,16 @@ export default {
     const data = await response.json()
     return data
   },
+
+  
+  async getTest() {
+    const response = await fetch(`${server}/login/kakao`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    const data = await response.json()
+    return data
+  },
 }
