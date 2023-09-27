@@ -19,6 +19,7 @@
     </div>
     <div class="kakao" @click="getTest"> 카카오로 로그인
     </div>
+    
   </main>
 </template>
 
