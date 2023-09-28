@@ -106,8 +106,8 @@ export default {
     async getTest() {
       const data = await api.getTest()
       if (data.success) {
-        console.log(data)
-        // await context.commit('setAddress', data.response.addresses)
+        console.log(data.response.kakaoUri)
+        window.location.href = data.response.kakaoUri;
         return true
       } else {
         router.push('/')
