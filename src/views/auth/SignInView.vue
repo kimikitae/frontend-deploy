@@ -17,9 +17,8 @@
       <span> | </span>
       <a href="/SignUpView">회원가입</a>
     </div>
-    <div class="kakao" @click="getTest"> 카카오로 로그인
-    </div>
-    
+    <img class="kakao" src="../../assets/kakao_login_medium_wide.png" @click="getTest">
+
   </main>
 </template>
 
@@ -119,12 +118,16 @@ a {
 }
 
 .kakao {
-  width: 20rem;
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 1rem;
+  /* width: 20rem;
   height: 3rem;
   border: 1px solid #D9D9D9;
   margin-left: 38rem;
   margin-top: 2rem;
   border-radius: 5px;
-  background-color: #F7E600;
+  background-color: #F7E600; */
 }
 </style>
