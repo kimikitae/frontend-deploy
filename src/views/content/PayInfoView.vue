@@ -272,5 +272,6 @@ export default {
   position: fixed;
   bottom: 0;
   cursor: pointer;
+  z-index: 2;
 }
 </style>

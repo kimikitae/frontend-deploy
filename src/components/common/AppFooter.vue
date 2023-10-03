@@ -31,6 +31,7 @@ export default {
   background-color: #fff5d1;
   padding: 2rem 18rem;
   height: 25vh;
+  margin-top: 2rem;
 }
 div {
   font-size: 0.7rem;

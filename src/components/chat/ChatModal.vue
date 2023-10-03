@@ -1,5 +1,7 @@
 <template>
-  <div class="zidx" @click="this.$emit('closeChatModal')">
+  <div class="zdx" @click="this.$emit('closeChatModal')">
+  </div>
+  <div class="zidx">
     <main>
       <div class="modalframe">
         <img
@@ -241,18 +243,28 @@ export default {
 </script>
 
 <style scoped>
+.zdx{
+  position: fixed;
+  top: 0;
+  z-index: 120;
+  height: 100vh;
+  width: 100vw;
+  backdrop-filter: blur(3px);
+}
 .zidx {
   position: fixed;
+  z-index: 200;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  z-index: 110;
-  backdrop-filter: blur(3px);
+  width: 58rem;
+  height: 90%;
+  margin: 0 auto;
+  margin-top: 2%;
 }
 
 .zidx > main {
-  z-index: 200;
   display: block;
   margin: 0 auto;
   margin-top: 2%;

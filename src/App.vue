@@ -1,15 +1,18 @@
 <script setup>
 import { RouterView } from "vue-router";
+import AppFooter from "./components/common/AppFooter.vue";
 </script>
 
 <template>
-  <RouterView id="all" @orderInfo="orderInfo" :stats="stats"/>
-  <AppFooter class="foot"/>
+  <div id="wrapper">
+    <RouterView id="all" @orderInfo="orderInfo" :stats="stats" />
+  </div>
+  <footer>
+    <AppFooter class="foot" />
+  </footer>
 </template>
 
 <script>
-import AppFooter from "./components/common/AppFooter.vue"
-
 export default {
   data() {
     return {
@@ -17,19 +20,31 @@ export default {
       isBackgroundBlue: true,
     };
   },
-  methods:{
-    orderInfo(stats){
-      this.stats = stats
-    }
+  methods: {
+    orderInfo(stats) {
+      this.stats = stats;
+    },
   },
-  components:{
-    AppFooter
-  }
+  components: {
+    AppFooter,
+  },
 };
 </script>
 
 <style scoped>
-.foot{
+#wrapper {
+  height: auto;
+  min-height: 100%;
+  padding-bottom: 25vh;
+}
+
+footer {
+  z-index: 1;
+  height: 25vh;
+  position : relative;
+  transform : translateY(-100%);
+}
+.foot {
   font-family: Arial, sans-serif;
 }
 #all {
