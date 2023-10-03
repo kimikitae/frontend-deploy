@@ -163,6 +163,7 @@ input::placeholder {
 }
 
 button {
+  cursor: pointer;
   font-size: 1.5rem;
   padding: 0.4rem 3rem;
   display: block;
