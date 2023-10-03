@@ -4,21 +4,12 @@ import { RouterView } from "vue-router";
 
 <template>
   <RouterView id="all" @orderInfo="orderInfo" :stats="stats"/>
-  <!-- <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header> -->
+  <AppFooter class="foot"/>
 </template>
 
 <script>
+import AppFooter from "./components/common/AppFooter.vue"
+
 export default {
   data() {
     return {
@@ -30,11 +21,17 @@ export default {
     orderInfo(stats){
       this.stats = stats
     }
+  },
+  components:{
+    AppFooter
   }
 };
 </script>
 
 <style scoped>
+.foot{
+  font-family: Arial, sans-serif;
+}
 #all {
   width: 100%;
   height: 100%;
