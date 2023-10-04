@@ -32,7 +32,7 @@
     <img
       class="kakao"
       src="../../assets/kakao_login_medium_wide.png"
-      @click="kakaoLogin()"
+      @click="getTest"
     />
   </main>
 </template>
