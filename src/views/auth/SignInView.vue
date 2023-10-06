@@ -32,7 +32,7 @@
     <img
       class="kakao"
       src="../../assets/kakao_login_medium_wide.png"
-      @click="kakaoLogin"
+      @click="getTest"
     />
   </main>
 </template>
@@ -91,12 +91,12 @@ export default {
       this.loginId = null;
       this.loginPassword = null;
     },
-    kakaoLogin() {
-      console.log(window.Kakao);
-      window.Kakao.Auth.authorize({
-        redirectUri: "https://kauth.kakao.com/oauth/authorize?client_id=e3743c41d0df1be9ef7bdc6790434cde&redirect_uri=http://localhost:8088/redirect&response_type=code",
-      });
-    },
+    // kakaoLogin() {
+    //   console.log(window.Kakao);
+    //   window.Kakao.Auth.authorize({
+    //     redirectUri: "https://kauth.kakao.com/oauth/authorize?client_id=e3743c41d0df1be9ef7bdc6790434cde&redirect_uri=http://localhost:8088/redirect&response_type=code",
+    //   });
+    // },
   },
 };
 </script>
