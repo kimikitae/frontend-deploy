@@ -15,7 +15,7 @@ export default {
         }
     },
     methods:{
-        ...mapActions("user", ["postTest"])
+        ...mapActions("token", ["postTest"])
     },
     async created(){
         this.code = this.$route.query.code
@@ -24,6 +24,6 @@ export default {
         }
         await this.postTest(info)
     }
-    
+
 }
 </script>

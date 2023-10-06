@@ -38,6 +38,18 @@ export default {
       }
       alert(data.error.status, data.error.message)
       return false
-    }
+    },
+    async postTest(context, info) {
+      const data = await api.postTest(info)
+      if (data.success) {
+        await context.commit('setToken', data.token)
+        router.push('/')
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status, data.error.message)
+        return false
+      }
+    },
   },
 }
