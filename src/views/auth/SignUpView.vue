@@ -2,7 +2,7 @@
 
 <template>
   <main>
-    <img class="logo" src="../../assets/appLogo.jpeg" />
+    <img class="logo" src="../../assets/appLogo.jpeg" @click="this.$router.push('/')"/>
 
     <div class="tbox">
       <div
@@ -93,6 +93,7 @@ export default {
   margin: 0 auto;
   margin-top: 7rem;
   display: block;
+  cursor: pointer;
 }
 
 .tbox {

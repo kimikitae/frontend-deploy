@@ -1,6 +1,6 @@
 <template>
   <main>
-    <img class="logo" src="../../assets/appLogo.jpeg" />
+    <img class="logo" src="../../assets/appLogo.jpeg" @click="this.$router.push('/')"/>
     <div class="inpbox">
       <div class="input0">
         <img class="iimg" src="../../assets/user.png" />
@@ -32,7 +32,7 @@
     <img
       class="kakao"
       src="../../assets/kakao_login_medium_wide.png"
-      @click="getTest"
+      @click="kakaoLogin"
     />
   </main>
 </template>
@@ -94,7 +94,7 @@ export default {
     kakaoLogin() {
       console.log(window.Kakao);
       window.Kakao.Auth.authorize({
-        redirectUri: "localhost:8088/SignInView",
+        redirectUri: "https://kauth.kakao.com/oauth/authorize?client_id=e3743c41d0df1be9ef7bdc6790434cde&redirect_uri=http://localhost:8088/redirect&response_type=code",
       });
     },
   },
@@ -107,6 +107,7 @@ export default {
   margin: 0 auto;
   margin-top: 7rem;
   display: block;
+  cursor: pointer;
 }
 .inpbox {
   margin: 0 auto;

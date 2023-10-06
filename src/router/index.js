@@ -12,6 +12,7 @@ import PostView from '../views/content/PostView.vue'
 import WriteView from '../views/content/WriteView.vue'
 import PayInfoView from '../views/content/PayInfoView.vue'
 import ShopInfoView from '../views/content/ShopInfoView.vue'
+import RedirectPage from '../components/common/RedirectPage.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -94,6 +95,11 @@ const router = createRouter({
       path: '/ShopInfoView',
       name: 'ShopInfoView',
       component: ShopInfoView
+    },
+    {
+      path: '/redirect',
+      name: 'RedirectPage',
+      component: RedirectPage
     },
   ]
 })

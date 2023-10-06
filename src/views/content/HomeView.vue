@@ -21,11 +21,16 @@ export default {
   data() {
     return {
         openUserModal: false,
+        code: ""
     };
   },
   computed: {},
   methods: {
     ...mapActions("token", ["tryLogin"]),
+  },
+  created(){
+    this.code = this.$route.query.code
+    console.log(this.code);
   },
   components: {
     NavBar,
