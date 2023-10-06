@@ -115,7 +115,7 @@ export default {
         return false
       }
     },
-    async postTest(info) {
+    async postTest(context, info) {
       const data = await api.postTest(info)
       if (data.success) {
         console.log(data)
