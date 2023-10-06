@@ -110,7 +110,6 @@ export default {
     return data
   },
   async postTest(info) {
-    console.log(info)
     const response = await fetch(`${server}/login/kakao/check`, {
       method: 'POST',
       headers: {
