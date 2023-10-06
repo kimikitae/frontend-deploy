@@ -116,7 +116,7 @@ export default {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(info)
+      body: info.code
     })
     const data = await response.json()
     return data
