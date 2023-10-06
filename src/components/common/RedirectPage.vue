@@ -15,14 +15,20 @@ export default {
         }
     },
     methods:{
-        ...mapActions("token", ["postTest"])
+        ...mapActions("token", ["postTest"]),
+        ...mapActions("user", ["getInfo"])
     },
     async created(){
         this.code = this.$route.query.code
         const info = { 
             code: this.code
         }
-        await this.postTest(info)
+        const t = await this.postTest(info)
+        if(t){
+            await this.getInfo()
+        } else{
+            alert("카카오 로긴 실패요~")
+        }
     }
 
 }
