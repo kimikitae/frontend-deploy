@@ -24,5 +24,6 @@ export default {
         }
         await this.postTest(info)
     }
+    
 }
 </script>
