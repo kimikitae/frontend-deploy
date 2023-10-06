@@ -109,4 +109,15 @@ export default {
     const data = await response.json()
     return data
   },
+  async postTest(info) {
+    const response = await fetch(`${server}/login/kakao/check`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(info)
+    })
+    const data = await response.json()
+    return data
+  },
 }

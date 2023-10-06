@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
     name: "RedirectPage",
     data(){
@@ -13,11 +15,14 @@ export default {
         }
     },
     methods:{
-
+        ...mapActions("user", ["postTest"])
     },
-    created(){
+    async created(){
         this.code = this.$route.query.code
-        console.log(this.code)
+        const info = { 
+            code: this.code
+        }
+        await this.postTest(info)
     }
 }
 </script>

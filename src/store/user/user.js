@@ -115,5 +115,16 @@ export default {
         return false
       }
     },
+    async postTest(info) {
+      const data = await api.postTest(info)
+      if (data.success) {
+        console.log(data)
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status, data.error.message)
+        return false
+      }
+    },
   },
 }
