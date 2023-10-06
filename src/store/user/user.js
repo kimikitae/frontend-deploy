@@ -118,7 +118,8 @@ export default {
     async postTest(context, info) {
       const data = await api.postTest(info)
       if (data.success) {
-        console.log(data)
+        await context.commit('setToken', data.token)
+        router.push('/')
         return true
       } else {
         router.push('/')

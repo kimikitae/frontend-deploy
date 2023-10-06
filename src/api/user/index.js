@@ -117,7 +117,16 @@ export default {
       },
       body: info.code
     })
-    const data = await response.json()
-    return data
+
+    let head = response.headers.get('Authorization')
+    let data = await response.json()
+
+    let d = {
+      success: data.success,
+      response: data.response,
+      error: data.error,
+      token: head
+    }
+    return d
   },
 }
