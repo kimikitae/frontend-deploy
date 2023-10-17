@@ -51,10 +51,10 @@ export default {
       userPwChk: "",
       CheckId: false,
       ChecksignUp: false,
-      // mock server
-      // server: "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
+      // 배포 server
+      server: "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app",
       // local server
-      server: "http://localhost:8080",
+      //server: "http://localhost:8080",
       userType: "일반회원",
     };
   },

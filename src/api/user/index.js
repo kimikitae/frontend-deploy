@@ -1,7 +1,7 @@
 //mock server
-// const server = "https://e5fce603-4225-432a-91e0-9508a46a8189.mock.pstmn.io"
+const server = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app"
 //local server
-const server = 'http://localhost:8080'
+//const server = 'http://localhost:8080'
 import store from '../../store/index'
 
 export default {

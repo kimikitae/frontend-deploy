@@ -195,7 +195,10 @@ export default {
       }
     },
     connect() {
-      const serverURL = "http://localhost:8080/ws";
+      // 배포 서버
+      const serverURL = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app";
+      // 로칼
+      //const serverURL = "http://localhost:8080/ws";
       let socket = new SockJS(serverURL);
       this.stompClient = Stomp.over(socket);
       console.log(`소켓 연결을 시도합니다. 서버 주소: ${serverURL}`);
