@@ -31,17 +31,17 @@
     </div>
     <img
       class="kakao"
-      src="../../assets/kakao_login_medium_wide.png"
+      src="../../assets/카카오.png"
       @click="getTest"
     />
     <img
       class="naver"
-      src="../../assets/btnW_완성형.png"
+      src="../../assets/네이버.png"
       @click="getTestN"
     />
     <img
       class="google"
-      src="../../assets/btn_google_signin_light_normal_web@2x.png"
+      src="../../assets/구글.png"
       @click="getTestG"
     />
   </main>
@@ -204,8 +204,9 @@ a {
   margin: 0 auto;
   margin-top: 4rem;
   width: 27rem;
-  height: 5.5rem;
-
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0.5px 0.5px 2px 1px #d6d6d624;
   /* width: 20rem;
   height: 3rem;
   border: 1px solid #D9D9D9;
@@ -220,7 +221,9 @@ a {
   margin: 0 auto;
   margin-top: 1rem;
   width: 27rem;
-  height: 5.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0.5px 0.5px 2px 1px #d6d6d624;
 }
 .google{
   display: block;
@@ -228,6 +231,8 @@ a {
   margin: 0 auto;
   margin-top: 1rem;
   width: 27rem;
-  height: 5.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  box-shadow: 0.5px 0.5px 2px 1px #d6d6d67b;
 }
 </style>
