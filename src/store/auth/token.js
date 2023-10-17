@@ -51,5 +51,31 @@ export default {
         return false
       }
     },
+
+    async postTestN(context, info) {
+      const data = await api.postTestN(info)
+      if (data.success) {
+        await context.commit('setToken', data.token)
+        router.push('/')
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status, data.error.message)
+        return false
+      }
+    },
+
+    async postTestG(context, info) {
+      const data = await api.postTestG(info)
+      if (data.success) {
+        await context.commit('setToken', data.token)
+        router.push('/')
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status, data.error.message)
+        return false
+      }
+    },
   },
 }

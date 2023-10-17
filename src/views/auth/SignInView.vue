@@ -39,6 +39,11 @@
       src="../../assets/btnW_완성형.png"
       @click="getTestN"
     />
+    <img
+      class="google"
+      src="../../assets/btn_google_signin_light_normal_web@2x.png"
+      @click="getTestG"
+    />
   </main>
 </template>
 
@@ -59,7 +64,7 @@ export default {
   computed: {},
   methods: {
     ...mapActions("token", ["tryLogin"]),
-    ...mapActions("user", ["getInfo", "getTest", "getTestN"]),
+    ...mapActions("user", ["getInfo", "getTest", "getTestN", "getTestG"]),
     chk_null(cmp) {
       // 비어있는지 체크하는 함수
       if (cmp.trim().length == 0) {
@@ -216,6 +221,13 @@ a {
   margin-top: 1rem;
   width: 27rem;
   height: 5.5rem;
-  
+}
+.google{
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 27rem;
+  height: 5.5rem;
 }
 </style>

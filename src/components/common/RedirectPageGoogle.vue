@@ -8,14 +8,14 @@
 import { mapActions } from "vuex";
 
 export default {
-    name: "RedirectPageNaver",
+    name: "RedirectPageGoogle",
     data(){
         return{
             code: "",
         }
     },
     methods:{
-        ...mapActions("token", ["postTestN"]),
+        ...mapActions("token", ["postTestG"]),
         ...mapActions("user", ["getInfo"])
     },
     async created(){
@@ -23,7 +23,7 @@ export default {
         const info = { 
             code: this.code
         }
-        const t = await this.postTestN(info)
+        const t = await this.postTestG(info)
         if(t){
             await this.getInfo()
         } else{
