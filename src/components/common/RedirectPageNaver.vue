@@ -8,14 +8,14 @@
 import { mapActions } from "vuex";
 
 export default {
-    name: "RedirectPage",
+    name: "RedirectPageNaver",
     data(){
         return{
             code: "",
         }
     },
     methods:{
-        ...mapActions("token", ["postTest"]),
+        ...mapActions("token", ["postTestN"]),
         ...mapActions("user", ["getInfo"])
     },
     async created(){

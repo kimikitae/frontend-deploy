@@ -13,6 +13,7 @@ import WriteView from '../views/content/WriteView.vue'
 import PayInfoView from '../views/content/PayInfoView.vue'
 import ShopInfoView from '../views/content/ShopInfoView.vue'
 import RedirectPage from '../components/common/RedirectPage.vue'
+import RedirectPageNaver from '../components/common/RedirectPageNaver.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -101,10 +102,15 @@ const router = createRouter({
       name: 'ShopInfoView',
       component: ShopInfoView
     },
-    {
+    { // 카카오
       path: '/redirect',
       name: 'RedirectPage',
       component: RedirectPage
+    },
+    { // 네이버
+      path: '/redirectn',
+      name: 'RedirectPageNaver',
+      component: RedirectPageNaver
     },
   ]
 })

@@ -115,5 +115,18 @@ export default {
         return false
       }
     },
+    async getTestN() {
+      const data = await api.getTestN()
+      if (data.success) {
+        // 수정 네이버로
+        console.log(data.response.naverUri)
+        window.location.href = data.response.naverUri;
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status, data.error.message)
+        return false
+      }
+    },
   },
 }

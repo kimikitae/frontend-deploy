@@ -129,4 +129,36 @@ export default {
     }
     return d
   },
+
+  async getTestN() {
+    const response = await fetch(`${server}/login/naver`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+    const data = await response.json()
+    return data
+  },
+  async postTestN(info) {
+    const response = await fetch(`${server}/login/naver/check`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: info.code
+    })
+
+    let head = response.headers.get('Authorization')
+    let data = await response.json()
+
+    let d = {
+      success: data.success,
+      response: data.response,
+      error: data.error,
+      token: head
+    }
+    return d
+  },
+  
 }

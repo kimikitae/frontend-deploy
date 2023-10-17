@@ -34,6 +34,11 @@
       src="../../assets/kakao_login_medium_wide.png"
       @click="getTest"
     />
+    <img
+      class="naver"
+      src="../../assets/btnW_완성형.png"
+      @click="getTestN"
+    />
   </main>
 </template>
 
@@ -54,7 +59,7 @@ export default {
   computed: {},
   methods: {
     ...mapActions("token", ["tryLogin"]),
-    ...mapActions("user", ["getInfo", "getTest"]),
+    ...mapActions("user", ["getInfo", "getTest", "getTestN"]),
     chk_null(cmp) {
       // 비어있는지 체크하는 함수
       if (cmp.trim().length == 0) {
@@ -91,12 +96,6 @@ export default {
       this.loginId = null;
       this.loginPassword = null;
     },
-    // kakaoLogin() {
-    //   console.log(window.Kakao);
-    //   window.Kakao.Auth.authorize({
-    //     redirectUri: "https://kauth.kakao.com/oauth/authorize?client_id=e3743c41d0df1be9ef7bdc6790434cde&redirect_uri=http://localhost:8088/redirect&response_type=code",
-    //   });
-    // },
   },
 };
 </script>
@@ -198,8 +197,10 @@ a {
   display: block;
   cursor: pointer;
   margin: 0 auto;
-  margin-top: 5rem;
+  margin-top: 4rem;
   width: 27rem;
+  height: 5.5rem;
+
   /* width: 20rem;
   height: 3rem;
   border: 1px solid #D9D9D9;
@@ -207,5 +208,14 @@ a {
   margin-top: 2rem;
   border-radius: 5px;
   background-color: #F7E600; */
+}
+.naver{
+  display: block;
+  cursor: pointer;
+  margin: 0 auto;
+  margin-top: 1rem;
+  width: 27rem;
+  height: 5.5rem;
+  
 }
 </style>
