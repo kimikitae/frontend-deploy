@@ -122,5 +122,15 @@ export default {
         return false
       }
     },
+    async enterShare(context, info) {
+      const data = await api.enterShare(info)
+      if (data.success) {
+        router.go(0)
+        return true
+      } else {
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
   },
 }

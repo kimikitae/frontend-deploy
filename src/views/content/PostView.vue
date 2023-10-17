@@ -33,7 +33,7 @@
                   <span class="name">
                     {{ post.author + "님" }}
                   </span>
-                  <span class="btn1"> 공유 참여하기 </span>
+                  <span class="btn1" @click="enter(post.idx)"> 공유 참여하기 </span>
                 </div>
 
                 <div>
@@ -143,9 +143,18 @@ export default {
   },
   methods: {
     ...mapActions("user", ["getUInfo"]),
-    ...mapActions("post", ["getPost", "deletePost"]),
+    ...mapActions("post", ["getPost", "deletePost", "enterShare"]),
     ...mapMutations("shop", ["setIdx"]),
     ...mapMutations("user", ["setUIdx"]),
+    async enter(idx){
+      const info = {
+        idx: idx
+      }
+      const a = await this.enterShare(info);
+      if(a){
+        console.log("공유 참여 성공")
+      }
+    },
     async delPost(idx){
       const info = {
         idx: idx
@@ -271,6 +280,7 @@ export default {
   line-height: 200%;
 }
 .btn1 {
+  cursor: pointer;
   background-color: #fff5d1;
   border-radius: 0.5rem;
   width: 6rem;
