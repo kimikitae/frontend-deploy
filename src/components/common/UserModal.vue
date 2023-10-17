@@ -40,7 +40,6 @@ export default {
     },
     toCart() {
       this.$emit("closeUserModal");
-      this.getCartInfo();
       router.push("/CartView");
     },
     ...mapMutations("token", ["setToken"]),

@@ -16,6 +16,9 @@ export default {
     setChat(state, chat) {
       state.chat = chat
     },
+    setPostIdx(state, postIdx){
+      state.chat.chat.postIdx = postIdx
+    }
   },
   actions: {
     async getChatRooms(context) {

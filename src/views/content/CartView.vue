@@ -75,7 +75,8 @@ export default {
   },
   methods: {
     ...mapMutations("cart", ["setQuantity"]),
-    ...mapActions("cart", ["putCartInfo", "deleteCart"]),
+    ...mapMutations("chat", ["setPostIdx"]),
+    ...mapActions("cart", ["getCartInfo", "putCartInfo", "deleteCart"]),
     async qModify(m, i, q) {
       const data = [
         {
@@ -93,6 +94,10 @@ export default {
     NavBar,
     UserModal,
   },
+  mounted(){
+    this.getCartInfo();
+    this.setPostIdx(this.cartInfo.postIdx);
+  }
 };
 </script>
 
