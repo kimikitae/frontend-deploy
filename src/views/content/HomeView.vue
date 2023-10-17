@@ -14,7 +14,6 @@ import NavBar from "../../components/common/navBar.vue";
 import MainScreen from "../../components/common/MainScreen.vue";
 import MainContent from "../../components/common/MainContent.vue";
 import UserModal from "../../components/common/UserModal.vue";
-import { mapActions } from "vuex";
 
 export default {
   name: "HomeView",
@@ -26,7 +25,6 @@ export default {
   },
   computed: {},
   methods: {
-    ...mapActions("token", ["tryLogin"]),
   },
   components: {
     NavBar,

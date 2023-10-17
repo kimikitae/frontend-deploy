@@ -47,7 +47,7 @@
               <div class="tprice">{{ cartInfo.totalPrice + "원" }}</div>
             </div>
 
-            <div class="box3">결제하기</div>
+            <div class="box3" @click="this.$router.push('/PayInfoView')">결제하기</div>
           </div>
         </div>
       </div>
