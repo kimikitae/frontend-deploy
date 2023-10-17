@@ -111,5 +111,16 @@ export default {
         return false
       }
     },
+    async deletePost(context, info) {
+      const data = await api.deletePost(info)
+      if (data.success) {
+        router.push('/ShareView')
+        return true
+      } else {
+        router.push('/')
+        alert(data.error.status + data.error.message)
+        return false
+      }
+    },
   },
 }

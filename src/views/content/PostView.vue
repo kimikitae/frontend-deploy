@@ -22,8 +22,8 @@
                   extrMinutes(post.createAt)
                 }}
               </span>
-              <span> 삭제 </span>
-              <span> 수정 </span>
+              <span @click="delPost(post.idx)"> 삭제 </span>
+              <span @click="updPost()"> 수정 </span>
             </div>
 
             <div class="line2">
@@ -142,6 +142,19 @@ export default {
     }),
   },
   methods: {
+    ...mapActions("user", ["getUInfo"]),
+    ...mapActions("post", ["getPost", "deletePost"]),
+    ...mapMutations("shop", ["setIdx"]),
+    ...mapMutations("user", ["setUIdx"]),
+    async delPost(idx){
+      const info = {
+        idx: idx
+      }
+      const a = await this.deletePost(info);
+      if(a){
+        console.log("게시물이 삭제됨")
+      }
+    },
     toInfoView(aidx) {
       if (aidx != this.userInfo.idx) {
         this.setUIdx(aidx);
@@ -153,10 +166,6 @@ export default {
       this.setIdx(idx);
       this.$router.push("/ShopInfoView");
     },
-    ...mapActions("user", ["getUInfo"]),
-    ...mapActions("post", ["getPost"]),
-    ...mapMutations("shop", ["setIdx"]),
-    ...mapMutations("user", ["setUIdx"]),
     extrYear(d) {
       return new Date(d).getFullYear();
     },
