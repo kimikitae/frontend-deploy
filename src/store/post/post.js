@@ -64,7 +64,7 @@ export default {
         return true
       } else {
         router.push('/')
-        alert(data.error.status + data.error.message)
+        //alert(data.error.status + data.error.message)
         return false
       }
     },
@@ -86,7 +86,7 @@ export default {
         return true
       } else {
         router.push('/')
-        alert(data.error.status + data.error.message)
+        //alert(data.error.status + data.error.message)
         return false
       }
     },

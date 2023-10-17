@@ -29,8 +29,8 @@
           </div>
 
           <span class="loc">연산동</span>
-          <span class="desc">주변 122개 동네의 게시물을 검색합니다.</span>
-
+          <span class="desc">주변 {{ posts.length }}개 동네의 게시물을 검색합니다.</span>
+          
           <div class="listbox">
             <template v-for="(post, pindex) in posts" :key="pindex">
               <div
