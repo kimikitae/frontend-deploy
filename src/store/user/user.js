@@ -110,7 +110,7 @@ export default {
         window.location.href = data.response.kakaoUri;
         return true
       } else {
-        router.push('/')
+        router.push('/SignInView')
         alert(data.error.status, data.error.message)
         return false
       }
@@ -122,7 +122,7 @@ export default {
         window.location.href = data.response.naverUri;
         return true
       } else {
-        router.push('/')
+        router.push('/SignInView')
         alert(data.error.status, data.error.message)
         return false
       }
@@ -134,7 +134,7 @@ export default {
         window.location.href = data.response.googleUri;
         return true
       } else {
-        router.push('/')
+        router.push('/SignInView')
         alert(data.error.status, data.error.message)
         return false
       }
