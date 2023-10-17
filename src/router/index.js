@@ -14,6 +14,7 @@ import PayInfoView from '../views/content/PayInfoView.vue'
 import ShopInfoView from '../views/content/ShopInfoView.vue'
 import RedirectPage from '../components/common/RedirectPage.vue'
 import RedirectPageNaver from '../components/common/RedirectPageNaver.vue'
+import RedirectPageGoogle from '../components/common/RedirectPageGoogle.vue'
 // import store from '../store/index'
 
 const router = createRouter({
@@ -111,6 +112,11 @@ const router = createRouter({
       path: '/redirectn',
       name: 'RedirectPageNaver',
       component: RedirectPageNaver
+    },
+    { // 구글
+      path: '/redirectg',
+      name: 'RedirectPageGoogle',
+      component: RedirectPageGoogle
     },
   ]
 })
