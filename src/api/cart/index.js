@@ -3,11 +3,12 @@
 //local server
 // const server = 'http://localhost:8080'
 import store from '../../store/index'
+import {server} from '../conf.js'
 
 export default {
   async getCartInfo() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/carts`, {
+    const response = await fetch(`${server}/carts`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ export default {
   },
   async putCartInfo(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/carts/update`, {
+    const response = await fetch(`${server}/carts/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +33,7 @@ export default {
   },
   async deleteCart() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/carts/clear`, {
+    const response = await fetch(`${server}/carts/clear`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

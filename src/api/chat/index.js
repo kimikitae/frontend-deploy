@@ -3,11 +3,12 @@
 //local server
 // const server = 'http://localhost:8080'
 import store from '../../store/index'
+import {server} from '../conf.js'
 
 export default {
   async getChatRooms() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/chats`, {
+    const response = await fetch(`${server}/chats`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ export default {
   },
   async getChatRoom(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/chats/${info.idx}`, {
+    const response = await fetch(`${server}/chats/${info.idx}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +32,7 @@ export default {
   },
   async deleteChat(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/chats/${info.selectedRoom}/delete`, {
+    const response = await fetch(`${server}/chats/${info.selectedRoom}/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

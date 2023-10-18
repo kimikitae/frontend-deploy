@@ -3,11 +3,12 @@
 //local server
 //const server = 'http://localhost:8080'
 import store from '../../store/index'
+import {server} from '../conf.js'
 
 export default {
   async getPosts() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/posts`, {
+    const response = await fetch(`${server}/posts`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ export default {
   },
   async getPost(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/posts/${info.idx}`, {
+    const response = await fetch(`${server}/posts/${info.idx}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +32,7 @@ export default {
   },
   async getSearchPosts(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/posts/search`, {
+    const response = await fetch(`${server}/posts/search`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ export default {
   },
   async getNotices() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/notices`, {
+    const response = await fetch(`${server}/notices`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +57,7 @@ export default {
   },
   async postNotice(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/notices/write`, {
+    const response = await fetch(`${server}/notices/write`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ export default {
   async writePost(info) {
     console.log(info)
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/posts/write`, {
+    const response = await fetch(`${server}/posts/write`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -83,7 +84,7 @@ export default {
   },
   async deletePost(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/posts/${info.idx}/delete`, {
+    const response = await fetch(`${server}/posts/${info.idx}/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -95,7 +96,7 @@ export default {
   },
   async enterShare(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/chats/enter`, {
+    const response = await fetch(`${server}/chats/enter`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

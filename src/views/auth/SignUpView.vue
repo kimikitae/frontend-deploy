@@ -51,10 +51,6 @@ export default {
       userPwChk: "",
       CheckId: false,
       ChecksignUp: false,
-      // 배포 server
-      // server: "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app",
-      // local server
-      //server: "http://localhost:8080",
       userType: "일반회원",
     };
   },

@@ -3,11 +3,12 @@
 //local server
 //const server = 'http://localhost:8080'
 import store from '../../store/index'
+import {server} from '../conf.js'
 
 export default {
   async postShops(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/shops`, {
+    const response = await fetch(`${server}/shops`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ export default {
   async putShopInfo(info) {
     const tok = store.state.token.accessToken
     console.log(info)
-    const response = await fetch(`${this.server}/shops/${info.idx}/update`, {
+    const response = await fetch(`${server}/shops/${info.idx}/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +36,7 @@ export default {
   async getMyShop() {
     const tok = store.state.token.accessToken
     const idx = store.state.user.userInfo.idx
-    const response = await fetch(`${this.server}/users/${idx}/shop`, {
+    const response = await fetch(`${server}/users/${idx}/shop`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ export default {
   },
   async deleteShop(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/shops/${info.idx}/unregist`, {
+    const response = await fetch(`${server}/shops/${info.idx}/unregist`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ export default {
   },
   async postBrand(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/shops/brand`, {
+    const response = await fetch(`${server}/shops/brand`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +73,7 @@ export default {
   },
   async postShopInfo(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/shops/regist`, {
+    const response = await fetch(`${server}/shops/regist`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +87,7 @@ export default {
   async getShop() {
     const tok = store.state.token.accessToken
     const idx = store.state.shop.selectedIdx
-    const response = await fetch(`${this.server}/shops/${idx}`, {
+    const response = await fetch(`${server}/shops/${idx}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

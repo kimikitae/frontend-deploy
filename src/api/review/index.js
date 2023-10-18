@@ -3,11 +3,12 @@
 //local server
 //const server = 'http://localhost:8080'
 import store from '../../store/index'
+import {server} from '../conf.js'
 
 export default {
   async getReviewInfo() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/reviews`, {
+    const response = await fetch(`${server}/reviews`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +20,7 @@ export default {
   },
   async postReview(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/reviews/write`, {
+    const response = await fetch(`${server}/reviews/write`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +33,7 @@ export default {
   },
   async deleteReview(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${this.server}/reviews/${info.idx}/delete`, {
+    const response = await fetch(`${server}/reviews/${info.idx}/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -48,7 +49,7 @@ export default {
     const content = {
       content: info.content
     }
-    const response = await fetch(`${this.server}/reviews/${info.idx}/update`, {
+    const response = await fetch(`${server}/reviews/${info.idx}/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
