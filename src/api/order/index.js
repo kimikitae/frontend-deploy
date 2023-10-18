@@ -1,5 +1,5 @@
 //mock server
-const server = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app"
+//const server = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app"
 //local server
 //const server = 'http://localhost:8080'
 import store from '../../store/index'
@@ -7,7 +7,7 @@ import store from '../../store/index'
 export default {
   async getOrderInfo() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/orders`, {
+    const response = await fetch(`${this.server}/orders`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export default {
   },
   async getCancelOrderInfo() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/orders/cancel`, {
+    const response = await fetch(`${this.server}/orders/cancel`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default {
   },
   async deleteOrder(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/orders/${info.idx}/delete`, {
+    const response = await fetch(`${this.server}/orders/${info.idx}/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ export default {
   },
   async getOrder(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/orders/${info}`, {
+    const response = await fetch(`${this.server}/orders/${info}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ export default {
   },
   async getSave() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/orders/save`, {
+    const response = await fetch(`${this.server}/orders/save`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ export default {
     const info = { 
       postIdx: store.state.chat.chat.postIdx
     }
-    const response = await fetch(`${server}/orders/info`, {
+    const response = await fetch(`${this.server}/orders/info`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

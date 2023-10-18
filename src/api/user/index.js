@@ -1,12 +1,12 @@
 //mock server
-const server = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app"
+// const server = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app"
 //local server
 //const server = 'http://localhost:8080'
 import store from '../../store/index'
 
 export default {
   async login(info) {
-    const response = await fetch(`${server}/users/login`, {
+    const response = await fetch(`${this.server}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,7 +25,7 @@ export default {
     return d
   },
   async signup(info) {
-    const response = await fetch(`${server}/users/regist`, {
+    const response = await fetch(`${this.server}/users/regist`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ export default {
   },
   async getInfo() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/users`, {
+    const response = await fetch(`${this.server}/users`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ export default {
   },
   async getUInfo() {
     const idx = store.state.user.uIdx
-    const response = await fetch(`${server}/users/${idx}`, {
+    const response = await fetch(`${this.server}/users/${idx}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export default {
   },
   async putInfo(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/users/update`, {
+    const response = await fetch(`${this.server}/users/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export default {
   },
   async getAddress() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/users/address`, {
+    const response = await fetch(`${this.server}/users/address`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export default {
   },
   async postAddress(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/users/address/add`, {
+    const response = await fetch(`${this.server}/users/address/add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export default {
 
   
   async getTest() {
-    const response = await fetch(`${server}/login/kakao`, {
+    const response = await fetch(`${this.server}/login/kakao`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export default {
     return data
   },
   async postTest(info) {
-    const response = await fetch(`${server}/login/kakao/check`, {
+    const response = await fetch(`${this.server}/login/kakao/check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -131,7 +131,7 @@ export default {
   },
 
   async getTestN() {
-    const response = await fetch(`${server}/login/naver`, {
+    const response = await fetch(`${this.server}/login/naver`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export default {
     return data
   },
   async postTestN(info) {
-    const response = await fetch(`${server}/login/naver/check`, {
+    const response = await fetch(`${this.server}/login/naver/check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -161,7 +161,7 @@ export default {
     return d
   },
   async getTestG() {
-    const response = await fetch(`${server}/login/google`, {
+    const response = await fetch(`${this.server}/login/google`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -171,7 +171,7 @@ export default {
     return data
   },
   async postTestG(info) {
-    const response = await fetch(`${server}/login/google/check`, {
+    const response = await fetch(`${this.server}/login/google/check`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,5 +1,5 @@
 //mock server
-const server = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app"
+// const server = "https://port-0-backend-jvpb2alnuic3pc.sel5.cloudtype.app"
 //local server
 // const server = 'http://localhost:8080'
 import store from '../../store/index'
@@ -7,7 +7,7 @@ import store from '../../store/index'
 export default {
   async getCartInfo() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/carts`, {
+    const response = await fetch(`${this.server}/carts`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -19,7 +19,7 @@ export default {
   },
   async putCartInfo(info) {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/carts/update`, {
+    const response = await fetch(`${this.server}/carts/update`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export default {
   },
   async deleteCart() {
     const tok = store.state.token.accessToken
-    const response = await fetch(`${server}/carts/clear`, {
+    const response = await fetch(`${this.server}/carts/clear`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
