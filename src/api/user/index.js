@@ -6,6 +6,7 @@ import store from '../../store/index'
 
 export default {
   async login(info) {
+    console.log(this.server)
     const response = await fetch(`${this.server}/users/login`, {
       method: 'POST',
       headers: {

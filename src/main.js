@@ -14,6 +14,6 @@ app.use(router)
 app.mount('#app')
 
 // 서버 글로벌 변수
-app.config.globalProperties.server = "https://port-0-sdsd-jvpb2alnuic3pc.sel5.cloudtype.app";
-// server = 'http://localhost:8080'
+//app.config.globalProperties.server = "https://port-0-sdsd-jvpb2alnuic3pc.sel5.cloudtype.app";
+app.config.globalProperties.server = 'http://localhost:8080'
 window.Kakao.init("e3743c41d0df1be9ef7bdc6790434cde")
