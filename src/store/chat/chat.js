@@ -17,7 +17,7 @@ export default {
       state.chat = chat
     },
     setPostIdx(state, postIdx){
-      state.chat.chat.postIdx = postIdx
+      state.chat.postIdx = postIdx
     }
   },
   actions: {
