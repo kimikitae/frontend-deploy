@@ -106,22 +106,8 @@ export default {
             this.locinfo.extraAddress = extraRoadAddr;
           }
 
-          // var guideTextBox = document.getElementById("guide");
-          // // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-          // if (data.autoRoadAddress) {
-          //   var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-          //   guideTextBox.innerHTML = "(예상 도로명 주소 : " + expRoadAddr + ")";
-          //   guideTextBox.style.display = "block";
-          // } else if (data.autoJibunAddress) {
-          //   var expJibunAddr = data.autoJibunAddress;
-          //   guideTextBox.innerHTML = "(예상 지번 주소 : " + expJibunAddr + ")";
-          //   guideTextBox.style.display = "block";
-          // } else {
-          //   guideTextBox.innerHTML = "";
-          //   guideTextBox.style.display = "none";
-          // }
           const info = {
-            address: this.locinfo.extraAddress,
+            address: this.locinfo.jibunAddress,
           };
           await this.addAddress(info);
         },
@@ -149,7 +135,7 @@ export default {
   margin-top: 23rem;
   margin-left: auto;
   margin-right: calc(50% - 25rem);
-  width: 150px;
+  width: 17rem;
   background-color: white;
   border-radius: 0.5rem;
   border: none;
