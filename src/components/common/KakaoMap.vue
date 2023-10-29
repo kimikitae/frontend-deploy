@@ -173,7 +173,7 @@ export default {
                         this.setEnable(false);
                     }
                     const d = dist / 1000;
-                    this.setDist(d.toFixed(1));
+                    this.setDist(d.toFixed(2));
                     console.log("거리는" + dist + "m입니다.");
                 } catch (e) {
                     console.error(e);
