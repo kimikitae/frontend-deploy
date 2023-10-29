@@ -21,7 +21,7 @@
           <div class="box1">
             <span>공유 장소를 선택하세요</span>
             <div class="plus" @click="search()">+</div>
-            <template v-if="true">
+            <template v-if="false">
               <input type="text" id="postcode" placeholder="우편번호" v-model="locinfo.postcode" />
               <input type="text" id="roadAddress" placeholder="도로명주소" v-model="locinfo.roadAddress" />
               <input type="text" id="jibunAddress" placeholder="지번주소" v-model="locinfo.jibunAddress" />
