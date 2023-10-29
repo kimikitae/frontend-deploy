@@ -110,6 +110,16 @@
                   </div>
                 </div>
               </div>
+
+              <div class="senable">
+                <div class="tt1">
+                  공유가 가능해요!
+                </div>
+                <div class="tt2">
+                  (공유 위치와 3km이내의 배달지만 공유 가능합니다.)
+                </div>
+              </div>
+              <KakaoMap />
             </div>
           </div>
         </div>
@@ -123,6 +133,7 @@
 import NavBar from "../../components/common/navBar.vue";
 import UserModal from "../../components/common/UserModal.vue";
 import { mapState, mapActions, mapMutations } from "vuex";
+import KakaoMap from "../../components/common/KakaoMap.vue"
 // import router from "../../router";
 
 export default {
@@ -146,21 +157,21 @@ export default {
     ...mapActions("post", ["getPost", "deletePost", "enterShare"]),
     ...mapMutations("shop", ["setIdx"]),
     ...mapMutations("user", ["setUIdx"]),
-    async enter(idx){
+    async enter(idx) {
       const info = {
         idx: idx
       }
       const a = await this.enterShare(info);
-      if(a){
+      if (a) {
         console.log("공유 참여 성공")
       }
     },
-    async delPost(idx){
+    async delPost(idx) {
       const info = {
         idx: idx
       }
       const a = await this.deletePost(info);
-      if(a){
+      if (a) {
         console.log("게시물이 삭제됨")
       }
     },
@@ -194,6 +205,7 @@ export default {
   components: {
     NavBar,
     UserModal,
+    KakaoMap
   },
   mounted() {
     const info = {
@@ -217,68 +229,84 @@ export default {
   align-items: center;
   flex-direction: column;
 }
+
 .item {
   margin-top: 2rem;
   margin-bottom: 1rem;
 }
+
 .upside {
   margin: 0 auto;
 }
+
 .title {
   font-size: 2.4rem;
   font-weight: bold;
 }
-.line1 > span:nth-child(1) {
+
+.line1>span:nth-child(1) {
   color: #d0d0d0;
 }
-.line1 > span:nth-child(2) {
+
+.line1>span:nth-child(2) {
   float: right;
   color: #d0d0d0;
   cursor: pointer;
   text-decoration: underline;
   padding-right: 0.6rem;
 }
-.line1 > span:nth-child(3) {
+
+.line1>span:nth-child(3) {
   float: right;
   color: #d0d0d0;
   cursor: pointer;
   text-decoration: underline;
   padding-right: 0.6rem;
 }
+
 .line2 {
   margin-top: 1rem;
   width: 100%;
   display: flex;
   align-items: center;
 }
-.line2 > div:nth-child(2) {
+
+.line2>div:nth-child(2) {
   flex: 5;
 }
-.line2 > div:nth-child(3) {
+
+.line2>div:nth-child(3) {
   flex: 1;
 }
+
 .flexline2 {
   flex-basis: 0;
   display: flex;
   flex-direction: column;
 }
-.flexline2 > div {
+
+.flexline2>div {
   flex: 1;
 }
-.flexline2 > div > span:nth-child(2) {
+
+.flexline2>div>span:nth-child(2) {
   float: right;
 }
-.flexline2 > div:nth-child(2) {
+
+.flexline2>div:nth-child(2) {
   padding-top: 0.7rem;
 }
+
 .name {
   margin-left: 1rem;
   font-size: 1.6rem;
 }
+
 .place {
   margin-left: 1rem;
   line-height: 200%;
 }
+
 .btn1 {
   cursor: pointer;
   background-color: #fff5d1;
@@ -288,6 +316,7 @@ export default {
   padding: 0.4rem 0.8rem;
   border: 1px solid rgba(123, 123, 123, 0.647);
 }
+
 .btn2 {
   cursor: pointer;
   width: 6rem;
@@ -296,16 +325,19 @@ export default {
   padding: 0.4rem 0.8rem;
   border: 1px solid rgba(123, 123, 123, 0.647);
 }
-.line2 > img {
+
+.line2>img {
   display: inline;
   width: 5rem;
   height: 5rem;
   border-radius: 5rem;
 }
+
 .content {
   margin-top: 1rem;
   width: 45rem;
 }
+
 .top {
   border-top: 1px solid rgba(123, 123, 123, 0.647);
   border-left: 1px solid rgba(123, 123, 123, 0.647);
@@ -313,63 +345,77 @@ export default {
   padding-top: 2rem;
   padding-left: 2rem;
 }
+
 .pcontent {
   line-height: 300%;
   margin-bottom: 4rem;
 }
+
 .pshare {
   line-height: 150%;
   color: #9a9a9a;
 }
+
 .psharebox {
   padding-bottom: 2rem;
 }
+
 .mid {
   border-top: 1px solid rgba(123, 123, 123, 0.647);
   border-left: 1px solid rgba(123, 123, 123, 0.647);
   border-right: 1px solid rgba(123, 123, 123, 0.647);
 }
+
 .head0 {
   padding: 0.5rem 0;
   text-align: center;
 }
+
 .menu {
   padding-top: 2rem;
   padding-left: 2rem;
   border-top: 1px solid rgba(123, 123, 123, 0.647);
 }
-.menu > div > span:nth-child(2) {
+
+.menu>div>span:nth-child(2) {
   padding-left: 2rem;
 }
+
 .option {
   display: flex;
   padding-top: 1.5rem;
   padding-left: 2rem;
 }
+
 .oflex {
   display: flex;
   flex-direction: column;
   width: fit-content;
   margin-left: 2rem;
 }
-.oflex > span {
+
+.oflex>span {
   padding-bottom: 1.5rem;
 }
+
 .bot {
   border-top: 1px solid rgba(123, 123, 123, 0.647);
   border-left: 1px solid rgba(123, 123, 123, 0.647);
   border-right: 1px solid rgba(123, 123, 123, 0.647);
   border-bottom: 1px solid rgba(123, 123, 123, 0.647);
 }
+
 .head1 {
   padding: 0.5rem 0;
   text-align: center;
 }
+
 .bflex {
   display: flex;
   border-top: 1px solid rgba(123, 123, 123, 0.647);
 }
-.bflex > img {
+
+.bflex>img {
   margin-top: 1.5rem;
   margin-bottom: 1rem;
   margin-left: 1rem;
@@ -377,6 +423,7 @@ export default {
   height: 5rem;
   border-radius: 3rem;
 }
+
 .sshop {
   flex: 1;
   text-align: right;
@@ -386,26 +433,47 @@ export default {
   cursor: pointer;
   text-decoration: underline;
 }
+
 .sname {
   flex: 1;
   margin-top: 0.5rem;
 }
+
 .bflex1 {
   width: calc(100% - 6rem);
   display: flex;
   flex-direction: column;
 }
-.bflex1 > div:nth-child(1) {
+
+.bflex1>div:nth-child(1) {
   padding-top: 1.5rem;
   flex: 1;
   font-size: 1.1rem;
   width: 100%;
   display: flex;
 }
-.bflex1 > div:nth-child(2) {
+
+.bflex1>div:nth-child(2) {
   flex: 1;
   font-size: 1.1rem;
 }
-.tip {
+
+.tip {}
+
+.senable{
+  margin: 2rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.tt1{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.tt2{
+  font-size: 0.9rem;
+  font-weight: bold;
+
 }
 </style>

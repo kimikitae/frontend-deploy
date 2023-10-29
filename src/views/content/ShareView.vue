@@ -166,8 +166,8 @@ export default {
   components: {
     NavBar,
     UserModal,
-    ChatModal
-  },
+    ChatModal,
+},
   mounted() {
     this.getPosts();
     this.getNotices();

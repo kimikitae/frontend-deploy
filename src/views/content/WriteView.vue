@@ -10,20 +10,10 @@
           <div class="line1">
             <span>게시물을 작성하고 용기를 나누어 보세요.</span>
           </div>
-          <input
-            v-model="writeInfo.title"
-            class="title"
-            type="text"
-            placeholder="제목을 입력하세요"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = '제목을 입력하세요'"
-          />
-          <textarea
-            v-model="writeInfo.content"
-            placeholder="내용을 입력하세요"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = '내용을 입력하세요'"
-          ></textarea>
+          <input v-model="writeInfo.title" class="title" type="text" placeholder="제목을 입력하세요"
+            onfocus="this.placeholder = ''" onblur="this.placeholder = '제목을 입력하세요'" />
+          <textarea v-model="writeInfo.content" placeholder="내용을 입력하세요" onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '내용을 입력하세요'"></textarea>
           <div class="box1">
             <span>공유 메뉴를 선택하세요</span>
             <div class="plus" @click="openMenuModal = true">+</div>
@@ -31,32 +21,12 @@
           <div class="box1">
             <span>공유 장소를 선택하세요</span>
             <div class="plus" @click="search()">+</div>
-            <template v-if="false">
-              <input
-                type="text"
-                id="postcode"
-                placeholder="우편번호"
-                v-model="locinfo.postcode"
-              />
-              <input
-                type="text"
-                id="roadAddress"
-                placeholder="도로명주소"
-                v-model="locinfo.roadAddress"
-              />
-              <input
-                type="text"
-                id="jibunAddress"
-                placeholder="지번주소"
-                v-model="locinfo.jibunAddress"
-              />
+            <template v-if="true">
+              <input type="text" id="postcode" placeholder="우편번호" v-model="locinfo.postcode" />
+              <input type="text" id="roadAddress" placeholder="도로명주소" v-model="locinfo.roadAddress" />
+              <input type="text" id="jibunAddress" placeholder="지번주소" v-model="locinfo.jibunAddress" />
               <span id="guide" style="color: #000; display: none"></span>
-              <input
-                type="text"
-                id="extraAddress"
-                placeholder="참고항목"
-                v-model="locinfo.extraAddress"
-              />
+              <input type="text" id="extraAddress" placeholder="참고항목" v-model="locinfo.extraAddress" />
             </template>
           </div>
           <div class="box1">
@@ -71,13 +41,7 @@
           </div>
           <div class="box1">
             <span>공유 시간를 선택하세요</span>
-            <input
-              class="time"
-              type="time"
-              v-model="writeInfo.time"
-              min="yyy"
-              max="zzz"
-            />
+            <input class="time" type="time" v-model="writeInfo.time" min="yyy" max="zzz" />
           </div>
           <div class="line2">
             <div class="btn2" @click="write">등록</div>
@@ -165,40 +129,17 @@ export default {
           }
 
           // 우편번호와 주소 정보를 해당 필드에 넣는다.
-          // document.getElementById("postcode").value = data.zonecode;
-          // document.getElementById("roadAddress").value = roadAddr;
-          // document.getElementById("jibunAddress").value = data.jibunAddress;
           this.locinfo.postcode = data.zonecode;
           this.locinfo.roadAddress = roadAddr;
           this.locinfo.jibunAddress = data.jibunAddress;
-
+          this.writeInfo.place = data.jibunAddress;
 
           // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
           if (roadAddr !== "") {
-            // document.getElementById("extraAddress").value = extraRoadAddr;
-            this.writeInfo.place = extraRoadAddr
             this.locinfo.extraAddress = extraRoadAddr
           } else {
-            // document.getElementById("extraAddress").value = "";
-            this.writeInfo.place = extraRoadAddr
             this.locinfo.extraAddress = extraRoadAddr
           }
-
-          // var guideTextBox = document.getElementById("guide");
-          // // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-          // if (data.autoRoadAddress) {
-          //   var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-          //   guideTextBox.innerHTML = "(예상 도로명 주소 : " + expRoadAddr + ")";
-          //   guideTextBox.style.display = "block";
-          // } else if (data.autoJibunAddress) {
-          //   var expJibunAddr = data.autoJibunAddress;
-          //   guideTextBox.innerHTML = "(예상 지번 주소 : " + expJibunAddr + ")";
-          //   guideTextBox.style.display = "block";
-          // } else {
-          //   guideTextBox.innerHTML = "";
-          //   guideTextBox.style.display = "none";
-          // }
-
         },
       }).open();
     },
@@ -208,7 +149,12 @@ export default {
     UserModal,
     MenuModal,
   },
-  mounted() {},
+  mounted() {
+    const script = document.createElement("script");
+    // 해당 앱키의 값은 추후 변경해야할것(현재 테스트용으로 개인키 입력)
+    script.src = "//dapi.kakao.com/v2/maps/sdk.js?appkey=0b9ba6edae8ef3eeaf2fb3f041d909f0&autoload=false&libraries=services"
+    document.head.appendChild(script);
+  },
 };
 </script>
 
@@ -246,7 +192,7 @@ export default {
   margin-top: 3rem;
 }
 
-.line > span {
+.line>span {
   float: left;
 }
 
