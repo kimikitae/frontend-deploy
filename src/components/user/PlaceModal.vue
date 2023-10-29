@@ -109,7 +109,10 @@ export default {
           const info = {
             address: this.locinfo.jibunAddress,
           };
-          await this.addAddress(info);
+          const a = await this.addAddress(info);
+          if(a){
+            this.getAddress();
+          }
         },
       }).open();
     },

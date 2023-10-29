@@ -18,7 +18,8 @@ export default {
       people: '',
       time: '',
     },
-    enable: null,
+    enable: false,
+    dist: 0,
   },
   getters: {},
   mutations: {
@@ -47,6 +48,9 @@ export default {
     },
     setEnable(state, enable){
       state.enable = enable
+    },
+    setDist(state, dist){
+      state.dist = dist
     }
   },
   actions: {

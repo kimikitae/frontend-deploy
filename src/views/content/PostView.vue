@@ -119,6 +119,9 @@
                   <div class="tt2">
                     (공유 위치와 3km이내의 배달지만 공유 가능합니다.)
                   </div>
+                  <div class="tt3">
+                    {{ "거리는 " + dist + "km입니다" }}
+                  </div>
                 </div>
               </template>
 
@@ -128,7 +131,12 @@
                     공유가 불가해요!
                   </div>
                   <div class="tt2">
-                    (공유 위치와 3km이내의 배달지만 공유 가능합니다.)
+                    (공유 위치와 3km이내의 배달지만 공유 가능합니다.
+                    또한 주소가 없으면 공유가 불가능합니다.
+                    )
+                  </div>
+                  <div class="tt3">
+                    {{ "거리는 " + dist + "km입니다" }}
                   </div>
                 </div>
               </template>
@@ -162,13 +170,14 @@ export default {
       post: (state) => state.post,
       selectedIdx: (state) => state.selectedIdx,
       enable: (state) => state.enable,
+      dist: (state) => state.dist
     }),
     ...mapState("user", {
       userInfo: (state) => state.userInfo,
     }),
   },
   methods: {
-    ...mapActions("user", ["getUInfo"]),
+    ...mapActions("user", ["getUInfo", "getAddress"]),
     ...mapActions("post", ["getPost", "deletePost", "enterShare"]),
     ...mapMutations("shop", ["setIdx"]),
     ...mapMutations("user", ["setUIdx"]),
@@ -222,11 +231,12 @@ export default {
     UserModal,
     KakaoMap
   },
-  mounted() {
+  async mounted() {
     const info = {
       idx: this.selectedIdx,
     };
-    this.getPost(info);
+    await this.getAddress()
+    await this.getPost(info);
   },
 };
 </script>
@@ -490,5 +500,10 @@ export default {
   font-size: 0.9rem;
   font-weight: bold;
 
+}
+
+.tt3{
+  font-size: 0.9rem;
+  font-weight: bold;
 }
 </style>
