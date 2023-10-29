@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 
 export default {
     name: "KakaoMap",
@@ -23,6 +23,7 @@ export default {
         }),
     },
     methods: {
+        ...mapMutations("post", ["setEnable"]),
         loadScript() {
             const script = document.createElement("script");
             // 해당 앱키의 값은 추후 변경해야할것(현재 테스트용으로 개인키 입력)
@@ -74,8 +75,6 @@ export default {
                         title: positions[0].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                         image: markerImage // 마커 이미지 
                     });
-                    console.log(marker)
-
 
                     // 마커가 지도 위에 표시되도록 설정합니다
                     marker.setMap(map);
@@ -125,8 +124,6 @@ export default {
                         title: positions[1].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
                         image: markerImage // 마커 이미지 
                     });
-                    console.log(marker)
-
 
                     // 마커가 지도 위에 표시되도록 설정합니다
                     marker.setMap(map);
@@ -159,7 +156,12 @@ export default {
                         strokeStyle: 'dashed'
                     });
                     const dist = Math.floor(polyline.getLength());
-                    console.log("거리는" + dist + "m 입니다");
+
+                    if(dist < 3000){
+                        this.setEnable(true)
+                    } else{
+                        this.setEnable(false)
+                    }
                 }
             });
 

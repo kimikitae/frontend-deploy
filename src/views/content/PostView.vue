@@ -111,14 +111,28 @@
                 </div>
               </div>
 
-              <div class="senable">
-                <div class="tt1">
-                  공유가 가능해요!
+              <template v-if="enable">
+                <div class="senable">
+                  <div class="tt1">
+                    공유가 가능해요!
+                  </div>
+                  <div class="tt2">
+                    (공유 위치와 3km이내의 배달지만 공유 가능합니다.)
+                  </div>
                 </div>
-                <div class="tt2">
-                  (공유 위치와 3km이내의 배달지만 공유 가능합니다.)
+              </template>
+
+              <template v-else>
+                <div class="senable">
+                  <div class="tt1">
+                    공유가 불가해요!
+                  </div>
+                  <div class="tt2">
+                    (공유 위치와 3km이내의 배달지만 공유 가능합니다.)
+                  </div>
                 </div>
-              </div>
+              </template>
+
               <KakaoMap />
             </div>
           </div>
@@ -146,7 +160,8 @@ export default {
   computed: {
     ...mapState("post", {
       post: (state) => state.post,
-      selectedIdx: (state) => state.selectedIdx
+      selectedIdx: (state) => state.selectedIdx,
+      enable: (state) => state.enable,
     }),
     ...mapState("user", {
       userInfo: (state) => state.userInfo,
@@ -460,18 +475,18 @@ export default {
 
 .tip {}
 
-.senable{
+.senable {
   margin: 2rem 0;
   text-align: center;
   width: 100%;
 }
 
-.tt1{
+.tt1 {
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-.tt2{
+.tt2 {
   font-size: 0.9rem;
   font-weight: bold;
 

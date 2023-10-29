@@ -18,6 +18,7 @@ export default {
       people: '',
       time: '',
     },
+    enable: null,
   },
   getters: {},
   mutations: {
@@ -43,6 +44,9 @@ export default {
       state.writeInfo.time = info.time
       state.writeInfo.people = info.people
       state.writeInfo.place = info.place
+    },
+    setEnable(state, enable){
+      state.enable = enable
     }
   },
   actions: {
